@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types';
 
-import './style.scss';
-
 const UserBanner = ({data}) => {
-
 return (
   <div className="flex wrap" key={data[1].id}>
     <div>
@@ -16,6 +13,8 @@ return (
     </div>
   </div>
 )};
+
+
 UserBanner.propTypes = {
   url_img: PropTypes.string.isRequired,
   nickname: PropTypes.string.isRequired,

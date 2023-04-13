@@ -18,10 +18,15 @@
       "es2021": true,
       "node": true
     },
-    "settings": {
-      "react": {
-        "version": "detect"
+    
+      "settings": {
+        "import/resolver": {
+          "node": {
+            "paths": ["../package"],
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
       }
-    }
+    
   }
   
