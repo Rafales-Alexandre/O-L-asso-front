@@ -1,18 +1,29 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import UserBanner from '../UserBanner';
+import SocialLinks from '../SocialLinks';
 
-import data from '../../../data/users.json';
-import './App.css';
+import NavLinks from '../NavLinks'
+import Logout from '../Logout';
 
-const App = () => {
-  // const [data, setData] = useState(data);
-console.log(data)
+import './App.css'
+
+import users from '../../../data/users.json';
+
+
+
+function App() {
+
+function App() {
   return (
     <div className="App">
-     <UserBanner data={data}/>
+     <UserBanner data={users} />
+     <NavLinks users={users} />
+      <SocialLinks />
+      <Logout />
     </div>
-  )
-};
+
+}
 
 export default App;
