@@ -1,17 +1,21 @@
-import React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom';
-import users from '../../../data/users.json'
-import NavLinks from '../NavLinks'
 
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import SocialLinks from '../SocialLinks';
+import './App.css'
+import NavLinks from '../NavLinks'
+import Logout from '../Logout';
+
+function App() {
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <NavLinks users={ users } />
-      </div>
-    </Router>
-  )
+    <div className="App">
+       <NavLinks users={ users } />
+      <SocialLinks />
+      <Logout />
+    </div>
+
 }
 
-export default App
+export default App;
