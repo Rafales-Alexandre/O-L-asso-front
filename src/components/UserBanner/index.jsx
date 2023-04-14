@@ -9,7 +9,7 @@ return (
     <div>
         <p className="user-nickname">{data[1].nickname}</p>
         <p className="user-email">{data[1].email}</p>
-        <p className="position absolute">{data[1].role}</p>
+        <p className="badge capitalize position absolute">{data[1].role}</p>
     </div>
   </div>
 )};
