@@ -5,7 +5,7 @@ import DataView from '../DataView';
 
 function App() {
   return (
-    <div className="App">
+    <div className="md:flex">
       <UserPanel />
       <DataView />
     </div>

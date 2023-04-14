@@ -8,8 +8,8 @@ import Suits from './Suits';
 
 const DataView = () => {
     return (
-    <>
-        <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+    <div className="flex flex-col items-stretch w-full">
+        <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mb-4">
             <div className="collapse-title text-xl font-medium">Instruments</div>
             <div className="collapse-content">
                 {instrument.map((instrument, id) => {
@@ -18,7 +18,7 @@ const DataView = () => {
             </div>
         </div>
         
-        <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+        <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mb-4">
                 <div className="collapse-title text-xl font-medium">Suits</div>
             <div className="collapse-content">
                 {suit.map((suit, id) => {
@@ -26,7 +26,7 @@ const DataView = () => {
                 })}
             </div>
         </div>
-    </>
+    </div>
   );
 };
 

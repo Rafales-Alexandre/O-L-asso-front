@@ -1,7 +1,7 @@
 const Instruments = ({code, observation}) => {
   return (
-    <div className="card card-side bg-base-100 shadow-xl">
-        <figure><img src="https://fakeimg.pl/100x100/?text=Instrument" alt="Aperçu"/></figure>
+    <div className="card card-side bg-base-100 shadow-md m-4">
+        <figure className="pl-8"><img src="https://fakeimg.pl/100x100/?text=Instrument" alt="Aperçu"/></figure>
         <div className="card-body">
             <h2 className="card-title">{code}</h2>
             <p>{ observation }</p>
