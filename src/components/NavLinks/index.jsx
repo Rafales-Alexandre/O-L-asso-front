@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 const NavLinks = ({users}) => {
   return (<div>
     <ul className="menu bg-base-100 w-56">
+      <div className="divider"></div>
       <li><Link to="/">Accueil</Link></li>
       <li className="bordered"><Link to={`/${users[0].id}`}>Profil</Link></li>
+      <div className="divider"></div>
       {users[0].role === ("member" || "admin") && (
         <>
         <li><Link to="/member/instuments">Instruments</Link></li>
