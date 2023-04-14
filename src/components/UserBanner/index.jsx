@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+
 
 const UserBanner = ({data}) => {
 return (
@@ -15,11 +15,5 @@ return (
 )};
 
 
-UserBanner.propTypes = {
-  url_img: PropTypes.string.isRequired,
-  nickname: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-};
 
 export default UserBanner;
