@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
-const InstrumentEdit= () => {
+const InstrumentEdit= ({OnSubmitFormInstrument}) => {
     return(
 
- <form>
+ <form onSubmit={OnSubmitFormInstrument}>
     <label>Code</label>
     <input type="text"
     className='form-input'
@@ -31,15 +33,15 @@ const InstrumentEdit= () => {
     <fieldset>
         <legend>Sticker</legend>
      <div>
-      <input type="radio" id='sticker-yes' name="yes" value="sticker"/>
+      <input type="radio" name="sticker" value="sticker-yes"/>
       <label >Oui</label>
-      <input type="radio" id='sticker-no' name="no" value="sticker" />
+      <input type="radio" name="sticker" value="sticker-no" />
       <label  >Non</label>
     </div>
     </fieldset>
 {/* Validate form */}
 
-    <button type='submit'>Valider</button>
+<button type='submit'><Link to='/member/suits'>Valider</Link></button>
  </form>
 )}
 

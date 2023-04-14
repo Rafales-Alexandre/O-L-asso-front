@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
-const SuitEdit= () => {
+const SuitEdit= ({OnSubmitFormSuit}) => {
     return(
     <div>
-        <form>
+        <form onSubmit={OnSubmitFormSuit}>
         <label>Label</label>
     <input type="text"
     className='form-input'
@@ -28,51 +30,52 @@ const SuitEdit= () => {
     <fieldset>
         <legend>Sticker</legend>
      <div>
-      <input type="radio" id='sticker-yes' name="yes" value="sticker"/>
+      <input type="radio" id='sticker-yes' name="sticker" value="sticker-yes" />
       <label >Oui</label>
-      <input type="radio" id='sticker-no' name="no" value="sticker" />
-      <label  >Non</label>
+      <input type="radio" id='sticker-no' name="sticker" value="sticker-no" />
+      <label >Non</label>
     </div>
     </fieldset>
 {/* Validate form */}
 
-    <button type='submit'>Valider</button>
+<button type='submit'><Link to='/member/suits'>Valider</Link></button>
+
  </form>
 <table>
     <thead>
     <tr>
-        <td>Taille</td>
-        <td>Quantité</td>
+        <td className='border'>Taille</td>
+        <td className='border'>Quantité</td>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td>XS</td>
-        <td>8</td>
+        <td className='border'>XS</td>
+        <td className='border'>8</td>
     </tr>
     <tr>
-        <td>S</td>
-        <td>7</td>
+        <td className='border'>S</td>
+        <td className='border'>7</td>
     </tr>
     <tr>
-        <td>M</td>
-        <td>6</td>
+        <td className='border'>M</td>
+        <td className='border'>6</td>
     </tr>
     <tr>
-        <td>L</td>
-        <td>3</td>
+        <td className='border'>L</td>
+        <td className='border'>3</td>
     </tr>
     <tr>
-        <td>XL</td>
-        <td>6</td>
+        <td className='border'>XL</td>
+        <td className='border'>6</td>
     </tr>
     <tr>
-        <td>XXL</td>
-        <td>5</td>
+        <td className='border'>XXL</td>
+        <td className='border'>5</td>
     </tr>
     <tr>
-        <td>XXXL</td>
-        <td>8</td>
+        <td className='border'>XXXL</td>
+        <td className='border'>8</td>
     </tr>
     </tbody>
 </table>

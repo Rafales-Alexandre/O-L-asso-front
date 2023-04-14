@@ -1,11 +1,13 @@
+import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
-const UserEdit= ({data}) => {
+const UserEdit= ({data, OnSubmitFormUser}) => {
   console.log(data[1].top_size)
 return(
  <form
-
- autoComplete="off"
+onSubmit={OnSubmitFormUser}
+//  autoComplete="off"
  className="login-form-element">
     <div className='flex wrap'>
       <label>Nom</label>
@@ -27,6 +29,9 @@ return(
          className='form-input'
          placeholder={data[1].nickname}
          />
+         {/* <input type='url' />
+
+         <button type='submit' >Ajouter une photo</button> */}
     </div>
     <label>Email</label>
         <input
@@ -45,6 +50,7 @@ return(
         type='date'
         className='form-input'
         placeholder={data[1].birthdate}
+        value={data[1].birthdate}
       />
       <label>Téléphone</label>
       <input
@@ -55,15 +61,14 @@ return(
     </div>  
     <div>
       <label >Genre</label>
-    <select name="genre"
-    placeholder={data[1].gender} >
-        <option value=""></option>
+    <select name="genre" >
+        <option value={data[1].gender} defaultValue>{data[1].gender}</option>
         <option value="femme">F</option>
         <option value="homme">M</option>
     </select>
     <label >Taille Haut</label>
     <select name="Taille-haut" >
-        <option value={data[1].top_size}></option>
+        <option value={data[1].top_size} defaultValue>{data[1].top_size}</option>
         <option value="xs">XS</option>
         <option value="s">S</option>
         <option value="m">M</option>
@@ -74,7 +79,7 @@ return(
     </select>
     <label >Taille Bas</label>
     <select name="Taille-bas" >
-        <option value={data[1].bottom_size}></option>
+        <option value={data[1].bottom_size} defaultValue>{data[1].bottom_size}</option>
         <option value="xs">XS</option>
         <option value="s">S</option>
         <option value="m">M</option>
@@ -90,11 +95,14 @@ return(
       <input
         type='text'
         className='form-input'
+        placeholder={data[1].address}
       />
+      <label>Adresse Complémentaire</label>
       <input
         type='text'
         className='form-input'
-        placeholder='Adresse complémentaire'
+        placeholder={data[1].address_2}
+        //TODO if adresse_2 ="" add placeholder=Adresse complémentaire
       />
     </div>  
     <div>
@@ -102,13 +110,17 @@ return(
       <input
         type='number'
         className='form-input'
+        placeholder={data[1].zip_code}
       />
       <label>Ville</label>
       <input
         type='text'
         className='form-input'
+        placeholder={data[1].city}
       />
     </div>  
+    <label >Role</label>
+    <input type='text' value={data[1].role}/>
  
 {/* PART Members and Admin */}
 {data[1].role === ("member" || "admin") && (
@@ -136,7 +148,7 @@ return(
 
 {/* Validate form */}
 
-    <button type='submit'>Valider</button>
+    <button type='submit'><Link to="/">Valider</Link></button>
     { /* <p>* Champs obligatoire</p> 
      => on peut mettre un message d'avertissement lorsqu'un champ est manquant} */}
     </form>
