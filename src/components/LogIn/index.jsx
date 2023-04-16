@@ -1,54 +1,27 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import LogIn from '../LogIn';
-import UserPanel from '../UserPanel';
-import { useQuery, gql } from '@apollo/client';
+import React, { useState } from 'react';
 
-const Get_User = gql`
-query Query {
-  getAllUser {
-    id
-    url_img
-    lastname
-    firstname
-    nickname
-    email
-    password
-    role
-  }
-}
-`;
+function LogIn({ onLogin }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-function App() {
-  const dispatch = useDispatch();
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const { loading, error, data } = useQuery(Get_User);
-
-  const handleLogin = (email, password) => {
-    const user = data.getAllUser.find(u => u.email === email && u.password === password);
-    if (user) {
-      dispatch({ type: 'LOGIN_USER', payload: user });
-    } else {
-      console.log('Identifiants invalides');
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onLogin(email, password);
   };
 
-  const handleLogout = () => {
-    dispatch({ type: 'LOGOUT_USER' });
-    };
-    
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-    
-    return (
-    <div className="App">
-    {loggedInUser ? (
-    <UserPanel user={loggedInUser} onLogout={handleLogout} />
-    ) : (
-    <LogIn onLogin={handleLogin} />
-    )}
-    </div>
-    );
-    }
-    
-    export default App;
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="email"  />
+        <input type="email" id="email" placeholder="Votre adresse email" value={email} onChange={(event) => setEmail(event.target.value)} />
+      </div>
+      <div>
+        <label htmlFor="password" />
+        <input type="password" id="password" placeholder="Votre mot de passe" value={password} onChange={(event) => setPassword(event.target.value)} />
+      </div>
+      <button type="submit">Se connecter</button>
+    </form>
+  );
+}
+
+export default LogIn;
