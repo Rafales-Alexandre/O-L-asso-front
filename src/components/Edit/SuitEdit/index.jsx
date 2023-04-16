@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
 
 const SuitEdit= ({OnSubmitFormSuit}) => {
@@ -15,7 +13,7 @@ const SuitEdit= ({OnSubmitFormSuit}) => {
     className='form-input'
     />
     <label>Observations</label>
-     <input type="text"
+     <textarea rows="5"
     className='form-input'
     />
     <label>Taille Haut</label>
@@ -38,7 +36,7 @@ const SuitEdit= ({OnSubmitFormSuit}) => {
     </fieldset>
 {/* Validate form */}
 
-<button type='submit'><Link to='/member/suits'>Valider</Link></button>
+<button type='submit'>Valider</button>
 
  </form>
 <table>

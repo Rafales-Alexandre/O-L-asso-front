@@ -1,9 +1,7 @@
-import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
-const UserEdit= ({data, OnSubmitFormUser}) => {
-  console.log(data[1].top_size)
+const UserEdit= ({data,OnSubmitFormUser, onChange}) => {
 return(
  <form
 onSubmit={OnSubmitFormUser}
@@ -15,6 +13,7 @@ onSubmit={OnSubmitFormUser}
          type='text'
          className='form-input'
          placeholder={data[1].lastname}
+         onChange={onChange}
          
          />
          <label>Prénom</label>
@@ -22,12 +21,14 @@ onSubmit={OnSubmitFormUser}
          type='text'
          className='form-input'
          value={data[1].firstname}
+         onChange={onChange}
         />
         <label>Pseudo</label>
         <input
          type='text'
          className='form-input'
          placeholder={data[1].nickname}
+         onChange={onChange}
          />
          {/* <input type='url' />
 
@@ -38,6 +39,7 @@ onSubmit={OnSubmitFormUser}
         type='email'
         className='form-input'
         placeholder={data[1].email}
+        onChange={onChange}
        />
        <button
         type='submit'
@@ -51,20 +53,23 @@ onSubmit={OnSubmitFormUser}
         className='form-input'
         placeholder={data[1].birthdate}
         value={data[1].birthdate}
+        onChange={onChange}
       />
       <label>Téléphone</label>
       <input
         type='tel'
         className='form-input'
         placeholder={data[1].phone}
+        onChange={onChange}
       />
     </div>  
     <div>
       <label >Genre</label>
     <select name="genre" >
-        <option value={data[1].gender} defaultValue>{data[1].gender}</option>
+        <option value={data[1].gender} defaultValue>{data[1].gender} </option>
         <option value="femme">F</option>
         <option value="homme">M</option>
+        
     </select>
     <label >Taille Haut</label>
     <select name="Taille-haut" >
@@ -96,12 +101,14 @@ onSubmit={OnSubmitFormUser}
         type='text'
         className='form-input'
         placeholder={data[1].address}
+        onChange={onChange}
       />
       <label>Adresse Complémentaire</label>
       <input
         type='text'
         className='form-input'
         placeholder={data[1].address_2}
+        onChange={onChange}
         //TODO if adresse_2 ="" add placeholder=Adresse complémentaire
       />
     </div>  
@@ -111,25 +118,31 @@ onSubmit={OnSubmitFormUser}
         type='number'
         className='form-input'
         placeholder={data[1].zip_code}
+        onChange={onChange}
       />
       <label>Ville</label>
       <input
         type='text'
         className='form-input'
         placeholder={data[1].city}
+        onChange={onChange}
       />
     </div>  
     <label >Role</label>
-    <input type='text' value={data[1].role}/>
+    <input type='text' value={data[1].role}
+    onChange={onChange}
+    />
  
 {/* PART Members and Admin */}
 {data[1].role === ("member" || "admin") && (
     <fieldset>
         <legend>Adhésion</legend>
      <div>
-      <input type="checkbox" id="cotisation" name="cotisation" value="cotisation"/>
+      <input type="checkbox" id="cotisation" name="cotisation" value="cotisation"
+      onChange={onChange}/>
       <label >Cotisation payée</label>
-      <input type="checkbox" id="caution" name="caution" value="caution"/>
+      <input type="checkbox" id="caution" name="caution" value="caution"
+      onChange={onChange}/>
       <label>Caution versée</label>
     </div>
     </fieldset>
@@ -138,7 +151,7 @@ onSubmit={OnSubmitFormUser}
 {data[1].role === ("admin") && (
   <div>
     <label >Choisir un rôle</label>
-    <select name="role" id="role">
+    <select name="role" id="role" onChange={onChange}>
         <option value="Adhérent">Adhérent</option>
         <option value="Bureau">Bureau</option>
         <option value="Admin">Admin</option>
@@ -148,7 +161,7 @@ onSubmit={OnSubmitFormUser}
 
 {/* Validate form */}
 
-    <button type='submit'><Link to="/">Valider</Link></button>
+<button type='submit'>Valider</button>
     { /* <p>* Champs obligatoire</p> 
      => on peut mettre un message d'avertissement lorsqu'un champ est manquant} */}
     </form>
