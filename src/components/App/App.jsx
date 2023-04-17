@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from '../../actions/userActions';
 import LogIn from '../LogIn';
@@ -8,17 +8,21 @@ function App() {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const users = useSelector((state) => state.user.users);
+  const [refused, setRefused] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
   const handleLogin = (email, password) => {
-    const user = users.find(u => u.email === email && u.password === password);
+    const test = [...users.getAllUsers];
+    const user = test.find(u => u.email === email && u.password === password);
     if (user) {
       dispatch({ type: 'LOGIN_USER', payload: user });
+      setRefused(false);
     } else {
-      console.log('Identifiants invalides');
+      setRefused(true);
+      console.log("REFUSED !");
     }
   };
 
@@ -31,7 +35,7 @@ function App() {
       {loggedInUser ? (
         <UserPanel user={loggedInUser} onLogout={handleLogout} />
       ) : (
-        <LogIn onLogin={handleLogin} />
+        <LogIn onLogin={handleLogin} refused={refused} />
       )}
     </div>
   );

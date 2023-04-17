@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function LogIn({ onLogin }) {
+function LogIn({ onLogin, refused }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,6 +29,9 @@ function LogIn({ onLogin }) {
           className="mb-4"
         />
         <button className='btn' type="submit">Log In</button>
+        {refused && (
+          <p className="mt-2 text-red-500">Invalid email or password. Please try again.</p>
+        )}
       </form>
     </div>
   );
