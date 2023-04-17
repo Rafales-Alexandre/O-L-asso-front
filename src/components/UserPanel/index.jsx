@@ -1,18 +1,18 @@
+import React from 'react';
 import UserBanner from '../UserBanner';
 import NavLinks from '../NavLinks';
 import LogOut from '../LogOut';
 import SocialLinks from '../SocialLinks';
 
-import users from '../../../data/users.json';
+function UserPanel({ user, onLogout }) {
+  return (
+    <div className='container px-4 mx-auto'>
+      <UserBanner user={user} />
+      <NavLinks user={user} />
+      <LogOut onLogout={onLogout} />
+      <SocialLinks />
+    </div>
+  );
+}
 
-const UserPanel = () => {
-    return (
-      <div>
-        <UserBanner data={users} />
-        <NavLinks users={users} />
-        <LogOut />
-        <SocialLinks />
-      </div>
-    )
-  }
 export default UserPanel;
