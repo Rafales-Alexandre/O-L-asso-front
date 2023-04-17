@@ -1,6 +1,6 @@
 const initialState = {
     loggedInUser: null,
-    users:[]
+    users:[],
   };
   
   const userReducer = (state = initialState, action) => {

@@ -1,6 +1,4 @@
-
-/* import PropTypes from 'prop-types'; */
-
+import React from "react";
 
 function UserBanner({ user }) {
   return (
@@ -18,15 +16,6 @@ function UserBanner({ user }) {
 }
 
 
-/* UserBanner.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    url_img: PropTypes.string.isRequired,
-    nickname: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-  }).isRequired,
-}; */
 
 
 export default UserBanner;
