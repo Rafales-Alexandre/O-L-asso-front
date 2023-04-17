@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-const Suits = ({ label, observation }) => {
+const Suits = ({ label, observation, gender }) => {
   const [collapse, setCollapse] = useState(false);
     const toggleCollapse = (e) => {
         e.preventDefault();
     setCollapse(!collapse);
-  };
+};
 
   return (
     <div className="card card-side bg-base-100 shadow-md m-4">
@@ -14,13 +14,15 @@ const Suits = ({ label, observation }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{label}</h2>
-              <p>{observation}</p>
-              {/* Collapsible content */}
+        <p className="normal-case first-letter:capitalize">{observation}</p>
+        
+        {/* Collapsible content */}
         <div className={`overflow-hidden transition-all duration-500 ${
           collapse ? 'h-auto' : 'h-0'
         }`}>
           <div className="collapse-content">
-            <p>This content is collapsible</p>
+            <p><span className="font-medium">Genre: </span></p>
+            <p><span className="font-medium">Taille: </span></p>
           </div>
         </div>
         <div className="card-actions justify-end">
@@ -31,7 +33,6 @@ const Suits = ({ label, observation }) => {
             {collapse ? "Moins" : "Plus"}
           </button>
         </div>
-        
       </div>
     </div>
   );
