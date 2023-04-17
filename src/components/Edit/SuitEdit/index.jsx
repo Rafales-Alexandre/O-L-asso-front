@@ -1,21 +1,47 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-const SuitEdit= ({OnSubmitFormSuit}) => {
+const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
     return(
-    <div>
-        <form onSubmit={OnSubmitFormSuit}>
-        <label>Label</label>
-    <input type="text"
-    className='form-input'
-    />
-        <label>Genre</label>
-     <input type="text"
-    className='form-input'
-    />
-    <label>Observations</label>
-     <textarea rows="5"
-    className='form-input'
-    />
+<div className='flex flex-wrap -mx-3 mb-6'>
+    <form 
+    onSubmit={OnSubmitFormSuit}
+    className="w-full max-w-lg">
+        <div className='flex flex-wrap -mx-3 mb-6'>
+            <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
+                <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-label'>
+                Label
+                </label>
+                    <input type="text"
+                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+                    id='grid-label'
+                    onChange={onChange}
+                    value=""
+                    />
+            </div>
+            <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>   
+                <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-suit-gender'>
+                Genre
+                </label>
+                    <input type="text"
+                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+                    id='grid-suit-gender'
+                    onChange={onChange}
+                    value=""
+                    />
+            </div>
+        </div>
+        <div className='w-full px-3'>
+            <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-suit-observations'>
+            Observations
+            </label>
+                <textarea 
+                rows="5"
+                className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+                id='grid-suit-observations'
+                />
+        </div>
+
+
     <label>Taille Haut</label>
      <input type="text"
     className='form-input'
@@ -37,49 +63,49 @@ const SuitEdit= ({OnSubmitFormSuit}) => {
 {/* Validate form */}
 
 <button type='submit'>Valider</button>
-
  </form>
-<table>
+ <div className="relative overflow-x-auto">
+<table className="table-zebra  border-collapse border border-slate-400 ...">
     <thead>
     <tr>
-        <td className='border'>Taille</td>
-        <td className='border'>Quantité</td>
+        <td >Taille</td>
+        <td  >Quantité</td>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td className='border'>XS</td>
-        <td className='border'>8</td>
+        <td >XS</td>
+        <td >8</td>
     </tr>
     <tr>
-        <td className='border'>S</td>
-        <td className='border'>7</td>
+        <td className="border border-slate-300 ... ">S</td>
+        <td className="border border-slate-300 ... ">7</td>
     </tr>
     <tr>
-        <td className='border'>M</td>
-        <td className='border'>6</td>
+        <td className="border border-slate-300 ... ">M</td>
+        <td className="border border-slate-300 ... ">6</td>
     </tr>
     <tr>
-        <td className='border'>L</td>
-        <td className='border'>3</td>
+        <td className="border border-slate-300 ... ">L</td>
+        <td className="border border-slate-300 ... ">3</td>
     </tr>
     <tr>
-        <td className='border'>XL</td>
-        <td className='border'>6</td>
+        <td className="border border-slate-300 ... ">XL</td>
+        <td className="border border-slate-300 ... ">6</td>
     </tr>
     <tr>
-        <td className='border'>XXL</td>
-        <td className='border'>5</td>
+        <td className="border border-slate-300 ... ">XXL</td>
+        <td className="border border-slate-300 ... ">5</td>
     </tr>
     <tr>
-        <td className='border'>XXXL</td>
-        <td className='border'>8</td>
+        <td className="border border-slate-300 ... ">XXXL</td>
+        <td className="border border-slate-300 ... ">8</td>
     </tr>
     </tbody>
 </table>
 
 
-
+</div>
 </div>
 )}
 

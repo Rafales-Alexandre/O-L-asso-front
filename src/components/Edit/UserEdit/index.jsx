@@ -9,7 +9,7 @@ onSubmit={OnSubmitFormUser}
  className="w-full max-w-lg">
   <div className='flex flex-wrap -mx-3 mb-6'>
     <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
-      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forHtml='grid-lastname'>Nom</label>
+      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-lastname'>Nom</label>
          <input 
          type='text'
          className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
@@ -19,7 +19,7 @@ onSubmit={OnSubmitFormUser}
          />
     </div>
     <div className='w-full md:w-1/3 px-3'>
-         <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forHtml='grid-firstname'>Prénom</label>
+         <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-firstname'>Prénom</label>
          <input
          type='text'
          className='appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
@@ -29,7 +29,7 @@ onSubmit={OnSubmitFormUser}
         />
       </div>
       <div className='w-full md:w-1/3 px-3'>
-        <label  className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forHtml='grid-nickname'>Pseudo</label>
+        <label  className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-nickname'>Pseudo</label>
         <input
          type='text'
          className='appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
@@ -44,7 +44,7 @@ onSubmit={OnSubmitFormUser}
     </div>
     <div className='flex flex-wrap -mx-3 mb-6'>
       <div className='w-full px-3'>
-        <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forHtml='grid-email'>
+        <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-email'>
         Email
         </label>
           <input
@@ -65,7 +65,7 @@ onSubmit={OnSubmitFormUser}
     </div>
   <div className='flex flex-wrap -mx-3 mb-2'>
     <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
-      <label className='"block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forHtml='grid-birthdate'>
+      <label className='"block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forhtml='grid-birthdate'>
       Date de naissance
       </label>
         <input
@@ -77,7 +77,7 @@ onSubmit={OnSubmitFormUser}
         />
     </div>
     <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
-      <label className='"block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forHtml='grid-phone'>
+      <label className='"block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forhtml='grid-phone'>
       Téléphone
       </label>
         <input
@@ -90,7 +90,7 @@ onSubmit={OnSubmitFormUser}
     </div>  
     <div className='flex flex-wrap -mx-3 mb-6'>
       <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
-        <label className='block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forHtml="grid-gender">
+        <label className='block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forhtml="grid-gender">
         Genre
         </label>
             <select className='block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500' 
@@ -102,7 +102,7 @@ onSubmit={OnSubmitFormUser}
             </select>
       </div>
       <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
-        <label className='block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forHtml="grid-top_size">
+        <label className='block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forhtml="grid-top_size">
         Taille Haut
         </label>
           <select className='block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500' 
@@ -119,7 +119,7 @@ onSubmit={OnSubmitFormUser}
           </select>
       </div>
       <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
-        <label className='block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forHtml="grid-bottom_size">
+        <label className='block uppercase tracking-wide text-white-700 text-xs font-bold mb-2' forhtml="grid-bottom_size">
         Taille Bas
         </label>
           <select className='block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500' 
@@ -139,7 +139,7 @@ onSubmit={OnSubmitFormUser}
   </div>  
   <div className='flex flex-wrap -mx-3 mb-2'>
     <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
-      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forHtml='grid-address'>
+      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-address'>
       Adresse
       </label>
         <input
@@ -151,7 +151,7 @@ onSubmit={OnSubmitFormUser}
         />
     </div>
     <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
-      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forHtml='grid-address_2'>
+      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-address_2'>
       Adresse Complémentaire
       </label>
         <input
@@ -166,7 +166,7 @@ onSubmit={OnSubmitFormUser}
   </div> 
   <div className='flex flex-wrap -mx-3 mb-2'>
     <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
-      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forHtml='grid-zip_code'>
+      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-zip_code'>
       Code postal
       </label>
         <input
@@ -178,7 +178,7 @@ onSubmit={OnSubmitFormUser}
         />
         </div>
         <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
-      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forHtml='grid-city'>
+      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-city'>
       Ville
       </label>
         <input
@@ -192,48 +192,74 @@ onSubmit={OnSubmitFormUser}
   </div>
   <div className='flex flex-wrap -mx-3 mb-6'>
     <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'> 
-    <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forHtml='grid-role'>
-    Role
-    </label>
-    <input 
-    type='text'
-    className='appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
-    id='grid-role'
-    value={data[1].role}
-    onChange={onChange}
-    />
- </div>
- </div>
-{/* PART Members and Admin */}
-{data[1].role === ("member" || "admin") && (
-    <fieldset>
-        <legend>Adhésion</legend>
-     <div>
-      <input type="checkbox" id="cotisation" name="cotisation" value="cotisation"
-      onChange={onChange}/>
-      <label >Cotisation payée</label>
-      <input type="checkbox" id="caution" name="caution" value="caution"
-      onChange={onChange}/>
-      <label>Caution versée</label>
+      <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-role'>
+      Role
+      </label>
+        <input 
+        type='text'
+        className='appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+        id='grid-role'
+        value={data[1].role}
+        onChange={onChange}
+        />
     </div>
-    </fieldset>
-)}
+{/* PART Members and Admin */}
+      <fieldset >
+        <legend >
+        Adhésion
+        </legend>
+        <div className='flex flex-wrap -mx-3 mb-6'>
+          <div className='w-full md:w-1/3 px-5 mb-6 md:mb-0'> 
+            <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-subscription'>
+            Cotisation payée
+            </label>
+              <input 
+              type="checkbox" 
+              id="grid-subscription" 
+              name="subscription" 
+              value={data[1].subscription}
+              onChange={onChange}
+              />
+          </div>
+          <div className='w-full md:w-1/3 px-5 mb-6 md:mb-0'> 
+            <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-deposit'>
+            Caution versée
+            </label>
+              <input 
+              type="checkbox" 
+              id="grid-deposit" 
+              name="deposit" 
+              value={data[1].deposit}
+              onChange={onChange}
+              />
+          </div>
+      </div>
+      </fieldset>
 {/* Part Admin */}
-{data[1].role === ("admin") && (
-  <div>
-    <label >
-    Choisir un rôle</label>
-    <select name="role" id="role" onChange={onChange}>
+<div className='w-full md:w-1/1 px-3 mb-6 md:mb-0'> 
+  <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-add-role'>
+    Choisir un rôle
+    </label>
+    <select className='block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500' 
+    name="role"
+    id="grid-add-role" 
+    onChange={onChange}>
         <option value="Adhérent">Adhérent</option>
         <option value="Bureau">Bureau</option>
         <option value="Admin">Admin</option>
     </select>
     </div>
-)}
+ </div>
 
 {/* Validate form */}
 
-<button type='submit' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>Valider</button>
+<div className='w-full px-3'>
+        <button
+        type='submit'
+        className='block appearance-none block w-full bg-black-200 text-white-700 border py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+        Valider
+        </button>
+      </div>
     { /* <p>* Champs obligatoire</p> 
      => on peut mettre un message d'avertissement lorsqu'un champ est manquant} */}
      

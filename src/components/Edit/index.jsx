@@ -7,8 +7,6 @@ import InstrumentEdit from './InstrumentEdit';
 
 import users from '../../../data/users.json';
 
-
-
 const Edit = () => {
   const { id } = useParams(); // get the id if present in the URL
   const [data, setData] = useState({ lastname: '', firstname: '', nickname: '',email: '', birthdate: '', phone: '',address: '', address_2: '', zip_code: '',city: '', gender: '', top_size: '',bottom_size: '', subscription: false, deposit: false, role: ''});
