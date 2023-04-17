@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from '../../actions/userActions';
 import LogIn from '../LogIn';
 import UserPanel from '../UserPanel';
+import Edit from '../Edit'
 
 function App() {
   const dispatch = useDispatch();
@@ -32,11 +33,16 @@ function App() {
 
   return (
     <div className="App">
+
+
+      <UserPanel />
+
       {loggedInUser ? (
         <UserPanel user={loggedInUser} onLogout={handleLogout} />
       ) : (
         <LogIn onLogin={handleLogin} refused={refused} />
       )}
+
     </div>
   );
 }
