@@ -1,5 +1,6 @@
-import React from 'react';
+
 /* import PropTypes from 'prop-types'; */
+
 
 function UserBanner({ user }) {
   return (
@@ -16,6 +17,7 @@ function UserBanner({ user }) {
   );
 }
 
+
 /* UserBanner.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -25,5 +27,6 @@ function UserBanner({ user }) {
     role: PropTypes.string.isRequired,
   }).isRequired,
 }; */
+
 
 export default UserBanner;

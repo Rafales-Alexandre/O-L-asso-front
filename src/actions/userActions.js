@@ -3,7 +3,7 @@ import client from '../apolloClient';
 
 const Get_User = gql`
 query Query {
-  getAllUser {
+  getAllUsers {
     id
     url_img
     lastname
@@ -11,7 +11,20 @@ query Query {
     nickname
     email
     password
+    birthdate
+    phone
+    address
+    address_2
+    zip_code
+    city
+    gender
+    top_size
+    bottom_size
+    subscription
+    deposit
     role
+    created_at
+    updated_at
   }
 }
 `;
@@ -19,7 +32,7 @@ query Query {
 export const fetchUsers = () => async (dispatch) => {
   try {
     const { data } = await client.query({ query: Get_User });
-    dispatch({ type: 'FETCH_USERS', payload: data.getAllUser });
+    dispatch({ type: 'FETCH_USERS', payload: data });
   } catch (error) {
     console.error('Erreur lors de la récupération des utilisateurs :', error);
   }
