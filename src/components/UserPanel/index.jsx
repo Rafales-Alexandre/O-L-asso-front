@@ -6,7 +6,7 @@ import SocialLinks from '../SocialLinks';
 
 function UserPanel({ user, onLogout }) {
   return (
-    <div className='container px-4 mx-auto'>
+    <div className='bg-primary w-1/4 float-left p-4'>
       <UserBanner user={user} />
       <NavLinks user={user} />
       <LogOut onLogout={onLogout} />
