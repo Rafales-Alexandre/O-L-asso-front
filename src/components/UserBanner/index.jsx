@@ -15,7 +15,4 @@ function UserBanner({ user }) {
   );
 }
 
-
-
-
 export default UserBanner;
