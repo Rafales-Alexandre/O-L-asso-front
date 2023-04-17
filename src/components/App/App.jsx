@@ -1,43 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers } from '../../actions/userActions';
 import LogIn from '../LogIn';
 import UserPanel from '../UserPanel';
 
-import { useQuery, gql } from '@apollo/client';
-
-const Get_User = gql`
-query Query {
-  getAllUser {
-    id
-    url_img
-    lastname
-    firstname
-    nickname
-    email
-    password
-    role
-  }
-}
-`;
-
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState(null);
-  const { loading, error, data } = useQuery(Get_User);
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const users = useSelector((state) => state.user.users);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   const handleLogin = (email, password) => {
-    const user = data.getAllUser.find(u => u.email === email && u.password === password);
+    const user = users.find(u => u.email === email && u.password === password);
     if (user) {
-      setLoggedInUser(user);
+      dispatch({ type: 'LOGIN_USER', payload: user });
     } else {
       console.log('Identifiants invalides');
     }
   };
 
   const handleLogout = () => {
-    setLoggedInUser(null);
+    dispatch({ type: 'LOGOUT_USER' });
   };
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
 
   return (
     <div className="App">

@@ -4,23 +4,33 @@ function LogIn({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onLogin(email, password);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email"  />
-        <input type="email" id="email" placeholder="Votre adresse email" value={email} onChange={(event) => setEmail(event.target.value)} />
-      </div>
-      <div>
-        <label htmlFor="password" />
-        <input type="password" id="password" placeholder="Votre mot de passe" value={password} onChange={(event) => setPassword(event.target.value)} />
-      </div>
-      <button type="submit">Se connecter</button>
-    </form>
+    <div className="LogIn min-h-screen flex items-center justify-center">
+      <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+        <label htmlFor="email" className="mb-2" />
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="mb-4"
+        />
+        <label htmlFor="password" className="mb-2" />
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="mb-4"
+        />
+        <button className='btn' type="submit">Log In</button>
+      </form>
+    </div>
   );
 }
 
