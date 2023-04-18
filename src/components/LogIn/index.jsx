@@ -33,7 +33,7 @@ function LogIn({ onLogin, refused }) {
             <div className="form-control mt-6">
               <button className="btn btn-primary" type="submit">Entrer</button>
               {refused && (
-                <p className="mt-6 text-red-500">Indentifiants invalides. Veuillez réessayer.</p>
+                <p className="text-center text-warning mt-6 ">Indentifiants invalides. Veuillez réessayer.</p>
               )}
             </div>
           </form>
