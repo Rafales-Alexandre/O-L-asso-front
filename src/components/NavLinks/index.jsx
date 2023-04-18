@@ -5,8 +5,8 @@ function NavLinks({ user }) {
   return (
     <div>
       <ul className="menu bg-base-100 w-56">
-        <li><Link to="/">Accueil</Link></li>
-        <li className="bordered"><Link to={`/${user.id}`}>Profil</Link></li>
+        <li className="bordered"><Link to="/">Accueil</Link></li>
+        <li><Link to={`/${user.id}`}>Profil</Link></li>
         {(user.role === 'board' || user.role === 'admin') && (
           <>
             <li><Link to="/member/instuments">Instruments</Link></li>

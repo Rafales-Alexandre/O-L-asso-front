@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from '../../actions/userActions';
 import LogIn from '../LogIn';
 import UserPanel from '../UserPanel';
-
+import UserEdit from '../Edit/UserEdit';
+import data from '../../../data/user.json';
 import DataView from '../DataView';
-import UserEdit from '../Edit/';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,14 +36,17 @@ function App() {
   return (
 
     <div className="md:flex">
-      <DataView />
-    <div className="App">
-      {loggedInUser ? (
-        <UserPanel user={loggedInUser} onLogout={handleLogout} />
-      ) : (
-        <LogIn onLogin={handleLogin} refused={refused} />
-      )}
+      <div className="App">
+        {loggedInUser ? (
+          <>
+          <UserPanel user={loggedInUser} onLogout={handleLogout} />
+          <DataView />
+          </>
+          ) : (
+            <LogIn onLogin={handleLogin} refused={refused} />
+            )}
 
+      </div>
     </div>
   );
 }

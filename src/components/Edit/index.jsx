@@ -5,7 +5,6 @@ import UserEdit from './UserEdit';
 import SuitEdit from './SuitEdit';
 import InstrumentEdit from './InstrumentEdit';
 
-import users from '../../../data/users.json';
 
 const Edit = () => {
   const { id } = useParams(); // get the id if present in the URL
