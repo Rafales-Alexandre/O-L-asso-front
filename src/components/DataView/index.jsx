@@ -4,7 +4,7 @@ import suit from '../../../data/suit.json';
 import Instruments from './Instruments';
 import Suits from './Suits';
 
-const DataView = () => {
+function DataView({user}){
     return (
         <div className="flex flex-col items-stretch w-full">
             

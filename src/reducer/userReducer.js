@@ -1,6 +1,7 @@
 const initialState = {
     loggedInUser: null,
-    users:[],
+    users: [],
+    instruments: [],
   };
   
   const userReducer = (state = initialState, action) => {
@@ -11,6 +12,8 @@ const initialState = {
         return { ...state, loggedInUser: action.payload };
       case 'LOGOUT_USER':
         return { ...state, loggedInUser: null };
+      case 'FETCH_INSTRUMENTS':
+        return { ...state, instruments: action.payload };
       default:
         return state;
     }
