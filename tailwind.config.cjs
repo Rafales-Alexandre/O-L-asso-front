@@ -1,7 +1,19 @@
 module.exports = {
-  content:["./src/**/*.{js,jsx}"],
+  content: ['./src/**/*.{js,jsx}'],
   theme: {
-    extend: {},
+    fontFamily: {
+      display: [
+        'ChelseaMarket',
+        'Arial',
+        'Trebuchet MS',
+        'Verdana',
+        'sans-serif',
+      ],
+      body: ['Arial', 'Trebuchet MS', 'Verdana', 'sans-serif'],
+    },
   },
-  plugins: [require("daisyui")],
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: ['lofi'],
+  },
 }
