@@ -4,12 +4,12 @@ function Instruments({ data }){
     const [collapse, setCollapse] = useState(false);
   const toggleCollapse = (e) => {
     e.preventDefault();
-    setCollapse(!collapse);
-  };
-  
+    setCollapse(!collapse);}
   return (
     <>
-    { data.map((u)=(
+    { data.map((u)=>{
+    return (
+      
         <div className="card card-side bg-base-100 shadow-md m-4">
           <figure className="pl-8"><img src="https://fakeimg.pl/100x100/?text=Instrument" alt="Aperçu"/></figure>
           <div className="card-body">
@@ -37,10 +37,9 @@ function Instruments({ data }){
           </div>
           </div>
       </div>
-    ))}
+    )})}
     </>
     
   )
 }
-
 export default Instruments;

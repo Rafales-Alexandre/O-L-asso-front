@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchInstruments, fetchUsers } from '../../actions/userActions';
+import { fetchInstruments, fetchUsers, fetchSuits } from '../../actions/userActions';
 import LogIn from '../LogIn';
 import UserPanel from '../UserPanel';
 import UserView from '../DataView/UserView';
@@ -18,17 +18,20 @@ function App() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const users = useSelector((state) => state.user.users);
   const instruments = useSelector((state) => state.user.instruments);
+  const suits = useSelector((state) => state.user.suits);
   const [refused, setRefused] = useState(false);
-  const [instruData, setInsruData] = useState([]);
-
+  const [instruData, setInstruData] = useState([]);
+  const [suitsData, setSuitsData] = useState([]);
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchInstruments());
+    dispatch(fetchSuits());
   }, [dispatch]);
 
   const handleLogin = (email, password) => {
-    setInsruData([...instruments.getAllInstruments]);
-    console.log(instruData);
+    setInstruData([...instruments.getAllInstruments]);
+    setSuitsData([...suits.getAllSuits]);
+    console.log(suitsData);
     const test = [...users.getAllUsers];
     const user = test.find(u => u.email === email && u.password === password);
     if (user) {
@@ -54,8 +57,8 @@ function App() {
             <div>
               <Routes>
                 <Route path="/" element={<UserView user={loggedInUser} />} />
-                <Route path="/member/instuments" element={<Instruments data={loggedInUser} />} />
-                <Route path="/member/suits" element={<Suits data={loggedInUser} />} />
+                <Route path="/member/instuments" element={<Instruments data={instruData} />} />
+                <Route path="/member/suits" element={<Suits data={suitsData} />} />
                 <Route path="/member/users" element={<Users data={loggedInUser} />} />
               </Routes>
             </div>
