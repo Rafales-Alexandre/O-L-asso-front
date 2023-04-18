@@ -14,6 +14,7 @@ function UserBanner({ user }) {
         <p className="badge badge-xs bade-primgary badge-outline font-semibold uppercase p-2">{user.role}</p>
       </div>
     </div>
+    
   );
 }
 

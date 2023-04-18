@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 function NavLinks({ user }) {
   return (
-    <div>
-      <ul className="menu bg-base-100 w-56">
+    <div className="overflow-x-auto scroll-smooth">
+      <ul className="menu menu-horizontal md:menu-vertical bg-base-100">
         <li className="bordered"><Link to="/">Accueil</Link></li>
         <li><Link to={`/${user.id}`}>Profil</Link></li>
         {(user.role === 'board' || user.role === 'admin') && (
