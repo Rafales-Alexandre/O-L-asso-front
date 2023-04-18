@@ -1,7 +1,5 @@
 import React from 'react';
 // import Select from 'react-select';
-
- 
 // const optionGender= [
 //   { value: 'F', label: 'F' },
 //   { value: 'H', label: 'H' },
@@ -35,21 +33,20 @@ import React from 'react';
 
 
 
-  function SelectInput ({onChange, value, name, option, inputSizeClass= ''}) {
-    return (
-      // <div className={`w-full px-3 ${inputSizeClass}`}>
-      // <label
-      //   className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-      //   htmlFor={`input-${name}`}
-      // >
-      //   {label}
-        <Select
-         name={name} 
-        option={optionTopSize, optionBottomSize, optionGender, optionRole} 
+function SelectInput({onChange, value, name, option, inputSizeClass= '', }) {
+  return (
+  // <div className={`w-full px-3 ${inputSizeClass}`}>
+    <label
+      className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
+      htmlFor='salut'
+     >
+        <select
+         name='salut '
+        option={option} 
         onChange={onChange}
         value={value}
        />
-            // </label>
+    </label>
             // </div>
   )}
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Button({ children, color = 'black', onClick }) {
+function Button({ children, color = 'primary', onClick }) {
   return (
     <button
       type="submit"
@@ -13,10 +13,9 @@ function Button({ children, color = 'black', onClick }) {
   );
 }
 
-Button.propTypes = {
+/* Button.propTypes = {
   children: PropTypes.node.isRequired,
-  color: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-};
+}; */
 
 export default Button;

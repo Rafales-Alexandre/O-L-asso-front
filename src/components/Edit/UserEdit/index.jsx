@@ -2,23 +2,24 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../Form/Button';
 import Input from '../../Form/Input';
-import Select from '../../Form/SelectInput'
+import SelectInput from '../../Form/SelectInput';
 
 function UserEdit({ data }) {
+  console.log(data);
   const [formData, setFormData] = useState({
-    lastname: data.lastname,
-    firstname: data.firstname,
-    nickname: data.nickname,
-    email: data.email,
-    birthdate: data.email,
-    phone: data.phone,
-    address: data.adress,
-    address_2: data.address_2,
-    zip_code: data.zip_code,
-    city: data.city,
-    role: data.role,
-    subscription: data.subscription,
-    deposit: data.deposit,
+    lastname: data[0].lastname,
+    firstname: data[0].firstname,
+    nickname: data[0].nickname,
+    email: data[0].email,
+    birthdate: data[0].email,
+    phone: data[0].phone,
+    address: data[0].adress,
+    address_2: data[0].address_2,
+    zip_code: data[0].zip_code,
+    city: data[0].city,
+    role: data[0].role,
+    subscription: data[0].subscription,
+    deposit: data[0].deposit,
   });
 
   const onChange = (e) => {
@@ -45,7 +46,7 @@ function UserEdit({ data }) {
           label="Nom"
           name="lastname"
           type="text"
-          placeholder={data.lastname}
+          placeholder={data[0].lastname}
           value={formData.lastname}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -55,7 +56,7 @@ function UserEdit({ data }) {
           label="Prénom"
           name="firstname"
           type="text"
-          placeholder={data.firstname}
+          placeholder={data[0].firstname}
           value={formData.firstname}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -65,7 +66,7 @@ function UserEdit({ data }) {
           label="Pseudo"
           name="nickname"
           type="text"
-          placeholder={data.nickname}
+          placeholder={data[0].nickname}
           value={formData.nickname}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -79,13 +80,13 @@ function UserEdit({ data }) {
           label="Email"
           name="email"
           type="email"
-          placeholder={data.email}
+          placeholder={data[0].email}
           value={formData.email}
           onChange={onChange}
         />
 
         <div className="w-full px-3">
-          <Button>Réinitialiser mot de passe</Button>
+          <Button >Réinitialiser mot de passe</Button>
         </div>
       </div>
       <div className="flex flex-wrap -mx-3 mb-2">
@@ -93,7 +94,7 @@ function UserEdit({ data }) {
           label="Date de naissance"
           name="birthdate"
           type="date"
-          placeholder={data.birthdate}
+          placeholder={data[0].birthdate}
           value={formData.birthdate}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -103,7 +104,7 @@ function UserEdit({ data }) {
           label="Téléphone"
           name="phone"
           type="tel"
-          placeholder={data.phone}
+          placeholder={data[0].phone}
           value={formData.phone}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -185,7 +186,7 @@ function UserEdit({ data }) {
           label="Adresse"
           name="address"
           type="text"
-          placeholder={data.address}
+          placeholder={data[0].address}
           value={formData.address}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -194,7 +195,7 @@ function UserEdit({ data }) {
           label="Adresse Complémentaire"
           name="address_2"
           type="text"
-          placeholder={data.address_2}
+          placeholder={data[0].address_2}
           value={formData.address_2}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -205,7 +206,7 @@ function UserEdit({ data }) {
           label="Code postal"
           name="zip_code"
           type="number"
-          placeholder={data.zip_code}
+          placeholder={data[0].zip_code}
           value={formData.zip_code}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -214,7 +215,7 @@ function UserEdit({ data }) {
           label="Ville"
           name="city"
           type="text"
-          placeholder={data.city}
+          placeholder={data[0].city}
           value={formData.city}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -225,7 +226,7 @@ function UserEdit({ data }) {
           label="Rôle"
           name="role"
           type="text"
-          placeholder={data.role}
+          placeholder={data[0].role}
           value={formData.role}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -238,7 +239,7 @@ function UserEdit({ data }) {
               label="Cotisation payée"
               name="subscription"
               type="checkbox"
-              placeholder={data.subscription}
+              placeholder={data[0].subscription}
               value={formData.subscription}
               onChange={onChange}
               inputSizeClass="md:w-1/3"
@@ -248,7 +249,7 @@ function UserEdit({ data }) {
               label="Caution versée"
               name="deposit"
               type="checkbox"
-              placeholder={data.deposit}
+              placeholder={data[0].deposit}
               value={formData.deposit}
               onChange={onChange}
               inputSizeClass="md:w-1/3"
@@ -256,7 +257,6 @@ function UserEdit({ data }) {
           </div>
         </fieldset>
         {/* Part Admin */}
-        <SelectInput />
         <div className="w-full md:w-1/1 px-3 mb-6 md:mb-0">
           <label
             className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"

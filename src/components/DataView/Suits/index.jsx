@@ -1,48 +1,60 @@
 import { useState } from "react";
 
-function Suits({ data }){
-  const [collapse, setCollapse] = useState(false);
-    const toggleCollapse = (e) => {
-        e.preventDefault();
-    setCollapse(!collapse);
-};
+function Suits({ data }) {
+  const [collapse, setCollapse] = useState(null);
+
+  const toggleCollapse = (id) => {
+    if (collapse === id) {
+      setCollapse(null);
+    } else {
+      setCollapse(id);
+    }
+  };
 
   return (
-    <>
-    { data.map((u)=>{
-      return (
-
-    <div className="card card-side bg-base-100 shadow-md m-4">
-    <figure className="pl-8">
-      <img src="https://fakeimg.pl/100x100/?text=Suit" alt="Aperçu" />
-    </figure>
-    <div className="card-body">
-      <h2 className="card-title">{u.label}</h2>
-      <p className="normal-case first-letter:capitalize">{u.observation}</p>
-      
-      {/* Collapsible content */}
-      <div className={`overflow-hidden transition-all duration-500 ${
-        collapse ? 'h-auto' : 'h-0'
-      }`}>
-        <div className="collapse-content">
-          <p><span className="font-medium">Genre: </span></p>
-          <p><span className="font-medium">Taille: </span></p>
-        </div>
-      </div>
-      <div className="card-actions justify-end">
-        <button
-          onClick={toggleCollapse}
-          className={`btn btn-primary ${collapse ? 'bg-accent' : ''}`}
-        >
-          {collapse ? "Moins" : "Plus"}
-        </button>
-      </div>
+    <div className="bg-base-300">
+      <h2 className="text-3xl font-bold m-4 pt-4">Costumes</h2>
+      {data.map((u) => {
+        return (
+          <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
+            <div onClick={() => toggleCollapse(u.id)} className="flex items-center">
+              <figure className="mr-4">
+                <img
+                  src="https://fakeimg.pl/100x100/?text=Suit"
+                  alt="Aperçu"
+                  className="rounded-full"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title text-xl font-bold">{u.label}</h2>
+                <p className="normal-case first-letter:capitalize text-gray-600">
+                  {u.observation}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => toggleCollapse(u.id)}
+              className={`btn btn-primary mt-4 top-5 right-4 absolute`}
+            >
+              Edition
+            </button>
+            {collapse === u.id && (
+              <div className="card-body mt-4">
+                <div>
+                  <p>
+                    <span className="font-medium">Genre: </span>
+                  </p>
+                  <p>
+                    <span className="font-medium">Taille: </span>
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
-  </div>
-      )
-    })}
-    </>
   );
-};
+}
 
 export default Suits;

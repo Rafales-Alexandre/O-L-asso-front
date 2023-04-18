@@ -55,8 +55,8 @@ query Query {
 `;
 export const fetchInstruments = () => async (dispatch) => {
   try {
-    const {data} = await client.query({query: Get_Instrument});
-    dispatch({ type: 'FETCH_INSTRUMENTS', payload: data});
+    const { data } = await client.query({query: Get_Instrument });
+    dispatch({ type: 'FETCH_INSTRUMENTS', payload: data });
   } catch (error) {
     console.error('Erreur lors de la récupération des instruments :', error);
   }
@@ -80,8 +80,8 @@ query Query {
 `;
 export const fetchSuits = () => async (dispatch) => {
   try {
-    const {data} = await client.query({query: Get_Suits});
-    dispatch({ type: 'FETCH_SUITS', payload: data});
+    const { data } = await client.query({ query: Get_Suits });
+    dispatch({ type: 'FETCH_SUITS', payload: data });
   } catch (error) {
     console.error('Erreur lors de la récupération des costumes :', error);
   }
