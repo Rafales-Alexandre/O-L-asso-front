@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInstruments, fetchUsers } from '../../actions/userActions';
 import LogIn from '../LogIn';
@@ -30,7 +30,7 @@ function App() {
     setInsruData([...instruments.getAllInstruments]);
     console.log(instruData);
     const test = [...users.getAllUsers];
-    const user = test.find(u => u.email === email && u.password === password);
+    const user = test.find((u) => u.email === email && u.password === password);
     if (user) {
       dispatch({ type: 'LOGIN_USER', payload: user });
       setRefused(false);
@@ -46,7 +46,7 @@ function App() {
 
   return (
 
-    <div className="md:flex">
+    <div>
       <div className="App">
         {loggedInUser ? (
           <>
@@ -55,6 +55,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<UserView user={loggedInUser} />} />
                 <Route path="/member/instuments" element={<Instruments data={loggedInUser} />} />
+                <Route path="/4" element={<UserEdit data={[loggedInUser]} onSubmitFormUser={()=>{}} />} />
                 <Route path="/member/suits" element={<Suits data={loggedInUser} />} />
                 <Route path="/member/users" element={<Users data={loggedInUser} />} />
               </Routes>
