@@ -2,6 +2,7 @@ const initialState = {
     loggedInUser: null,
     users: [],
     instruments: [],
+    suits: [],
   };
   
   const userReducer = (state = initialState, action) => {
@@ -14,6 +15,8 @@ const initialState = {
         return { ...state, loggedInUser: null };
       case 'FETCH_INSTRUMENTS':
         return { ...state, instruments: action.payload };
+      case 'FETCH_SUITS':
+        return { ...state, suits: action.payload };
       default:
         return state;
     }

@@ -4,6 +4,7 @@ import Button from '../../Form/Button';
 import Input from '../../Form/Input';
 
 function UserEdit({ data }) {
+  console.log(data);
   const [formData, setFormData] = useState({
     lastname: data[0].lastname,
     firstname: data[0].firstname,

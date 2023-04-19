@@ -15,4 +15,9 @@ function Button({ children, onClick }) {
   );
 }
 
+/* Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+}; */
+
 export default Button;
