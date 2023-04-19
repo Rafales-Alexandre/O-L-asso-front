@@ -1,3 +1,4 @@
+import { useMutation } from '@apollo/client';
 import { gql } from '@apollo/client/core';
 import client from '../apolloClient';
 
@@ -86,3 +87,69 @@ export const fetchSuits = () => async (dispatch) => {
     console.error('Erreur lors de la récupération des costumes :', error);
   }
 };
+
+export const Update_User = gql`
+mutation Mutation($updateUserId: ID!, $input: UserInput) {
+  updateUser(id: $updateUserId, input: $input) {
+    id
+    url_img
+    lastname
+    firstname
+    nickname
+    email
+    password
+    birthdate
+    phone
+    address
+    address_2
+    zip_code
+    city
+    gender
+    top_size
+    bottom_size
+    subscription
+    deposit
+    role
+    created_at
+    updated_at
+  }
+}
+`;
+
+export const updateUser = (updateUserId, input) => async (dispatch) => {
+  try {
+    const response = await client.mutate({
+      mutation: Update_User,
+      variables: {
+        "updateUserId": 1,
+        "input": {
+          "lastname": "Sixtineeeeuu",
+          "email": "Nathalie.Cousin40@gmail.com",
+          "zip_code": null,
+          "url_img": null,
+          "subscription": null,
+          "top_size": null,
+          "role": null,
+          "phone": null,
+          "password": null,
+          "nickname": null,
+          "instrument_id": null,
+          "gender": null,
+          "firstname": null,
+          "deposit": null,
+          "city": null,
+          "bottom_size": null,
+          "birthdate": null,
+          "address_2": null,
+          "address": null
+        }
+      },
+    });
+    dispatch({
+      type: 'Update_User',
+      payload: response.data.updateUser,
+    });
+  } catch (error) {
+    console.error("Erreur lors de la création de l'utilisateur :", error);
+  }
+}

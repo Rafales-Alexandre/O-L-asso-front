@@ -2,7 +2,7 @@ import React from "react";
 
 function UserBanner({ user }) {
   return (
-    <div className="flex w-screen bg-base-200 p-6" key={user.id}>
+    <div className="flex bg-base-200 p-6" key={user.id}>
       <div className="avatar">
         <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
           <img src={user.url_img} alt="Avatar" />

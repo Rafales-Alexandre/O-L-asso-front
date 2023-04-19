@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchInstruments, fetchUsers, fetchSuits } from '../../actions/userActions';
+import { fetchInstruments, fetchUsers, fetchSuits, Update_User } from '../../actions/userActions';
 import LogIn from '../LogIn';
 import UserPanel from '../UserPanel';
 import UserView from '../DataView/UserView';
@@ -10,7 +10,11 @@ import Users from '../DataView/Users';
 import Instruments from '../DataView/Instruments';
 import UserEdit from '../Edit/UserEdit';
 
+import { useMutation } from '@apollo/client';
+
+
 function App() {
+  const [updateUser, { data, loading, error}] = useMutation(Update_User);
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const users = useSelector((state) => state.user.users);
@@ -28,6 +32,34 @@ function App() {
   }, [dispatch]);
 
   const handleLogin = (email, password) => {
+    updateUser({
+      variables: {
+        "updateUserId": 1,
+        "input": {
+          "lastname": "Sixtineee",
+          "email": "Nathalie.Cousin40@gmail.com",
+          "zip_code": null,
+          "url_img": null,
+          "subscription": null,
+          "top_size": null,
+          "role": null,
+          "phone": null,
+          "password": "this",
+          "nickname": null,
+          "gender": null,
+          "firstname": "test",
+          "deposit": null,
+          "city": null,
+          "bottom_size": null,
+          "birthdate": null,
+          "address_2": null,
+          "address": null
+        },
+    },
+    });
+
+
+
     setUserData([...users.getAllUsers]);
     setInstruData([...instruments.getAllInstruments]);
     setSuitsData([...suits.getAllSuits]);

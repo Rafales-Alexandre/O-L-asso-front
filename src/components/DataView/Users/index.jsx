@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import UserEdit from "../../Edit/UserEdit";
+import { useSelector } from 'react-redux';
 
 function User({ data }) {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [collapse, setCollapse] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const toggleCollapse = (id) => {
     if (collapse === id) {
@@ -9,6 +14,10 @@ function User({ data }) {
     } else {
       setCollapse(id);
     }
+  };
+  const toggleModal = (user) => {
+    setSelectedUser(user);
+    setShowModal(!showModal);
   };
 
   return (
@@ -29,7 +38,7 @@ function User({ data }) {
                 </div>
               </div>
               <button
-                onClick={() => toggleCollapse(u.id)}
+                onClick={() => toggleModal(u)}
                 className={`btn btn-primary mt-4 top-5 right-4 absolute`}
               >
                 Edition
@@ -38,43 +47,16 @@ function User({ data }) {
             {collapse === u.id && (
               <div className="card-body mt-4">
                 <div>
-                  <p className="normal-case first-letter:capitalize text-gray-600">
-                    {u.email}
-                  </p>
-                  <p>
-                    <span className="font-medium">Phone: </span>
-                    {u.phone}
-                  </p>
-                  <p>
-                    <span className="font-medium">Address: </span>
-                    {u.address}, {u.address_2}
-                  </p>
-                  <p>
-                    <span className="font-medium">City: </span>
-                    {u.city}
-                  </p>
-                  <p>
-                    <span className="font-medium">Zip Code: </span>
-                    {u.zip_code}
-                  </p>
-                  <p>
-                    <span className="font-medium">Gender: </span>
-                    {u.gender}
-                  </p>
-                  <p>
-                    <span className="font-medium">Top Size: </span>
-                    {u.top_size}
-                  </p>
-                  <p>
-                    <span className="font-medium">Bottom Size: </span>
-                    {u.bottom_size}
-                  </p>
+                  {/* User details */}
                 </div>
               </div>
             )}
           </div>
         );
       })}
+      {showModal && (
+        <div> <h1>HELLO</h1></div>
+      )}
     </div>
   );
 }
