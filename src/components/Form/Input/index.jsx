@@ -1,7 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function Input({ label, name, type, placeholder = '', onChange, value, inputSizeClass = '' }) {
+function Input({
+  label, name, type, placeholder = '', onChange, value, inputSizeClass = ''
+}) {
   return (
     <div className={`w-full px-3 ${inputSizeClass}`}>
       <label
@@ -12,7 +14,7 @@ function Input({ label, name, type, placeholder = '', onChange, value, inputSize
         <input
           type={type}
           name={name}
-          className="appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          className="input input-bordered"
           id={`input-${name}`}
           placeholder={placeholder}
           onChange={onChange}
@@ -22,5 +24,14 @@ function Input({ label, name, type, placeholder = '', onChange, value, inputSize
     </div>
   );
 }
+Input.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  onChange: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+
+};
 
 export default Input;

@@ -1,41 +1,74 @@
 import { useState } from "react";
 
-const Instruments = ({ code, pupitre, observation, depth, rods, weight, sticker }) => {
-    const [collapse, setCollapse] = useState(false);
-  const toggleCollapse = (e) => {
-    e.preventDefault();
-    setCollapse(!collapse);
+function Instruments({ data }) {
+  const [collapse, setCollapse] = useState(null);
+
+  const toggleCollapse = (id) => {
+    if (collapse === id) {
+      setCollapse(null);
+    } else {
+      setCollapse(id);
+    }
   };
-  
+
   return (
-    <div className="card card-side bg-base-100 shadow-md m-4">
-        <figure className="pl-8"><img src="https://fakeimg.pl/100x100/?text=Instrument" alt="Aperçu"/></figure>
-        <div className="card-body">
-            <h2 className="card-title">{code}</h2>
-            <p className="normal-case first-letter:capitalize">{ observation }</p>
-                    {/* Collapsible content */}
-        <div className={`overflow-hidden transition-all duration-500 ${
-          collapse ? 'h-auto' : 'h-0'
-        }`}>
-          <div className="collapse-content">
-            <p><span className="font-medium">Pupitre: </span>{pupitre}</p>
-            <p><span className="font-medium">Tirant: </span>{rods}</p>
-            <p><span className="font-medium">Profondeur: </span>{depth}</p>
-            <p><span className="font-medium">Poids: </span>{weight}</p>
-            <p><span className="font-medium">Sticker: </span>{sticker}</p>
+    <div className="bg-base-300">
+      <h2 className="text-3xl font-bold m-4 pt-4">Instruments</h2>
+      {data.map((u) => {
+        return (
+          <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
+            <div onClick={() => toggleCollapse(u.id)} className="flex items-center">
+              <figure className="mr-4">
+                <img
+                  src="https://fakeimg.pl/100x100/?text=Instrument"
+                  alt="Aperçu"
+                  className="rounded-full"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title text-xl font-bold">{u.code}</h2>
+                <p className="normal-case first-letter:capitalize text-gray-600">
+                  {u.observation}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => toggleCollapse(u.id)}
+              className={`btn btn-primary mt-4 top-5 right-4 absolute`}
+            >
+              Edition
+            </button>
+            {collapse === u.id && (
+              <div className="card-body mt-4">
+                <div>
+                  <p>
+                    <span className="font-medium">Pupitre: </span>
+                    {u.pupitre}
+                  </p>
+                  <p>
+                    <span className="font-medium">Tirant: </span>
+                    {u.rods}
+                  </p>
+                  <p>
+                    <span className="font-medium">Profondeur: </span>
+                    {u.depth}
+                  </p>
+                  <p>
+                    <span className="font-medium">Poids: </span>
+                    {u.weight}
+                  </p>
+                  <p>
+                    <span className="font-medium">Sticker: </span>
+                    {u.sticker}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-        <div className="card-actions justify-end">
-          <button
-            onClick={toggleCollapse}
-            className={`btn btn-primary ${collapse ? 'bg-accent' : ''}`}
-          >
-            {collapse ? "Moins" : "Plus"}
-          </button>
-        </div>
-        </div>
+        );
+      })}
     </div>
-  )
+  );
 }
 
 export default Instruments;

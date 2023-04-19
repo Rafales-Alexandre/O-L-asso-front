@@ -1,14 +1,28 @@
-import React, {useState} from "react";
-import PropTypes from "prop-types";
-import Button from "../../Form/Button";
-import Input from "../../Form/Input";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import Button from '../../Form/Button';
+import Input from '../../Form/Input';
 
 function UserEdit({ data }) {
+  console.log(data);
   const [formData, setFormData] = useState({
-    lastname: data[1].lastname,
-    firstname: data[1].firstname,
-    nickname: data[1].nickname,
-    email: data[1].email,
+    lastname: data[0].lastname,
+    firstname: data[0].firstname,
+    nickname: data[0].nickname,
+    email: data[0].email,
+    birthdate: data[0].email,
+    phone: data[0].phone,
+    address: data[0].address,
+    address_2: data[0].address_2,
+    zip_code: data[0].zip_code,
+    city: data[0].city,
+    role: data[0].role,
+    subscription: data[0].subscription,
+    deposit: data[0].deposit,
+    url_img: data[0].url_img,
+    gender: data[0].gender,
+    top_size: data[0].top_size,
+    bottom_size: data[0].bottom_size,
   });
 
   const onChange = (e) => {
@@ -17,25 +31,29 @@ function UserEdit({ data }) {
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
-
   const onSubmitFormUser = (e) => {
     e.preventDefault();
 
     //
-  }
+  };
 
   return (
     <form
       onSubmit={onSubmitFormUser}
       //  autoComplete="off"
-      className="w-full max-w-lg"
+      className="card-body"
     >
+      <div className="avatar">
+        <div className="w-24 mask mask-squircle">
+          <img src={data[0].url_img} alt={data[0].url_img} />
+        </div>
+      </div>
       <div className="flex flex-wrap -mx-3 mb-6">
         <Input
           label="Nom"
           name="lastname"
           type="text"
-          placeholder="Votre nom..."
+          placeholder={data[0].lastname}
           value={formData.lastname}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -45,7 +63,7 @@ function UserEdit({ data }) {
           label="Prénom"
           name="firstname"
           type="text"
-          placeholder="Votre prénom..."
+          placeholder={data[0].firstname}
           value={formData.firstname}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -55,7 +73,7 @@ function UserEdit({ data }) {
           label="Pseudo"
           name="nickname"
           type="text"
-          placeholder="Votre pseudo..."
+          placeholder={data[0].nickname}
           value={formData.nickname}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -69,266 +87,202 @@ function UserEdit({ data }) {
           label="Email"
           name="email"
           type="email"
-          placeholder="Votre email..."
+          placeholder={data[0].email}
           value={formData.email}
           onChange={onChange}
         />
-
-        <div className="w-full px-3">
-          <Button>Réinitialiser mot de passe</Button>
-        </div>
+        <Button> Réinitialiser mot de passe </Button>
       </div>
       <div className="flex flex-wrap -mx-3 mb-2">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label
-            className='"block uppercase tracking-wide text-white-700 text-xs font-bold mb-2'
-            forhtml="grid-birthdate"
-          >
-            Date de naissance
-          </label>
-          <input
-            type="date"
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-birthdate"
-            placeholder={data[1].birthdate}
-            onChange={onChange}
-          />
-        </div>
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label
-            className='"block uppercase tracking-wide text-white-700 text-xs font-bold mb-2'
-            forhtml="grid-phone"
-          >
-            Téléphone
-          </label>
-          <input
-            type="tel"
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-phone"
-            placeholder={data[1].phone}
-            onChange={onChange}
-          />
-        </div>
+        <Input
+          label="Date de naissance"
+          name="birthdate"
+          type="date"
+          placeholder={data[0].birthdate}
+          value={formData.birthdate}
+          onChange={onChange}
+          inputSizeClass="md:w-1/2"
+        />
+
+        <Input
+          label="Téléphone"
+          name="phone"
+          type="tel"
+          placeholder={data[0].phone}
+          value={formData.phone}
+          onChange={onChange}
+          inputSizeClass="md:w-1/2"
+        />
+
         <div className="flex flex-wrap -mx-3 mb-6">
+
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
-              forhtml="grid-gender"
+              htmlFor="gender"
             >
               Genre
+              <select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="gender"
+                name="gender"
+              >
+                <option value={data[0].gender} defaultValue>
+                  {data[0].gender}
+                </option>
+                <option value="femme">F</option>
+                <option value="homme">M</option>
+              </select>
             </label>
-            <select
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-gender"
-              name="gender"
-            >
-              <option value={data[1].gender} defaultValue>
-                {data[1].gender}{" "}
-              </option>
-              <option value="femme">F</option>
-              <option value="homme">M</option>
-            </select>
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
-              forhtml="grid-top_size"
+              htmlFor="top_size"
             >
               Taille Haut
+              <select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="top_size"
+                name="top_size"
+              >
+                <option value={data[0].top_size} defaultValue>
+                  {data[0].top_size}
+                </option>
+                <option value="xs">XS</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="xxl">XXL</option>
+                <option value="xxxl">XXXL</option>
+              </select>
             </label>
-            <select
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-top_size"
-              name="top_size"
-            >
-              <option value={data[1].top_size} defaultValue>
-                {data[1].top_size}
-              </option>
-              <option value="xs">XS</option>
-              <option value="s">S</option>
-              <option value="m">M</option>
-              <option value="l">L</option>
-              <option value="xl">XL</option>
-              <option value="xxl">XXL</option>
-              <option value="xxxl">XXXL</option>
-            </select>
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
-              forhtml="grid-bottom_size"
+              htmlFor="bottom_size"
             >
               Taille Bas
+              <select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="bottom_size"
+                name="bottom_size"
+              >
+                <option value={data[0].bottom_size} defaultValue>
+                  {data[0].bottom_size}
+                </option>
+                <option value="xs">XS</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="xxl">XXL</option>
+                <option value="xxxl">XXXL</option>
+              </select>
             </label>
-            <select
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-bottom_size"
-              name="bottom_size"
-            >
-              <option value={data[1].bottom_size} defaultValue>
-                {data[1].bottom_size}
-              </option>
-              <option value="xs">XS</option>
-              <option value="s">S</option>
-              <option value="m">M</option>
-              <option value="l">L</option>
-              <option value="xl">XL</option>
-              <option value="xxl">XXL</option>
-              <option value="xxxl">XXXL</option>
-            </select>
           </div>
         </div>
       </div>
       <div className="flex flex-wrap -mx-3 mb-2">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-            forhtml="grid-address"
-          >
-            Adresse
-          </label>
-          <input
-            type="text"
-            className="appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-address"
-            placeholder={data[1].address}
-            onChange={onChange}
-          />
-        </div>
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-            forhtml="grid-address_2"
-          >
-            Adresse Complémentaire
-          </label>
-          <input
-            type="text"
-            className="appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-address_2"
-            placeholder={data[1].address_2}
-            onChange={onChange}
-            //TODO if adresse_2 ="" add placeholder=Adresse complémentaire
-          />
-        </div>
+        <Input
+          label="Adresse"
+          name="address"
+          type="text"
+          placeholder={data[0].address}
+          value={formData.address}
+          onChange={onChange}
+          inputSizeClass="md:w-1/2"
+        />
+        <Input
+          label="Adresse Complémentaire"
+          name="address_2"
+          type="text"
+          placeholder={data[0].address_2}
+          value={formData.address_2}
+          onChange={onChange}
+          inputSizeClass="md:w-1/2"
+        />
       </div>
       <div className="flex flex-wrap -mx-3 mb-2">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-            forhtml="grid-zip_code"
-          >
-            Code postal
-          </label>
-          <input
-            type="number"
-            className="appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-zip_code"
-            placeholder={data[1].zip_code}
-            onChange={onChange}
-          />
-        </div>
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-            forhtml="grid-city"
-          >
-            Ville
-          </label>
-          <input
-            type="text"
-            className="appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-city"
-            placeholder={data[1].city}
-            onChange={onChange}
-          />
-        </div>
+        <Input
+          label="Code postal"
+          name="zip_code"
+          type="number"
+          placeholder={data[0].zip_code}
+          value={formData.zip_code}
+          onChange={onChange}
+          inputSizeClass="md:w-1/2"
+        />
+        <Input
+          label="Ville"
+          name="city"
+          type="text"
+          placeholder={data[0].city}
+          value={formData.city}
+          onChange={onChange}
+          inputSizeClass="md:w-1/2"
+        />
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-            forhtml="grid-role"
-          >
-            Role
-          </label>
-          <input
-            type="text"
-            className="appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-role"
-            value={data[1].role}
-            onChange={onChange}
-          />
-        </div>
+        <Input
+          label="Rôle"
+          name="role"
+          type="text"
+          placeholder={data[0].role}
+          value={formData.role}
+          onChange={onChange}
+          inputSizeClass="md:w-1/3"
+        />
         {/* PART Members and Admin */}
         <fieldset>
           <legend>Adhésion</legend>
           <div className="flex flex-wrap -mx-3 mb-6">
-            <div className="w-full md:w-1/3 px-5 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-                forhtml="grid-subscription"
-              >
-                Cotisation payée
-              </label>
-              <input
-                type="checkbox"
-                id="grid-subscription"
-                name="subscription"
-                value={data[1].subscription}
-                onChange={onChange}
-              />
-            </div>
-            <div className="w-full md:w-1/3 px-5 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-                forhtml="grid-deposit"
-              >
-                Caution versée
-              </label>
-              <input
-                type="checkbox"
-                id="grid-deposit"
-                name="deposit"
-                value={data[1].deposit}
-                onChange={onChange}
-              />
-            </div>
+            <Input
+              label="Cotisation payée"
+              name="subscription"
+              type="checkbox"
+              placeholder={data[0].subscription}
+              value={formData.subscription}
+              onChange={onChange}
+              inputSizeClass="md:w-1/3"
+            />
+
+            <Input
+              label="Caution versée"
+              name="deposit"
+              type="checkbox"
+              placeholder={data[0].deposit}
+              value={formData.deposit}
+              onChange={onChange}
+              inputSizeClass="md:w-1/3"
+            />
           </div>
         </fieldset>
         {/* Part Admin */}
         <div className="w-full md:w-1/1 px-3 mb-6 md:mb-0">
           <label
             className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-            forhtml="grid-add-role"
+            htmlFor="add-role"
           >
             Choisir un rôle
+            <select
+              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              name="add-role"
+              id="add-role"
+              onChange={onChange}
+            >
+              <option value="Adhérent">Adhérent</option>
+              <option value="Bureau">Bureau</option>
+              <option value="Admin">Admin</option>
+            </select>
           </label>
-          <select
-            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            name="role"
-            id="grid-add-role"
-            onChange={onChange}
-          >
-            <option value="Adhérent">Adhérent</option>
-            <option value="Bureau">Bureau</option>
-            <option value="Admin">Admin</option>
-          </select>
         </div>
       </div>
 
       {/* Validate form */}
-
-      <div className="w-full px-3">
-        <button
-          type="submit"
-          className="block appearance-none block w-full bg-black-200 text-white-700 border py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Valider
-        </button>
-      </div>
-      {/* <p>* Champs obligatoire</p> 
-     => on peut mettre un message d'avertissement lorsqu'un champ est manquant} */}
+      <Button>Valider</Button>
     </form>
   );
 }
@@ -340,9 +294,21 @@ UserEdit.propTypes = {
       firstname: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
       nickname: PropTypes.string.isRequired,
+      birthdate: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired,
+      address: PropTypes.string.isRequired,
+      address_2: PropTypes.string.isRequired,
+      zip_code: PropTypes.string.isRequired,
+      city: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+      subscription: PropTypes.bool.isRequired,
+      deposit: PropTypes.bool.isRequired,
+      url_img: PropTypes.string.isRequired,
+      gender: PropTypes.string.isRequired,
+      top_size: PropTypes.string.isRequired,
+      bottom_size: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  onSubmitFormUser: PropTypes.func.isRequired,
 };
 
 export default UserEdit;
