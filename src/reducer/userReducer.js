@@ -16,6 +16,7 @@ const userReducer = (state = initialState, action) => {
     case 'FETCH_INSTRUMENTS':
       return { ...state, instruments: action.payload };
     case 'FETCH_SUITS':
+      console.log("State updated in reducer: ", { ...state, suits: action.payload }); // Add this line
       return { ...state, suits: action.payload };
     default:
       return state;

@@ -144,9 +144,9 @@ export const updateUser = (updateUserId, input) => async (dispatch) => {
       mutation: Update_User,
       variables: {
         "updateUserId": updateUserId,
-        "input": 
+        "input": {
           input
-        
+        }
       },
     });
     dispatch({
@@ -158,7 +158,7 @@ export const updateUser = (updateUserId, input) => async (dispatch) => {
   }
 };
 
-export const Update_Instrument = gql`
+export default Update_Instrument = gql`
 mutation Mutation($updateInstrumentId: ID!, $input: InstrumentInput) {
   updateInstrument(id: $updateInstrumentId, input: $input) {
     id
@@ -223,76 +223,23 @@ export const createInstrument = (input) => async (dispatch) => {
       },
     });
   }catch (error) {
-    console.error("Erreur lors de la création de l'instrument :", error);
-  }
-};
 
-export const Update_Suit= gql`
-mutation Mutation($updateSuitId: ID!, $input: SuitInput) {
-  updateSuit(id: $updateSuitId, input: $input) {
+  }
+}
+
+export default Update_Suit= gql`
+mutation Mutation($updateInstrumentId: ID!, $input: InstrumentInput) {
+  updateInstrument(id: $updateInstrumentId, input: $input) {
     id
-    label
-    gender
+    code
+    pupitre
     observation
-    quantity_s
-    quantity_m
-    quantity_l
-    quantity_xl
-    quantity_xxl
-    quantity_xxxl
-    total
+    depth
+    rods
+    weight
+    sticker
+    created_at
+    updated_at
   }
 }
 `;
-export const updateSuit = (updateSuitId, input) => async (dispatch) => {
-  try {
-    const response = await client.mutate({
-      mutation: Update_Suit,
-      variables: {
-        "updateSuitId": updateSuitId,
-        "input": {
-          input
-        }
-      },
-    });
-    dispatch({
-      type: 'Update_Suit',
-      payload: response.data.updateSuit,
-    });
-  } catch (error) {
-    console.error("Erreur lors de la modification du costume :", error);
-  }
-};
-
-export const Create_Suit= gql`
-mutation Mutation($input: SuitInput) {
-  addSuit(input: $input) {
-    id
-    label
-    gender
-    observation
-    quantity_s
-    quantity_m
-    quantity_l
-    quantity_xl
-    quantity_xxl
-    quantity_xxxl
-    total
-  }
-}`;
-
-export const createSuit = (input) => async (dispatch) => {
-  try {
-    const response = await client.mutate({
-      mutation: Create_Suit,
-      variables: {
-        "input": {
-          input
-        }
-      },
-    });
-  } catch (error) {
-    console.error("Erreur lors de la création du costume :", error);
-  }
-};
-
