@@ -13,7 +13,7 @@ function Suits({ data }) {
 
   return (
     <div className="bg-base-300">
-      <h2 className="text-3xl font-bold m-4 pt-4">Costumes</h2>
+      <h2 className="text-3xl font-bold">Costumes</h2>
       {data.map((u) => {
         return (
           <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
