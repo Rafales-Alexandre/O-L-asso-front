@@ -28,6 +28,13 @@ function App() {
   }, [dispatch]);
 
   const handleLogin = (email, password) => {
+    // Avec l'email et password, faire une requête POST à l'API (leur demander la doc si nécessaire)
+    // donc requête gql à faire
+    // une fois que la requeête s'est bien passée et que le back nous a retourné un token,
+    // ajouter le token en localStorage
+    // (eventuellement stocker le token dans le store de redux)
+    // ajouter le token dans le header autorization de votre client appollo
+
     setUserData([...users.getAllUsers]);
     setInstruData([...instruments.getAllInstruments]);
     setSuitsData([...suits.getAllSuits]);

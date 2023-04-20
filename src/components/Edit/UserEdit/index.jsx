@@ -1,42 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../Form/Button';
 import Input from '../../Form/Input';
+import Select from '../../Form/Select';
+import { useMutation } from '@apollo/client';
+import { updateUser } from '../../../actions/userActions';
+import { useDispatch } from 'react-redux';
+
 
 function UserEdit({ data }) {
-  console.log(data);
+  const dispatch = useDispatch();
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
   const [formData, setFormData] = useState({
     lastname: data[0].lastname,
     firstname: data[0].firstname,
     nickname: data[0].nickname,
     email: data[0].email,
-    birthdate: data[0].email,
+    birthdate: formatDate(data[0].birthdate),
     phone: data[0].phone,
     address: data[0].address,
     address_2: data[0].address_2,
     zip_code: data[0].zip_code,
     city: data[0].city,
     role: data[0].role,
-    subscription: data[0].subscription,
-    deposit: data[0].deposit,
     url_img: data[0].url_img,
     gender: data[0].gender,
     top_size: data[0].top_size,
     bottom_size: data[0].bottom_size,
   });
 
+  updateUser(data[0].id, formData);
+  const [isChecked, setIsChecked] = useState({
+    subscription: toString(data[0].subscription),
+    deposit: toString(data[0].deposit),
+  });
+  const Ismember = data[0].role === 'member';
+
+  const handleCheckboxChange = (event) => {
+    if (Ismember) {
+      event.preventDefault();
+      return;
+    }
+
+    setIsChecked(event.target.checked);
+  };
   const onChange = (e) => {
     setFormData({
       ...formData,
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
-  const onSubmitFormUser = (e) => {
+  const onSubmitFormUser = async (e) => {
     e.preventDefault();
-
-    //
+    dispatch(updateUser(data[0].id, formData));
+    console.log(data)
   };
-
+  useEffect(() => {
+    onSubmitFormUser()
+  }, [formData]);
+  
   return (
     <form
       onSubmit={onSubmitFormUser}
@@ -48,7 +77,7 @@ function UserEdit({ data }) {
           <img src={data[0].url_img} alt={data[0].url_img} />
         </div>
       </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
+      <div className="flex flex-wrap">
         <Input
           label="Nom"
           name="lastname"
@@ -116,73 +145,95 @@ function UserEdit({ data }) {
 
         <div className="flex flex-wrap -mx-3 mb-6">
 
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
-              htmlFor="gender"
-            >
-              Genre
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="gender"
-                name="gender"
-              >
-                <option value={data[0].gender} defaultValue>
-                  {data[0].gender}
-                </option>
-                <option value="femme">F</option>
-                <option value="homme">M</option>
-              </select>
-            </label>
-          </div>
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
-              htmlFor="top_size"
-            >
-              Taille Haut
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="top_size"
-                name="top_size"
-              >
-                <option value={data[0].top_size} defaultValue>
-                  {data[0].top_size}
-                </option>
-                <option value="xs">XS</option>
-                <option value="s">S</option>
-                <option value="m">M</option>
-                <option value="l">L</option>
-                <option value="xl">XL</option>
-                <option value="xxl">XXL</option>
-                <option value="xxxl">XXXL</option>
-              </select>
-            </label>
-          </div>
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
-              htmlFor="bottom_size"
-            >
-              Taille Bas
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="bottom_size"
-                name="bottom_size"
-              >
-                <option value={data[0].bottom_size} defaultValue>
-                  {data[0].bottom_size}
-                </option>
-                <option value="xs">XS</option>
-                <option value="s">S</option>
-                <option value="m">M</option>
-                <option value="l">L</option>
-                <option value="xl">XL</option>
-                <option value="xxl">XXL</option>
-                <option value="xxxl">XXXL</option>
-              </select>
-            </label>
-          </div>
+          <Select
+            label="Genre"
+            name="gender"
+            selected={data[0].gender}
+            options={[
+              {
+                label: 'F',
+                value: 'F',
+              },
+              {
+                label: 'M',
+                value: 'M',
+              },
+              {
+                label: 'mixte',
+                value: 'mixte',
+              },
+            ]}
+          />
+          <Select
+            label="Taille Haut"
+            name="top_size"
+            selected={data[0].top_size}
+            options={[
+              {
+                label: 'XS',
+                value: 'XS',
+              },
+              {
+                label: 'S',
+                value: 'S',
+              },
+              {
+                label: 'M',
+                value: 'M',
+              },
+              {
+                label: 'L',
+                value: 'L',
+              },
+              {
+                label: 'XL',
+                value: 'XL',
+              },
+              {
+                label: 'XXL',
+                value: 'XXL',
+              },
+              {
+                label: 'XXXL',
+                value: 'XXXL',
+              },
+            ]}
+          />
+          <Select
+            label="Taille bAS"
+            name="bottom_size"
+            selected={data[0].bottom_size}
+            options={[
+              {
+                label: 'XS',
+                value: 'XS',
+              },
+              {
+                label: 'S',
+                value: 'S',
+              },
+              {
+                label: 'M',
+                value: 'M',
+              },
+              {
+                label: 'L',
+                value: 'L',
+              },
+              {
+                label: 'XL',
+                value: 'XL',
+              },
+              {
+                label: 'XXL',
+                value: 'XXL',
+              },
+              {
+                label: 'XXXL',
+                value: 'XXXL',
+              },
+            ]}
+          />
         </div>
       </div>
       <div className="flex flex-wrap -mx-3 mb-2">
@@ -225,6 +276,7 @@ function UserEdit({ data }) {
           inputSizeClass="md:w-1/2"
         />
       </div>
+      {/* PART Members and Admin */}
       <div className="flex flex-wrap -mx-3 mb-6">
         <Input
           label="Rôle"
@@ -232,20 +284,21 @@ function UserEdit({ data }) {
           type="text"
           placeholder={data[0].role}
           value={formData.role}
-          onChange={onChange}
+          onChange={handleCheckboxChange}
           inputSizeClass="md:w-1/3"
+          disabled={Ismember}
         />
-        {/* PART Members and Admin */}
-        <fieldset>
+        <fieldset disabled={Ismember}>
           <legend>Adhésion</legend>
           <div className="flex flex-wrap -mx-3 mb-6">
             <Input
               label="Cotisation payée"
               name="subscription"
               type="checkbox"
-              placeholder={data[0].subscription}
+              checked={isChecked}
+              placeholder={data.subscription}
               value={formData.subscription}
-              onChange={onChange}
+              onClick={handleCheckboxChange}
               inputSizeClass="md:w-1/3"
             />
 
@@ -253,32 +306,35 @@ function UserEdit({ data }) {
               label="Caution versée"
               name="deposit"
               type="checkbox"
-              placeholder={data[0].deposit}
+              checked={isChecked}
+              placeholder={data.deposit}
               value={formData.deposit}
-              onChange={onChange}
+              onClick={handleCheckboxChange}
               inputSizeClass="md:w-1/3"
             />
           </div>
         </fieldset>
-        {/* Part Admin */}
-        <div className="w-full md:w-1/1 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-            htmlFor="add-role"
-          >
-            Choisir un rôle
-            <select
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              name="add-role"
-              id="add-role"
-              onChange={onChange}
-            >
-              <option value="Adhérent">Adhérent</option>
-              <option value="Bureau">Bureau</option>
-              <option value="Admin">Admin</option>
-            </select>
-          </label>
-        </div>
+        {(data[0].role === 'admin') && (
+          <Select
+            label="Choisir un rôle"
+            name="role"
+            selected="Adhérent"
+            options={[
+              {
+                label: 'Adhérent',
+                value: 'member',
+              },
+              {
+                label: 'Bureau',
+                value: 'board',
+              },
+              {
+                label: 'Admin',
+                value: 'admin',
+              },
+            ]}
+          />
+        )}
       </div>
 
       {/* Validate form */}
