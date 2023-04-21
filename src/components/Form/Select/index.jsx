@@ -20,10 +20,12 @@ function Select({
           className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           id={name}
           name={name}
+          value={selected}
         >
           {
             options.map((option) => (
               <option
+                key={option.value}
                 value={option.value}
                 selected={option.value === selected}
                 onChange={onChange}
@@ -38,15 +40,17 @@ function Select({
   );
 }
 
-Select.propTypes = {
+/* Select.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf({
-    value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-  }).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   selected: PropTypes.string.isRequired,
-};
+  onChange: PropTypes.func.isRequired,
+}; */
 
 export default Select;

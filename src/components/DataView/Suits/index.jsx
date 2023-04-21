@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSuits } from "../../../actions/userActions";
+import { fetchSuits } from "../../../actions/suitActions";
+import SuitEdit from '../../Edit/SuitEdit';
+import SuitCreate from '../../Create/SuitCreate'
 import Button from "../../Form/Button";
 
 function Suits() {
@@ -8,6 +10,9 @@ function Suits() {
   const dispatch = useDispatch();
   const [suitData, setsuitData] = useState([]);
   const suits = useSelector((state) => state.user.suits.getAllSuits);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchSuits());
@@ -25,6 +30,13 @@ function Suits() {
     } else {
       setCollapse(id);
     }
+  };
+  const toggleModal = (user) => {
+    setSelectedUser(user);
+    setShowModal(!showModal);
+  };
+  const toggleCreateModal = () => {
+    setShowCreateModal(!showCreateModal);
   };
 
   return (
@@ -70,7 +82,32 @@ function Suits() {
           </div>
         );
       })}
-      
+      {showModal && (
+        <>
+        <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+        <div
+          className={`modal  ${showModal ? "modal-open" : ""}`}
+        >
+          <div className="modal-box relative w-11/12 max-w-5xl">
+            <button onClick={()=>{toggleModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+            <SuitEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+          </div>
+        </div>
+        </>
+      )}
+      {showCreateModal && (
+        <>
+        <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+        <div
+          className={`modal  ${showCreateModal ? "modal-open" : ""}`}
+        >
+          <div className="modal-box relative w-11/12 max-w-5xl">
+            <button onClick={()=>{toggleCreateModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+            <SuitCreate data={[]} onSubmitFormUser={() => {}} />
+          </div>
+        </div>
+        </>
+      )}
     </div>
   );
 }

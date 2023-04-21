@@ -1,11 +1,13 @@
-import React, { useState,useEffect } from "react";
-import UserEdit from "../../Edit/UserEdit";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState,useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import UserEdit from '../../Edit/UserEdit';
+import UserCreate from '../../Create/UserCreate';
 import { fetchUsers } from '../../../actions/userActions';
 
 function User() {
   const [collapse, setCollapse] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
@@ -30,13 +32,15 @@ function User() {
     setSelectedUser(user);
     setShowModal(!showModal);
   };
-
+  const toggleCreateModal = () => {
+    setShowCreateModal(!showCreateModal);
+  };
 
   return (
     <div className="bg-base-300">
       <h2 className="text-3xl font-bold">Adherents</h2>
 
-      <button className="btn" onClick={()=>{toggleModal()}}>CREATE USER</button>
+      <button type="submit" className="btn" onClick={()=> toggleCreateModal()}>CREATE USER</button>
       {userData.map((u) => {
         return (
           <div
@@ -76,7 +80,6 @@ function User() {
           </div>
         );
       })}
-
       {showModal && (
         <>
         <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
@@ -85,7 +88,20 @@ function User() {
         >
           <div className="modal-box relative w-11/12 max-w-5xl">
             <button onClick={()=>{toggleModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-            <UserEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+            <UserEdit data={[selectedUser]} closeModal={toggleModal} onSubmitFormUser={() => {}} />
+          </div>
+        </div>
+        </>
+      )}
+      {showCreateModal && (
+        <>
+        <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+        <div
+          className={`modal  ${showCreateModal ? "modal-open" : ""}`}
+        >
+          <div className="modal-box relative w-11/12 max-w-5xl">
+            <button onClick={()=>{toggleCreateModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+            <UserCreate data={[]} closeModal={toggleCreateModal}onSubmitFormUser={() => {}} />
           </div>
         </div>
         </>

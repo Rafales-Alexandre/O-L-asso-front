@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchInstruments } from "../../../actions/userActions";
+import { fetchInstruments } from "../../../actions/instrumentActions";
+import InstrumentEdit from "../../Edit/InstrumentEdit";
+import InstrumentCreate from '../../Create/InstrumentCreate';
 
 function Instruments() {
   const [collapse, setCollapse] = useState(null);
   const dispatch = useDispatch();
   const [instruData, setInstruData] = useState([]);
   const instruments = useSelector((state) => state.user.instruments.getAllInstruments);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchInstruments());
@@ -24,6 +29,13 @@ function Instruments() {
     } else {
       setCollapse(id);
     }
+  };
+  const toggleModal = (user) => {
+    setSelectedUser(user);
+    setShowModal(!showModal);
+  };
+  const toggleCreateModal = () => {
+    setShowCreateModal(!showCreateModal);
   };
 
   return (
@@ -82,6 +94,32 @@ function Instruments() {
           </div>
         );
       })}
+      {showModal && (
+        <>
+        <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+        <div
+          className={`modal  ${showModal ? "modal-open" : ""}`}
+        >
+          <div className="modal-box relative w-11/12 max-w-5xl">
+            <button onClick={()=>{toggleModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+            <InstrumentEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+          </div>
+        </div>
+        </>
+      )}
+      {showCreateModal && (
+        <>
+        <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+        <div
+          className={`modal  ${showCreateModal ? "modal-open" : ""}`}
+        >
+          <div className="modal-box relative w-11/12 max-w-5xl">
+            <button onClick={()=>{toggleCreateModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+            <InstruCreate data={[]} onSubmitFormUser={() => {}} />
+          </div>
+        </div>
+        </>
+      )}
     </div>
   );
 }

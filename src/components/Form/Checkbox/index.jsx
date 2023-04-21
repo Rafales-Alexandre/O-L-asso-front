@@ -26,11 +26,11 @@ function Checkbox({
     </div>
   );
 }
-Checkbox.propTypes = {
+/* Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-};
+}; */
 
 export default Checkbox;

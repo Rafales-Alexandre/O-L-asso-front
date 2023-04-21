@@ -1,49 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { createUser } from '../../../actions/userActions';
 import Button from '../../Form/Button';
-import { updateUser } from '../../../actions/userActions';
 import Select from '../../Form/Select';
 import Input from '../../Form/Input';
 import Checkbox from '../../Form/Checkbox';
+import logo from '../../../assets/react.svg';
 
-function UserEdit({ data = 0, closeModal }) {
-  const dispatch = useDispatch();
+function UserCreate({ data = [], closeModal }) {
+  const [password, setPassword] = useState('');
 
-  const formatDate = (date) => {
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+  function generateRandomPassword() {
+    const length = 12;
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+<>/?';
+    const charsetLength = charset.length;
+    const randomArray = new Uint8Array(length);
+    window.crypto.getRandomValues(randomArray);
+
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += charset[randomArray[i] % charsetLength];
+    }
+
+    return result;
+  }
+
+  const generatePassword = () => {
+    const newPassword = generateRandomPassword();
+    setPassword(newPassword);
+    setFormData({...formData, password: newPassword });
   };
 
-  const [formData, setFormData] = useState({
-    lastname: data[0].lastname,
-    firstname: data[0].firstname,
-    nickname: data[0].nickname,
-    email: data[0].email,
-    birthdate: formatDate(data[0].birthdate),
-    phone: data[0].phone,
-    address: data[0].address,
-    address_2: data[0].address_2,
-    zip_code: data[0].zip_code,
-    city: data[0].city,
-    role: data[0].role,
-    url_img: data[0].url_img,
-    gender: data[0].gender,
-    top_size: data[0].top_size,
-    bottom_size: data[0].bottom_size,
-  });
+  useEffect(() => {
+    generatePassword();
+  }, []);
+  const dispatch = useDispatch();
+  const role = 'admin';
+  const initialFormData = {
+    lastname: '',
+    firstname: '',
+    nickname: '',
+    email: '',
+    birthdate: '',
+    phone: '',
+    address: '',
+    address_2: '',
+    zip_code: '',
+    city: '',
+    role: 'admin',
+    url_img: '',
+    gender: 'F',
+    top_size: 'M',
+    bottom_size: 'M',
+  };
 
-  updateUser(data[0].id, formData);
-  const [isChecked, setIsChecked] = useState({
-    subscription: data[0].subscription.toString(),
-    deposit: data[0].deposit.toString(),
-  });
-  const Ismember = data[0].role === 'member';
+  const initialIsChecked = {
+    subscription: 'false',
+    deposit: 'false',
+};
+
+  const [formData, setFormData] = useState(initialFormData);
+  const [isChecked, setIsChecked] = useState(initialIsChecked);
+
+  const Ismember = data.length && role === 'member';
 
   const handleCheckboxChange = (event) => {
+    createUser(formData);
     if (Ismember) {
       event.preventDefault();
       return;
@@ -61,23 +84,31 @@ function UserEdit({ data = 0, closeModal }) {
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
+
   const onSubmitFormUser = async (e) => {
-    e.preventDefault();
-    dispatch(updateUser(data[0].id, { ...formData,
-      subscription: isChecked.subscription === 'true',
-      deposit: isChecked.deposit === 'true',
-    }));
+    if (e) {
+      e.preventDefault();
+    }
+    generatePassword();
+    dispatch(createUser(formData));
     closeModal();
   };
+
+  useEffect(() => {
+    if (data.length) {
+      onSubmitFormUser();
+    }
+  }, [formData]);
 
   return (
     <form
       onSubmit={onSubmitFormUser}
+      //  autoComplete="off"
       className="card-body"
     >
       <div className="avatar">
         <div className="w-24 mask mask-squircle">
-          <img src={data[0].url_img} alt={data[0].url_img} />
+          <img src={logo} alt={logo} />
         </div>
       </div>
       <div className="flex flex-wrap">
@@ -85,7 +116,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Nom"
           name="lastname"
           type="text"
-          placeholder={data[0].lastname}
+          placeholder="Votre Nom"
           value={formData.lastname}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -95,7 +126,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Prénom"
           name="firstname"
           type="text"
-          placeholder={data[0].firstname}
+          placeholder="Votre Prénom"
           value={formData.firstname}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -105,7 +136,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Pseudo"
           name="nickname"
           type="text"
-          placeholder={data[0].nickname}
+          placeholder="Votre Pseudo"
           value={formData.nickname}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -119,7 +150,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Email"
           name="email"
           type="email"
-          placeholder={data[0].email}
+          placeholder="Votre Email"
           value={formData.email}
           onChange={onChange}
         />
@@ -130,7 +161,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Date de naissance"
           name="birthdate"
           type="date"
-          placeholder={data[0].birthdate}
+          placeholder="Votre Date de naissance"
           value={formData.birthdate}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -140,7 +171,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Téléphone"
           name="phone"
           type="tel"
-          placeholder={data[0].phone}
+          placeholder="Votre Téléphone"
           value={formData.phone}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -151,7 +182,6 @@ function UserEdit({ data = 0, closeModal }) {
           <Select
             label="Genre"
             name="gender"
-            selected={data[0].gender}
             onChange={onChange}
             options={[
               {
@@ -172,7 +202,6 @@ function UserEdit({ data = 0, closeModal }) {
           <Select
             label="Taille Haut"
             name="top_size"
-            selected={data[0].top_size}
             onChange={onChange}
             options={[
               {
@@ -208,7 +237,6 @@ function UserEdit({ data = 0, closeModal }) {
           <Select
             label="Taille Bas"
             name="bottom_size"
-            selected={data[0].bottom_size}
             onChange={onChange}
             options={[
               {
@@ -248,7 +276,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Adresse"
           name="address"
           type="text"
-          placeholder={data[0].address}
+          placeholder="Votre adresse"
           value={formData.address}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -257,7 +285,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Adresse Complémentaire"
           name="address_2"
           type="text"
-          placeholder={data[0].address_2}
+          placeholder="Adresse Complémentaire"
           value={formData.address_2}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -268,7 +296,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Code postal"
           name="zip_code"
           type="number"
-          placeholder={data[0].zip_code}
+          placeholder="Code postal"
           value={formData.zip_code}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -277,7 +305,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Ville"
           name="city"
           type="text"
-          placeholder={data[0].city}
+          placeholder="Ville"
           value={formData.city}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -289,7 +317,7 @@ function UserEdit({ data = 0, closeModal }) {
           label="Rôle"
           name="role"
           type="text"
-          placeholder={data[0].role}
+          placeholder="Rôle"
           value={formData.role}
           onChange={handleCheckboxChange}
           inputSizeClass="md:w-1/3"
@@ -317,7 +345,7 @@ function UserEdit({ data = 0, closeModal }) {
             />
           </div>
         </fieldset>
-        {(data[0].role === 'admin') && (
+        {(role === 'admin') && (
           <Select
             label="Choisir un rôle"
             name="role"
@@ -347,7 +375,7 @@ function UserEdit({ data = 0, closeModal }) {
   );
 }
 
-UserEdit.propTypes = {
+UserCreate.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       lastname: PropTypes.string.isRequired,
@@ -368,7 +396,7 @@ UserEdit.propTypes = {
       top_size: PropTypes.string.isRequired,
       bottom_size: PropTypes.string.isRequired,
     }),
-  ).isRequired,
+    ),
 };
 
-export default UserEdit;
+export default UserCreate;
