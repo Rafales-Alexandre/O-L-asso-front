@@ -34,8 +34,8 @@ function User() {
 
   return (
     <div className="bg-base-300">
-      <h2 className="text-3xl font-bold m-4 pt-4">Adherents</h2>
-      {userData.map((u) => {
+      <h2 className="text-3xl font-bold">Adherents</h2>
+      {data.map((u) => {
         return (
           <div
             className="card card-side bg-base-100 shadow-md m-4 mt-10 p-4 flex flex-col relative"
@@ -54,7 +54,7 @@ function User() {
                   />
                 </figure>
                 <div className="card-body">
-                  <h2 className="card-title text-xl font-bold">
+                  <h2 className="card-title text-xl">
                     {u.firstname} {u.lastname} ({u.nickname})
                   </h2>
                 </div>

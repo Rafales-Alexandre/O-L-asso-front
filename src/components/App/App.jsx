@@ -50,13 +50,14 @@ function App() {
     <div>
       <div className="App">
         {loggedInUser ? (
-          <>
-            <h2 className="text-3xl font-bold m-4 w-5/5">Dashboard</h2>
-            <UserPanel user={loggedInUser} onLogout={handleLogout} />
-            <div className="absolute top-0 right-10 w-3/5">
+          <div className="flex flex-col md:flex-row w-full h-screen">
+            <div className="md:w-1/5 sticky top-0 h-screen">
+              <UserPanel user={loggedInUser} onLogout={handleLogout} />
+            </div>
+            <div className="md:w-4/5 h-screen overflow-y-scroll">
               <DataView loggedInUser={loggedInUser} />
             </div>
-          </>
+          </div>
         ) : (
           <LogIn onLogin={handleLogin} refused={refused} />
         )}
