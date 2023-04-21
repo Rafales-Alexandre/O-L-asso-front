@@ -48,7 +48,7 @@ function LogIn({ onLogin, refused }) {
               </button>
               {refused && (
                 <p className="mt-6 text-center text-warning ">
-                  Indentifiants invalides. Veuillez réessayer.
+                  Identifiants invalides. Veuillez réessayer.
                 </p>
               )}
             </div>
