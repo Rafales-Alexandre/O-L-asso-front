@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../Form/Button';
+import Select from '../../Form/Select';
 import Input from '../../Form/Input';
+import { updateUser } from '../../../actions/userActions';
+import { useDispatch } from 'react-redux';
+
 
 function UserEdit({ data }) {
-  console.log(data);
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     lastname: data[0].lastname,
     firstname: data[0].firstname,
     nickname: data[0].nickname,
     email: data[0].email,
-    birthdate: data[0].email,
+    birthdate: data[0].birthdate,
     phone: data[0].phone,
     address: data[0].address,
     address_2: data[0].address_2,
@@ -24,16 +29,17 @@ function UserEdit({ data }) {
     top_size: data[0].top_size,
     bottom_size: data[0].bottom_size,
   });
-
   const onChange = (e) => {
     setFormData({
       ...formData,
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
-  const onSubmitFormUser = (e) => {
-    e.preventDefault();
 
+  const onSubmitFormUser = async (e) => {
+    e.preventDefault();
+    dispatch(updateUser(data[0].id, formData));
+    console.log(data)
     //
   };
 
@@ -116,25 +122,22 @@ function UserEdit({ data }) {
 
         <div className="flex flex-wrap -mx-3 mb-6">
 
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
-              htmlFor="gender"
-            >
-              Genre
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="gender"
-                name="gender"
-              >
-                <option value={data[0].gender} defaultValue>
-                  {data[0].gender}
-                </option>
-                <option value="femme">F</option>
-                <option value="homme">M</option>
-              </select>
-            </label>
-          </div>
+          <Select
+            label="Genre"
+            name="gender"
+            selected={data[0].gender}
+            options={[
+              {
+                label: 'F',
+                value: 'F',
+              },
+              {
+                label: 'M',
+                value: 'M',
+              },
+            ]}
+          />
+
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
