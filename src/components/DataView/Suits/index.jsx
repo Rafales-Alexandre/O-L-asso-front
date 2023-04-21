@@ -1,7 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSuits } from "../../../actions/userActions";
 
-function Suits({ data }) {
+function Suits() {
   const [collapse, setCollapse] = useState(null);
+  const dispatch = useDispatch();
+  const [suitData, setsuitData] = useState([]);
+  const suits = useSelector((state) => state.user.suits.getAllSuits);
+
+  useEffect(() => {
+    dispatch(fetchSuits());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (suits) {
+      setsuitData(Object.values(suits));
+    }
+  }, [suits]);
 
   const toggleCollapse = (id) => {
     if (collapse === id) {
@@ -53,6 +68,7 @@ function Suits({ data }) {
           </div>
         );
       })}
+      
     </div>
   );
 }

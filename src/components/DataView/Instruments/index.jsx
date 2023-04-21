@@ -1,7 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchInstruments } from "../../../actions/userActions";
 
-function Instruments({ data }) {
+function Instruments() {
   const [collapse, setCollapse] = useState(null);
+  const dispatch = useDispatch();
+  const [instruData, setInstruData] = useState([]);
+  const instruments = useSelector((state) => state.user.instruments.getAllInstruments);
+
+  useEffect(() => {
+    dispatch(fetchInstruments());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (instruments) {
+      setInstruData(Object.values(instruments));
+    }
+  }, [instruments]);
 
   const toggleCollapse = (id) => {
     if (collapse === id) {

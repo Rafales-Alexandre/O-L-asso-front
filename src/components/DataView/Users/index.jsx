@@ -1,7 +1,23 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import UserEdit from "../../Edit/UserEdit";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from '../../../actions/userActions';
 
-function User({ data }) {
+function User() {
   const [collapse, setCollapse] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState([]);
+  const users = useSelector((state) => state.user.users.getAllUsers);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setUserData(Object.values(users));
+  }, [users]);
 
   const toggleCollapse = (id) => {
     if (collapse === id) {
@@ -10,17 +26,32 @@ function User({ data }) {
       setCollapse(id);
     }
   };
+  const toggleModal = (user) => {
+    setSelectedUser(user);
+    setShowModal(!showModal);
+  };
+
 
   return (
     <div className="bg-base-300">
       <h2 className="text-3xl font-bold">Adherents</h2>
       {data.map((u) => {
         return (
-          <div className="card card-side bg-base-100 shadow-md m-4 mt-10 p-4 flex flex-col relative" key={u.id}>
+          <div
+            className="card card-side bg-base-100 shadow-md m-4 mt-10 p-4 flex flex-col relative"
+            key={u.id}
+          >
             <div className="flex-grow">
-              <div onClick={() => toggleCollapse(u.id)} className="flex items-center">
+              <div
+                onClick={() => toggleCollapse(u.id)}
+                className="flex items-center"
+              >
                 <figure className="mr-4">
-                  <img src={u.url_img} alt="User" className="rounded-full w-20 h-20" />
+                  <img
+                    src={u.url_img}
+                    alt="User"
+                    className="rounded-full w-20 h-20"
+                  />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title text-xl">
@@ -29,7 +60,7 @@ function User({ data }) {
                 </div>
               </div>
               <button
-                onClick={() => toggleCollapse(u.id)}
+                onClick={() => toggleModal(u)}
                 className={`btn btn-primary mt-4 top-5 right-4 absolute`}
               >
                 Edition
@@ -37,44 +68,26 @@ function User({ data }) {
             </div>
             {collapse === u.id && (
               <div className="card-body mt-4">
-                <div>
-                  <p className="normal-case first-letter:capitalize text-gray-600">
-                    {u.email}
-                  </p>
-                  <p>
-                    <span className="font-medium">Phone: </span>
-                    {u.phone}
-                  </p>
-                  <p>
-                    <span className="font-medium">Address: </span>
-                    {u.address}, {u.address_2}
-                  </p>
-                  <p>
-                    <span className="font-medium">City: </span>
-                    {u.city}
-                  </p>
-                  <p>
-                    <span className="font-medium">Zip Code: </span>
-                    {u.zip_code}
-                  </p>
-                  <p>
-                    <span className="font-medium">Gender: </span>
-                    {u.gender}
-                  </p>
-                  <p>
-                    <span className="font-medium">Top Size: </span>
-                    {u.top_size}
-                  </p>
-                  <p>
-                    <span className="font-medium">Bottom Size: </span>
-                    {u.bottom_size}
-                  </p>
-                </div>
+                <div>{/* User details */}</div>
               </div>
             )}
           </div>
         );
       })}
+
+      {showModal && (
+        <>
+        <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+        <div
+          className={`modal  ${showModal ? "modal-open" : ""}`}
+        >
+          <div className="modal-box relative w-11/12 max-w-5xl">
+            <button onClick={()=>{toggleModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+            <UserEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+          </div>
+        </div>
+        </>
+      )}
     </div>
   );
 }
