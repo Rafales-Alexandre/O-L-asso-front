@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../Form/Button';
+import Select from '../../Form/Select';
 import Input from '../../Form/Input';
+
 import Select from '../../Form/Select';
 import { useMutation } from '@apollo/client';
 import { updateUser } from '../../../actions/userActions';
@@ -18,6 +20,7 @@ function UserEdit({ data }) {
     const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
+
   const [formData, setFormData] = useState({
     lastname: data[0].lastname,
     firstname: data[0].firstname,
@@ -36,6 +39,7 @@ function UserEdit({ data }) {
     bottom_size: data[0].bottom_size,
   });
 
+
   updateUser(data[0].id, formData);
   const [isChecked, setIsChecked] = useState({
     subscription: toString(data[0].subscription),
@@ -51,6 +55,7 @@ function UserEdit({ data }) {
 
     setIsChecked(event.target.checked);
   };
+
   const onChange = (e) => {
     setFormData({
       ...formData,
@@ -158,6 +163,7 @@ function UserEdit({ data }) {
                 label: 'M',
                 value: 'M',
               },
+
               {
                 label: 'mixte',
                 value: 'mixte',
@@ -201,7 +207,7 @@ function UserEdit({ data }) {
             ]}
           />
           <Select
-            label="Taille bAS"
+            label="Taille Bas"
             name="bottom_size"
             selected={data[0].bottom_size}
             onChange={onChange}
@@ -234,6 +240,8 @@ function UserEdit({ data }) {
                 label: 'XXXL',
                 value: 'XXXL',
               },
+            ]}
+          />
             ]}
           />
         </div>
