@@ -22,8 +22,6 @@ function App() {
     }
   }, [users]);
 
-
-
   const handleLogin = (email, password) => {
     const user = userData.find((u) => u.email === email && u.password === password);
     if (user) {
