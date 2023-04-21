@@ -6,6 +6,8 @@ function Select({
   name,
   options,
   selected,
+
+  onChange,
 }) {
   return (
     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -24,6 +26,7 @@ function Select({
               <option
                 value={option.value}
                 selected={option.value === selected}
+                onChange={onChange}
               >
                 {option.label}
               </option>
@@ -41,6 +44,7 @@ Select.propTypes = {
   options: PropTypes.arrayOf({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
   }).isRequired,
   selected: PropTypes.string.isRequired,
 };

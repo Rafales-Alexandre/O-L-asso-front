@@ -8,7 +8,7 @@ function Logout() {
   };
 
   return (
-    <button className="btn" type="button" onClick={handleLogout}>
+    <button className="btn btn-primary invisible md:visible w-48 md:hover:btn-warning" type="button" onClick={handleLogout}>
       Déconnexion
     </button>
   );

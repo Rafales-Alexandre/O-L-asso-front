@@ -279,7 +279,6 @@ mutation Mutation($input: SuitInput) {
     quantity_xxxl
     total
   }
-}`;
 
 export const createSuit = (input) => async (dispatch) => {
   try {
