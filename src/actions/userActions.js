@@ -26,8 +26,8 @@ query Query {
     created_at
     updated_at
   }
-}
-`;
+}`;
+
 export const fetchUsers = () => async (dispatch) => {
   try {
     const { data } = await client.query({ query: Get_User });
@@ -88,7 +88,7 @@ export const fetchSuits = () => async (dispatch) => {
 };
 
 
-export const Create_User = gql`
+/* export const Create_User = gql`
 mutation Mutation($input: UserInput) {
   addUser(input: $input) {
     lastname
@@ -108,7 +108,7 @@ export const createUser = ( input) => async (dispatch) => {
   } catch (error) {
 
   }
-};
+}; */
 
 export const Update_User = gql`
 mutation Mutation($updateUserId: ID!, $input: UserInput) {
@@ -212,7 +212,7 @@ mutation Mutation($input: InstrumentInput) {
 }
 `;
 
-export const createInstrument = (input) => async (dispatch) => {
+/* export const createInstrument = (input) => async (dispatch) => {
   try {
     const response = await client.mutate({
       mutation: Create_Instrument,
@@ -225,7 +225,7 @@ export const createInstrument = (input) => async (dispatch) => {
   }catch (error) {
     console.error("Erreur lors de la création de l'instrument :", error);
   }
-};
+}; */
 
 export const Update_Suit= gql`
 mutation Mutation($updateSuitId: ID!, $input: SuitInput) {
@@ -264,7 +264,7 @@ export const updateSuit = (updateSuitId, input) => async (dispatch) => {
   }
 };
 
-export const Create_Suit= gql`
+export const Create_Suit = gql`
 mutation Mutation($input: SuitInput) {
   addSuit(input: $input) {
     id
@@ -279,6 +279,7 @@ mutation Mutation($input: SuitInput) {
     quantity_xxxl
     total
   }
+}`;
 
 export const createSuit = (input) => async (dispatch) => {
   try {
@@ -294,4 +295,3 @@ export const createSuit = (input) => async (dispatch) => {
     console.error("Erreur lors de la création du costume :", error);
   }
 };
-

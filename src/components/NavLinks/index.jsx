@@ -9,7 +9,7 @@ function NavLinks({ user }) {
     <div className="overflow-x-auto scroll-smooth border-b border-primary md:border-b-0 md:my-12">
       <ul className="menu menu-horizontal menu-compact md:menu-vertical md:menu-normal">
         <li className={currentPath === '/' ? 'bordered' : ''}><Link to="/">Accueil</Link></li>
-        <li className={currentPath === `/${user.id}` ? 'bordered' : ''}><Link to={`/${user.id}`}>Profil</Link></li>
+        <li className={currentPath === '/profil' ? 'bordered' : ''}><Link to="/profil">Profil</Link></li>
         {(user.role === 'board' || user.role === 'admin') && (
           <>
             <li className={currentPath === '/instuments' ? 'bordered' : ''}><Link to="/instuments">Instruments</Link></li>

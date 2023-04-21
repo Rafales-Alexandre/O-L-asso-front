@@ -29,7 +29,7 @@ function Suits() {
   return (
     <div className="bg-base-300">
       <h2 className="text-3xl font-bold">Costumes</h2>
-      {data.map((u) => {
+      {suitData.map((u) => {
         return (
           <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
             <div onClick={() => toggleCollapse(u.id)} className="flex items-center">

@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 
 const client = new ApolloClient({
 
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://cami-marti-server.eddi.cloud/graphql',
 
   cache: new InMemoryCache(),
 });
@@ -12,5 +12,4 @@ const client = new ApolloClient({
 // ici récupérer le token dans le localStorage
 // le définir dans le header Autorization du client comme suit : `Bearer ${token}`
 
-
-export default client
+export default client;

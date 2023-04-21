@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import Button from '../../Form/Button';
 import Select from '../../Form/Select';
 import Input from '../../Form/Input';
-
-import Select from '../../Form/Select';
 import { useMutation } from '@apollo/client';
 import { updateUser } from '../../../actions/userActions';
 import { useDispatch } from 'react-redux';
@@ -240,8 +238,6 @@ function UserEdit({ data }) {
                 label: 'XXXL',
                 value: 'XXXL',
               },
-            ]}
-          />
             ]}
           />
         </div>
