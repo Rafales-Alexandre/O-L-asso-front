@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSuits } from "../../../actions/userActions";
+import Button from "../../Form/Button";
 
 function Suits() {
   const [collapse, setCollapse] = useState(null);
@@ -29,6 +30,7 @@ function Suits() {
   return (
     <div className="bg-base-300">
       <h2 className="text-3xl font-bold">Costumes</h2>
+      <button className="btn">CREATE SUIT</button>
       {suitData.map((u) => {
         return (
           <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>

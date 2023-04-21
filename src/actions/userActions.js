@@ -295,3 +295,11 @@ export const createSuit = (input) => async (dispatch) => {
     console.error("Erreur lors de la création du costume :", error);
   }
 };
+
+
+/* TODO plusieurs actions car la c'est un peu too mutch */
+/* futur query d'auth
+ query GetUserByCredential($email: String!, $password: String!) {
+  getUserByCredential(email: $email, password: $password) {
+  }
+} */

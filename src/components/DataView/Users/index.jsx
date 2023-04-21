@@ -35,6 +35,8 @@ function User() {
   return (
     <div className="bg-base-300">
       <h2 className="text-3xl font-bold">Adherents</h2>
+
+      <button className="btn" onClick={()=>{toggleModal()}}>CREATE USER</button>
       {userData.map((u) => {
         return (
           <div

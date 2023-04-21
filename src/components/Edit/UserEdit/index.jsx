@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { updateUser } from '../../../actions/userActions';
 import Button from '../../Form/Button';
 import Select from '../../Form/Select';
 import Input from '../../Form/Input';
-import { useMutation } from '@apollo/client';
-import { updateUser } from '../../../actions/userActions';
-import { useDispatch } from 'react-redux';
 import Checkbox from '../../Form/Checkbox';
 
 function UserEdit({ data }) {
@@ -20,7 +19,7 @@ function UserEdit({ data }) {
   };
 
   const [formData, setFormData] = useState({
-    lastname: data[0].lastname,
+    lastname: data.length > 0 ? data[0].lastname : '',
     firstname: data[0].firstname,
     nickname: data[0].nickname,
     email: data[0].email,
