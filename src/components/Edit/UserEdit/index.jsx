@@ -6,7 +6,7 @@ import Select from '../../Form/Select';
 import { useMutation } from '@apollo/client';
 import { updateUser } from '../../../actions/userActions';
 import { useDispatch } from 'react-redux';
-
+import Checkbox from '../../Form/Checkbox';
 
 function UserEdit({ data }) {
   const dispatch = useDispatch();
@@ -63,9 +63,8 @@ function UserEdit({ data }) {
     console.log(data)
   };
   useEffect(() => {
-    onSubmitFormUser()
+    onSubmitFormUser() 
   }, [formData]);
-  
   return (
     <form
       onSubmit={onSubmitFormUser}
@@ -149,6 +148,7 @@ function UserEdit({ data }) {
             label="Genre"
             name="gender"
             selected={data[0].gender}
+            onChange={onChange}
             options={[
               {
                 label: 'F',
@@ -168,6 +168,7 @@ function UserEdit({ data }) {
             label="Taille Haut"
             name="top_size"
             selected={data[0].top_size}
+            onChange={onChange}
             options={[
               {
                 label: 'XS',
@@ -203,6 +204,7 @@ function UserEdit({ data }) {
             label="Taille bAS"
             name="bottom_size"
             selected={data[0].bottom_size}
+            onChange={onChange}
             options={[
               {
                 label: 'XS',
@@ -290,27 +292,23 @@ function UserEdit({ data }) {
         />
         <fieldset disabled={Ismember}>
           <legend>Adhésion</legend>
-          <div className="flex flex-wrap -mx-3 mb-6">
-            <Input
+          <div className="flex flex-wrap">
+            <Checkbox
               label="Cotisation payée"
               name="subscription"
               type="checkbox"
               checked={isChecked}
-              placeholder={data.subscription}
               value={formData.subscription}
               onClick={handleCheckboxChange}
-              inputSizeClass="md:w-1/3"
             />
 
-            <Input
+            <Checkbox
               label="Caution versée"
               name="deposit"
               type="checkbox"
               checked={isChecked}
-              placeholder={data.deposit}
               value={formData.deposit}
               onClick={handleCheckboxChange}
-              inputSizeClass="md:w-1/3"
             />
           </div>
         </fieldset>
@@ -319,6 +317,7 @@ function UserEdit({ data }) {
             label="Choisir un rôle"
             name="role"
             selected="Adhérent"
+            onChange={onChange}
             options={[
               {
                 label: 'Adhérent',
