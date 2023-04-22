@@ -20,7 +20,9 @@ function User() {
   }, [dispatch]);
 
   useEffect(() => {
-    setUserData(Object.values(users));
+    if (users) {
+      setUserData(Object.values(users));
+    }
   }, [users]);
 
   const toggleCollapse = (id) => {

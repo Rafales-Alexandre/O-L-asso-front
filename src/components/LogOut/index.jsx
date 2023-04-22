@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 function Logout() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    // TODO suppression du token d'authentification
-   /*  window.location.href = 'http://www.batala-lr.com/batala-mundo/'; */
-    // ou page de login
+    dispatch({ type: 'LOGOUT_USER' });
+    navigate('/');
   };
 
   return (
