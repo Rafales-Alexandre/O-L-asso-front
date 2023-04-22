@@ -74,7 +74,23 @@ function User() {
             </div>
             {collapse === u.id && (
               <div className="card-body mt-4">
-                <div>{/* User details */}</div>
+                <div>
+                  <p>Nickname: {u.nickname}</p>
+                  <p>Email: {u.email}</p>
+                  <p>Phone: {u.phone}</p>
+                  <p>Address: {u.address}</p>
+                  <p>Address 2: {u.address_2}</p>
+                  <p>Zip Code: {u.zip_code}</p>
+                  <p>City: {u.city}</p>
+                  <p>Gender: {u.gender}</p>
+                  <p>Top Size: {u.top_size}</p>
+                  <p>Bottom Size: {u.bottom_size}</p>
+                  <p>Subscription: {u.subscription}</p>
+                  <p>Deposit: {u.deposit}</p>
+                  <p>Role: {u.role}</p>
+                  <p>Birthdate: {u.birthdate}</p>
+                  <p>Created At: {u.created_at}</p>
+                  <p>Updated At: {u.updated_at}</p></div>
               </div>
             )}
           </div>

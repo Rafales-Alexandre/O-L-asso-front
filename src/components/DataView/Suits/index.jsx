@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchSuits } from "../../../actions/suitActions";
+import React,{ useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSuits } from '../../../actions/suitActions';
 import SuitEdit from '../../Edit/SuitEdit';
-import SuitCreate from '../../Create/SuitCreate'
-import Button from "../../Form/Button";
+import SuitCreate from '../../Create/SuitCreate';
 
 function Suits() {
   const [collapse, setCollapse] = useState(null);
@@ -40,72 +39,66 @@ function Suits() {
   };
 
   return (
-    <div className="bg-base-300">
-      <h2 className="text-3xl font-bold">Costumes</h2>
-      <button className="btn">CREATE SUIT</button>
-      {suitData.map((u) => {
-        return (
-          <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
-            <div onClick={() => toggleCollapse(u.id)} className="flex items-center">
-              <figure className="mr-4">
-                <img
-                  src="https://fakeimg.pl/100x100/?text=Suit"
-                  alt="Aperçu"
-                  className="rounded-full"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title text-xl font-bold">{u.label}</h2>
-                <p className="normal-case first-letter:capitalize text-gray-600">
-                  {u.observation}
+    <div className="bg-base-200">
+      <h2 className="text-3xl font-bold">
+        <i className="fa-solid fa-user-tie fa-xs mr-3" />
+        Costumes
+      </h2>
+      <button type="submit" className="btn">CREATE SUIT</button>
+      {suitData.map((u) => (
+        <div className="card card-side relative m-4 flex flex-col bg-base-100 p-4 shadow-md" key={u.id}>
+          <div onClick={() => toggleCollapse(u.id)}  className="flex items-center">
+            <figure className="mr-4">
+              <img
+                src="https://fakeimg.pl/100x100/?text=Suit"
+                alt="Aperçu"
+                className="rounded-full"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-xl font-bold">{u.label}</h2>
+              <p className="normal-case first-letter:capitalize text-gray-600">
+                {u.observation}
+              </p>
+            </div>
+          </div>
+          <button type="submit" onClick={() => toggleCollapse(u.id)} className="btn btn-primary mt-4 top-5 right-4 absolute">
+            Edition
+          </button>
+          {collapse === u.id && (
+            <div className="card-body mt-4">
+              <div>
+                <p>
+                  <span className="font-medium">Genre: </span>
+                </p>
+                <p>
+                  <span className="font-medium">Taille: </span>
                 </p>
               </div>
             </div>
-            <button
-              onClick={() => toggleCollapse(u.id)}
-              className={`btn btn-primary mt-4 top-5 right-4 absolute`}
-            >
-              Edition
-            </button>
-            {collapse === u.id && (
-              <div className="card-body mt-4">
-                <div>
-                  <p>
-                    <span className="font-medium">Genre: </span>
-                  </p>
-                  <p>
-                    <span className="font-medium">Taille: </span>
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-      })}
+          )}
+        </div>
+      ))}
       {showModal && (
         <>
-        <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
-        <div
-          className={`modal  ${showModal ? "modal-open" : ""}`}
-        >
-          <div className="modal-box relative w-11/12 max-w-5xl">
-            <button onClick={()=>{toggleModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-            <SuitEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+          <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+          <div className={`modal  ${showModal ? 'modal-open' : ''}`}>
+            <div className="modal-box relative w-11/12 max-w-5xl">
+              <button type="submit" onClick={() => toggleModal()} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+              <SuitEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+            </div>
           </div>
-        </div>
         </>
       )}
       {showCreateModal && (
         <>
-        <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
-        <div
-          className={`modal  ${showCreateModal ? "modal-open" : ""}`}
-        >
-          <div className="modal-box relative w-11/12 max-w-5xl">
-            <button onClick={()=>{toggleCreateModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-            <SuitCreate data={[]} onSubmitFormUser={() => {}} />
+          <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+          <div className={`modal  ${showCreateModal ? 'modal-open' : ''}`}>
+            <div className="modal-box relative w-11/12 max-w-5xl">
+              <button type="submit" onClick={() => toggleCreateModal()} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+              <SuitCreate data={[]} onSubmitFormUser={() => {}} />
+            </div>
           </div>
-        </div>
         </>
       )}
     </div>

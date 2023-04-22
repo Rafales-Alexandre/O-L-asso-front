@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useCallback } from 'react';
+/* import PropTypes from 'prop-types'; */
 import { useDispatch } from 'react-redux';
 import { createUser } from '../../../actions/userActions';
 import Button from '../../Form/Button';
@@ -10,33 +10,9 @@ import logo from '../../../assets/react.svg';
 
 function UserCreate({ data = [], closeModal }) {
   const [password, setPassword] = useState('');
-
-  function generateRandomPassword() {
-    const length = 12;
-    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+<>/?';
-    const charsetLength = charset.length;
-    const randomArray = new Uint8Array(length);
-    window.crypto.getRandomValues(randomArray);
-
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      result += charset[randomArray[i] % charsetLength];
-    }
-
-    return result;
-  }
-
-  const generatePassword = () => {
-    const newPassword = generateRandomPassword();
-    setPassword(newPassword);
-    setFormData({...formData, password: newPassword });
-  };
-
-  useEffect(() => {
-    generatePassword();
-  }, []);
   const dispatch = useDispatch();
   const role = 'admin';
+
   const initialFormData = {
     lastname: '',
     firstname: '',
@@ -58,10 +34,33 @@ function UserCreate({ data = [], closeModal }) {
   const initialIsChecked = {
     subscription: 'false',
     deposit: 'false',
-};
-
+  };
   const [formData, setFormData] = useState(initialFormData);
   const [isChecked, setIsChecked] = useState(initialIsChecked);
+
+  function generateRandomPassword() {
+    const length = 12;
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+<>/?';
+    const charsetLength = charset.length;
+    const randomArray = new Uint8Array(length);
+    window.crypto.getRandomValues(randomArray);
+
+    let result = '';
+    for (let i = 0; i < length; i += 1) {
+      result += charset[randomArray[i] % charsetLength];
+    }
+
+    return result;
+  }
+
+  const generatePassword = useCallback(() => {
+    const newPassword = generateRandomPassword();
+    return newPassword;
+  }, []);
+
+  useEffect(() => {
+    generatePassword();
+  }, [generatePassword]);
 
   const Ismember = data.length && role === 'member';
 
@@ -85,20 +84,24 @@ function UserCreate({ data = [], closeModal }) {
     });
   };
 
-  const onSubmitFormUser = async (e) => {
-    if (e) {
-      e.preventDefault();
-    }
-    generatePassword();
-    dispatch(createUser(formData));
-    closeModal();
-  };
+  const onSubmitFormUser = useCallback(
+    async (e, newPassword = null) => {
+      if (e) {
+        e.preventDefault();
+      }
+      const passwordToUse = newPassword || generatePassword();
+      dispatch(createUser({ ...formData, password: passwordToUse }));
+      closeModal();
+    },
+    [generatePassword, formData, dispatch, closeModal]
+  );
 
   useEffect(() => {
     if (data.length) {
-      onSubmitFormUser();
+      const newPassword = generatePassword();
+      onSubmitFormUser(null, newPassword);
     }
-  }, [formData]);
+  }, [data, onSubmitFormUser, generatePassword]);
 
   return (
     <form
@@ -375,28 +378,9 @@ function UserCreate({ data = [], closeModal }) {
   );
 }
 
-UserCreate.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      lastname: PropTypes.string.isRequired,
-      firstname: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      nickname: PropTypes.string.isRequired,
-      birthdate: PropTypes.string.isRequired,
-      phone: PropTypes.string.isRequired,
-      address: PropTypes.string.isRequired,
-      address_2: PropTypes.string.isRequired,
-      zip_code: PropTypes.string.isRequired,
-      city: PropTypes.string.isRequired,
-      role: PropTypes.string.isRequired,
-      subscription: PropTypes.bool.isRequired,
-      deposit: PropTypes.bool.isRequired,
-      url_img: PropTypes.string.isRequired,
-      gender: PropTypes.string.isRequired,
-      top_size: PropTypes.string.isRequired,
-      bottom_size: PropTypes.string.isRequired,
-    }),
-    ),
-};
+/* UserCreate.propTypes = {
+  data: PropTypes.array,
+  closeModal: PropTypes.func,
+}; */
 
 export default UserCreate;
