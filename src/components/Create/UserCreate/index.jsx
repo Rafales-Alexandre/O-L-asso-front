@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-/* import PropTypes from 'prop-types'; */
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { createUser } from '../../../actions/userActions';
 import Button from '../../Form/Button';
@@ -9,7 +9,6 @@ import Checkbox from '../../Form/Checkbox';
 import logo from '../../../assets/react.svg';
 
 function UserCreate({ data = [], closeModal }) {
-  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const role = 'admin';
 
@@ -93,7 +92,7 @@ function UserCreate({ data = [], closeModal }) {
       dispatch(createUser({ ...formData, password: passwordToUse }));
       closeModal();
     },
-    [generatePassword, formData, dispatch, closeModal]
+    [generatePassword, formData, dispatch, closeModal],
   );
 
   useEffect(() => {
@@ -334,7 +333,7 @@ function UserCreate({ data = [], closeModal }) {
               name="subscription"
               type="checkbox"
               checked={isChecked.subscription === 'true'}
-              value={formData.subscription}
+              value={formData.subscription || false}
               onChange={handleCheckboxChange}
             />
 
@@ -343,7 +342,7 @@ function UserCreate({ data = [], closeModal }) {
               name="deposit"
               type="checkbox"
               checked={isChecked.deposit === 'true'}
-              value={formData.deposit}
+              value={formData.deposit || false}
               onChange={handleCheckboxChange}
             />
           </div>
@@ -378,9 +377,17 @@ function UserCreate({ data = [], closeModal }) {
   );
 }
 
-/* UserCreate.propTypes = {
-  data: PropTypes.array,
+UserCreate.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    }),
+  ),
   closeModal: PropTypes.func,
-}; */
-
+};
+UserCreate.defaultProps = {
+  data: [],
+  closeModal: () => {},
+};
 export default UserCreate;

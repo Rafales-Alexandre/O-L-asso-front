@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client/core';
 import client from '../apolloClient';
 
-const Get_Instrument = gql`
+const getInstrumentReq = gql`
 query Query {
   getAllInstruments {
     id
@@ -20,15 +20,14 @@ query Query {
 
 export const fetchInstruments = () => async (dispatch) => {
   try {
-    const { data } = await client.query({query: Get_Instrument });
+    const { data } = await client.query({ query: getInstrumentReq });
     dispatch({ type: 'FETCH_INSTRUMENTS', payload: data });
   } catch (error) {
-    console.error('Erreur lors de la récupération des instruments :', error);
+    /* console.error('Erreur lors de la récupération des instruments :', error); */
   }
 };
 
-
-export const Update_Instrument = gql`
+export const upadteInstrumentReq = gql`
 mutation Mutation($updateInstrumentId: ID!, $input: InstrumentInput) {
   updateInstrument(id: $updateInstrumentId, input: $input) {
     id
@@ -48,24 +47,24 @@ mutation Mutation($updateInstrumentId: ID!, $input: InstrumentInput) {
 export const updateInstrument = (updateInstrumentId, input) => async (dispatch) => {
   try {
     const response = await client.mutate({
-      mutation: Update_Instrument,
+      mutation: upadteInstrumentReq,
       variables: {
-        "updateInstrumentId": updateInstrumentId,
-        "input": {
-          input
-        }
+        updateInstrumentId,
+        input: {
+          input,
+        },
       },
     });
     dispatch({
-      type: 'Update_Instrument',
+      type: 'upadteInstrumentReq',
       payload: response.data.updateInstrument,
     });
   } catch (error) {
-    console.error("Erreur lors de la modification de l'instrument :", error);
+    /* console.error("Erreur lors de la modification de l'instrument :", error); */
   }
 };
 
-export const Create_Instrument= gql`
+export const createInstrumentReq = gql`
 mutation Mutation($input: InstrumentInput) {
   addInstrument(input: $input) {
     id
@@ -85,19 +84,16 @@ mutation Mutation($input: InstrumentInput) {
 export const createInstrument = (input) => async (dispatch) => {
   try {
     const response = await client.mutate({
-      mutation: Create_Instrument,
-     variables: {
-          "input": {
-            input
-          }
-        },
-      });
-      dispatch({
-        type: 'Update_Instrument',
-        payload: response.data.updateInstrument,
-      });
-    } catch (error) {
-      console.error("Erreur lors de la création de l'instrument :", error);
-    }
-  };
-  
+      mutation: createInstrumentReq,
+      variables: {
+        input,
+      },
+    });
+    dispatch({
+      type: 'upadteInstrumentReq',
+      payload: response.data.updateInstrument,
+    });
+  } catch (error) {
+    /* console.error("Erreur lors de la création de l'instrument :", error); */
+  }
+};

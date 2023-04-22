@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Button from '../../Form/Button';
@@ -38,8 +38,8 @@ function UserEdit({ data = 0, closeModal }) {
 
   updateUser(data[0].id, formData);
   const [isChecked, setIsChecked] = useState({
-    subscription: data[0].subscription.toString(),
-    deposit: data[0].deposit.toString(),
+    subscription: Boolean(data[0].subscription),
+    deposit: Boolean(data[0].deposit),
   });
   const Ismember = data[0].role === 'member';
 
@@ -63,7 +63,8 @@ function UserEdit({ data = 0, closeModal }) {
   };
   const onSubmitFormUser = async (e) => {
     e.preventDefault();
-    dispatch(updateUser(data[0].id, { ...formData,
+    dispatch(updateUser(data[0].id, {
+      ...formData,
       subscription: isChecked.subscription === 'true',
       deposit: isChecked.deposit === 'true',
     }));
@@ -302,16 +303,18 @@ function UserEdit({ data = 0, closeModal }) {
               label="Cotisation payée"
               name="subscription"
               type="checkbox"
-              checked={isChecked.subscription === 'true'}
+              checked={isChecked.subscription}
               onChange={handleCheckboxChange}
+              value={isChecked.subscription}
             />
 
             <Checkbox
               label="Caution versée"
               name="deposit"
               type="checkbox"
-              checked={isChecked.deposit === 'true'}
+              checked={isChecked.deposit}
               onChange={handleCheckboxChange}
+              value={isChecked.deposit}
             />
           </div>
         </fieldset>
@@ -367,6 +370,7 @@ UserEdit.propTypes = {
       bottom_size: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default UserEdit;

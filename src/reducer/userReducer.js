@@ -5,7 +5,7 @@ const initialState = {
   suits: [],
 };
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action = { type: '', payload: null }) => {
   switch (action.type) {
     case 'FETCH_USERS':
       return { ...state, users: action.payload };

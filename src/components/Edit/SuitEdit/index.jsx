@@ -1,9 +1,12 @@
-// import PropTypes from 'prop-types';
+/* eslint-disable max-len */
+import React from 'react';
 
-const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
-    return(
-<div className='flex flex-wrap -mx-3 mb-6'>
-    <form 
+function SuitEdit() {
+  return (
+    <>
+    </>
+  /* <div className='flex flex-wrap -mx-3 mb-6'>
+    <form
     onSubmit={OnSubmitFormSuit}
     className="w-full max-w-lg">
         <div className='flex flex-wrap -mx-3 mb-6'>
@@ -12,18 +15,18 @@ const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
                 Label
                 </label>
                     <input type="text"
-                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                     id='grid-label'
                     onChange={onChange}
                     value=""
                     />
             </div>
-            <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>   
+            <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
                 <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-suit-gender'>
                 Genre
                 </label>
                     <input type="text"
-                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                     id='grid-suit-gender'
                     onChange={onChange}
                     value=""
@@ -34,13 +37,12 @@ const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
             <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-suit-observations'>
             Observations
             </label>
-                <textarea 
+                <textarea
                 rows="5"
-                className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+        className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                 id='grid-suit-observations'
                 />
         </div>
-
 
     <label>Taille Haut</label>
      <input type="text"
@@ -50,7 +52,7 @@ const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
      <input type="text"
     className='form-input'
     />
-    
+
     <fieldset>
         <legend>Sticker</legend>
      <div>
@@ -60,7 +62,6 @@ const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
       <label >Non</label>
     </div>
     </fieldset>
-{/* Validate form */}
 
 <button type='submit'>Valider</button>
  </form>
@@ -104,9 +105,9 @@ const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
     </tbody>
 </table>
 
+ </div>
+</div> */
+  );
+}
 
-</div>
-</div>
-)}
-
-export default SuitEdit
+export default SuitEdit;

@@ -11,7 +11,7 @@ function DataView({ loggedInUser }) {
   return (
     <Routes>
       <Route path="/" element={<UserView user={loggedInUser} />} />
-      <Route path="/profil" element={<UserEdit data={[loggedInUser]} onSubmitFormUser={() => {}} />} />
+      <Route path="/profil" element={<UserEdit data={[loggedInUser]} closeModal={() => {}} />} />
       <Route path="/instuments" element={<Instruments />} />
       <Route path="/suits" element={<Suits />} />
       <Route path="/users" element={<Users />} />

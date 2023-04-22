@@ -1,10 +1,11 @@
+import React from 'react';
+/* import PropTypes from 'prop-types'; */
 
-import PropTypes from 'prop-types';
-
-const InstrumentEdit= ({OnSubmitFormInstrument}) => {
-    return(
-
- <form onSubmit={OnSubmitFormInstrument}>
+function InstrumentEdit() {
+  return (
+    <>
+    </>
+  /*    <form onSubmit={OnSubmitFormInstrument}>
     <label>Code</label>
     <input type="text"
     className='form-input'
@@ -38,10 +39,10 @@ const InstrumentEdit= ({OnSubmitFormInstrument}) => {
       <label  >Non</label>
     </div>
     </fieldset>
-{/* Validate form */}
 
-<button type='submit'>Valider</button>
- </form>
-)}
+   <button type='submit'>Valider</button>
+ </form> */
+  );
+}
 
 export default InstrumentEdit;

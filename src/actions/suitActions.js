@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client/core';
 import client from '../apolloClient';
 
-const Get_Suits = gql`
+const getSuitsReq = gql`
 query Query {
   getAllSuits {
     id
@@ -20,14 +20,14 @@ query Query {
 
 export const fetchSuits = () => async (dispatch) => {
   try {
-    const { data } = await client.query({ query: Get_Suits });
+    const { data } = await client.query({ query: getSuitsReq });
     dispatch({ type: 'FETCH_SUITS', payload: data });
   } catch (error) {
-    console.error('Erreur lors de la récupération des costumes :', error);
+    /* console.error('Erreur lors de la récupération des costumes :', error); */
   }
 };
 
-export const Update_Suit = gql`
+export const updateSuitReq = gql`
 mutation Mutation($updateSuitId: ID!, $input: SuitInput) {
   updateSuit(id: $updateSuitId, input: $input) {
     id
@@ -48,24 +48,24 @@ mutation Mutation($updateSuitId: ID!, $input: SuitInput) {
 export const updateSuit = (updateSuitId, input) => async (dispatch) => {
   try {
     const response = await client.mutate({
-      mutation: Update_Suit,
+      mutation: updateSuitReq,
       variables: {
-        "updateSuitId": updateSuitId,
-        "input": {
-          input
-        }
+        updateSuitId,
+        input: {
+          input,
+        },
       },
     });
     dispatch({
-      type: 'Update_Suit',
+      type: 'updateSuitReq',
       payload: response.data.updateSuit,
     });
   } catch (error) {
-    console.error("Erreur lors de la modification du costume :", error);
+    /* console.error('Erreur lors de la modification du costume :', error); */
   }
 };
 
-export const Create_Suit = gql`
+export const createSuitReq = gql`
 mutation Mutation($input: SuitInput) {
   addSuit(input: $input) {
     id
@@ -85,14 +85,18 @@ mutation Mutation($input: SuitInput) {
 export const createSuit = (input) => async (dispatch) => {
   try {
     const response = await client.mutate({
-      mutation: Create_Suit,
+      mutation: createSuitReq,
       variables: {
-        "input": {
-          input
-        }
+        input: {
+          input,
+        },
       },
     });
+    dispatch({
+      type: 'createSuitReq',
+      payload: response.data.createSuit,
+    });
   } catch (error) {
-    console.error("Erreur lors de la création du costume :", error);
+    /* console.error('Erreur lors de la création du costume :', error); */
   }
 };

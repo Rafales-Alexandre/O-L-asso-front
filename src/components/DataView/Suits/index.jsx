@@ -1,4 +1,5 @@
-import React,{ useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSuits } from '../../../actions/suitActions';
 import SuitEdit from '../../Edit/SuitEdit';
@@ -47,7 +48,7 @@ function Suits() {
       <button type="submit" className="btn">CREATE SUIT</button>
       {suitData.map((u) => (
         <div className="card card-side relative m-4 flex flex-col bg-base-100 p-4 shadow-md" key={u.id}>
-          <div onClick={() => toggleCollapse(u.id)}  className="flex items-center">
+          <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
             <figure className="mr-4">
               <img
                 src="https://fakeimg.pl/100x100/?text=Suit"
@@ -81,7 +82,7 @@ function Suits() {
       ))}
       {showModal && (
         <>
-          <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+          <input type="checkbox" id="my-modal-3" className="modal-toggle" />
           <div className={`modal  ${showModal ? 'modal-open' : ''}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
               <button type="submit" onClick={() => toggleModal()} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
@@ -92,7 +93,7 @@ function Suits() {
       )}
       {showCreateModal && (
         <>
-          <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
+          <input type="checkbox" id="my-modal-3" className="modal-toggle" />
           <div className={`modal  ${showCreateModal ? 'modal-open' : ''}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
               <button type="submit" onClick={() => toggleCreateModal()} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
