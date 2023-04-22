@@ -335,7 +335,7 @@ function UserCreate({ data = [], closeModal }) {
               type="checkbox"
               checked={isChecked.subscription === 'true'}
               value={formData.subscription}
-              onClick={handleCheckboxChange}
+              onChange={handleCheckboxChange}
             />
 
             <Checkbox
@@ -344,7 +344,7 @@ function UserCreate({ data = [], closeModal }) {
               type="checkbox"
               checked={isChecked.deposit === 'true'}
               value={formData.deposit}
-              onClick={handleCheckboxChange}
+              onChange={handleCheckboxChange}
             />
           </div>
         </fieldset>
