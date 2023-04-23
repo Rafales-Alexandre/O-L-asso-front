@@ -1,15 +1,45 @@
-import { useMutation } from '@apollo/client';
-import { Update_Suit } from '../../../actions/userActions';
-// import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
-const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
-    return(
-<div className='flex flex-wrap -mx-3 mb-6'>
-    <form 
-    onSubmit={OnSubmitFormSuit}
+import PropTypes from 'prop-types';
+
+function SuitEdit({ data }) {
+  const [suitData, setSuitData] = useState({
+    label: data[0].label,
+    gender: data[0].gender,
+    observation: data[0].observation,
+    quantity_s: data[0].quantity_s,
+    quantity_m: data[0].quantity_m,
+    quantity_l: data[0].quantity_l,
+    quantity_xl: data[0].quantity_xl,
+    quantity_xxl: data[0].quantity_xxl,
+    quantity_xxxl: data[0].quantity_xxxl,
+  });
+
+  const onChange = (e) => {
+    setSuitData({
+      ...suitData,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+  const onSubmitFormSuit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className='flex flex-wrap -mx-3 mb-6'>
+      <form 
+    onSubmit={onSubmitFormSuit}
     className="w-full max-w-lg">
         <div className='flex flex-wrap -mx-3 mb-6'>
-            <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
+        <Input
+          label="Label"
+          name="label"
+          type="text"
+          placeholder={data[0].label}
+          value={suitData.label}
+          onChange={onChange}
+          inputSizeClass="md:w-1/2"
+        />
                 <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-label'>
                 Label
                 </label>
@@ -19,7 +49,6 @@ const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
                     onChange={onChange}
                     value=""
                     />
-            </div>
             <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>   
                 <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-suit-gender'>
                 Genre
@@ -42,7 +71,7 @@ const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
                 id='grid-suit-observations'
                 />
         </div>
-
+ 
 
     <label>Taille Haut</label>
      <input type="text"
@@ -109,6 +138,22 @@ const SuitEdit= ({OnSubmitFormSuit, onChange}) => {
 
 </div>
 </div>
-)}
+)};
 
-export default SuitEdit
+SuitEdit.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      gender: PropTypes.string.isRequired,
+      observation: PropTypes.string.isRequired,
+      quantity_s: PropTypes.string.isRequired,
+      quantity_m: PropTypes.string.isRequired,
+      quantity_l: PropTypes.string.isRequired,
+      quantity_xl: PropTypes.bool.isRequired,
+      quantity_xxl: PropTypes.string.isRequired,
+      quantity_xxxl: PropTypes.bool.isRequired,
+    }),
+  ).isRequired,
+};
+
+export default SuitEdit;

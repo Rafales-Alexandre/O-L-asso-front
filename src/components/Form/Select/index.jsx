@@ -6,7 +6,6 @@ function Select({
   name,
   options,
   selected,
-
   onChange,
 }) {
   return (
@@ -44,9 +43,9 @@ Select.propTypes = {
   options: PropTypes.arrayOf({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
   }).isRequired,
   selected: PropTypes.string.isRequired,
+  onChange: PropTypes.string.isRequired,
 };
 
 export default Select;

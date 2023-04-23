@@ -37,7 +37,6 @@ function UserEdit({ data }) {
     bottom_size: data[0].bottom_size,
   });
 
-
   updateUser(data[0].id, formData);
   const [isChecked, setIsChecked] = useState({
     subscription: toString(data[0].subscription),
