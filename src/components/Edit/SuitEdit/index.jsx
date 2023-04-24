@@ -1,3 +1,5 @@
+
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
@@ -44,17 +46,18 @@ function SuitEdit({ data }) {
                 Label
                 </label>
                     <input type="text"
-                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                     id='grid-label'
                     onChange={onChange}
                     value=""
                     />
-            <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>   
+            </div>
+            <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
                 <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-suit-gender'>
                 Genre
                 </label>
                     <input type="text"
-                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+                    className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                     id='grid-suit-gender'
                     onChange={onChange}
                     value=""
@@ -65,13 +68,12 @@ function SuitEdit({ data }) {
             <label className='block uppercase tracking-wide text-black-700 text-xs font-bold mb-2' forhtml='grid-suit-observations'>
             Observations
             </label>
-                <textarea 
+                <textarea
                 rows="5"
-                className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' 
+        className='appearance-none block w-full bg-black-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                 id='grid-suit-observations'
                 />
         </div>
- 
 
     <label>Taille Haut</label>
      <input type="text"
@@ -81,7 +83,7 @@ function SuitEdit({ data }) {
      <input type="text"
     className='form-input'
     />
-    
+
     <fieldset>
         <legend>Sticker</legend>
      <div>
@@ -91,7 +93,6 @@ function SuitEdit({ data }) {
       <label >Non</label>
     </div>
     </fieldset>
-{/* Validate form */}
 
 <button type='submit'>Valider</button>
  </form>
@@ -135,7 +136,10 @@ function SuitEdit({ data }) {
     </tbody>
 </table>
 
-
+ </div>
+</div> */
+  );
+}
 </div>
 </div>
 )};
@@ -155,5 +159,4 @@ SuitEdit.propTypes = {
     }),
   ).isRequired,
 };
-
 export default SuitEdit;

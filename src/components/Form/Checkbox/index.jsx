@@ -23,6 +23,7 @@ function Checkbox({
           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:bg-gray-700 dark:border-gray-600"
           onChange={onChange}
           value={value}
+          checked={value}
         />
       </label>
     </div>
@@ -31,8 +32,8 @@ function Checkbox({
 Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  value: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
 
 };
