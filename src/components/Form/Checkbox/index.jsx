@@ -6,6 +6,7 @@ function Checkbox({
   name,
   onChange,
   value,
+  id,
 }) {
   return (
     <div className="flex items-center pl-3">
@@ -15,6 +16,7 @@ function Checkbox({
       >
         {label}
         <input
+          key={id}
           id={name}
           type="checkbox"
           name={name}
@@ -31,6 +33,8 @@ Checkbox.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+
 };
 
 export default Checkbox;
