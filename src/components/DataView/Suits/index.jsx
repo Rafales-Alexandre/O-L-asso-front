@@ -40,8 +40,8 @@ function Suits() {
       setCollapse(id);
     }
   };
-  const toggleModal = (user) => {
-    setSelectedUser(user);
+  const toggleModal = (suit) => {
+    setSelectedUser(suit);
     setShowModal(!showModal);
   };
   const toggleCreateModal = () => {
@@ -72,7 +72,7 @@ function Suits() {
               </p>
             </div>
           </div>
-          <button type="submit" onClick={() => toggleCollapse(u.id)} className="btn btn-primary mt-4 top-5 right-4 absolute">
+          <button type="submit" onClick={() => toggleModal(u)} className="btn btn-primary mt-4 top-5 right-4 absolute">
             Edition
           </button>
           {collapse === u.id && (

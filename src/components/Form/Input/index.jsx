@@ -22,5 +22,26 @@ function Input({ label, name, type, placeholder = '', onChange, value, inputSize
     </div>
   );
 }
-
+Input.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'date', 'number', 'textarea', 'email']).isRequired,
+  placeholder: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.oneOf([null]),
+  ]),
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date),
+    PropTypes.oneOf([null, undefined]),
+  ]),
+  inputSizeClass: PropTypes.string,
+};
+Input.defaultProps = {
+  placeholder: null,
+  inputSizeClass: '',
+  value: null,
+};
 export default Input;

@@ -60,34 +60,35 @@ function InstrumentEdit({ data }) {
           inputSizeClass="md:w-1/2"
         />
       </div>
-      <div />
-      <Input
-        label="Tirant"
-        name="depth"
-        type="text"
-        placeholder={data[0].depth}
-        value={instruData.depth}
-        onChange={onChange}
-        inputSizeClass="md:w-1/3"
-      />
-      <Input
-        label="Profondeur"
-        name="rods"
-        type="text"
-        placeholder={data[0].rods}
-        value={instruData.rods}
-        onChange={onChange}
-        inputSizeClass="md:w-1/3"
-      />
-      <Input
-        label="Poids"
-        name="weight"
-        type="text"
-        placeholder={data[0].weight}
-        value={instruData.weight}
-        onChange={onChange}
-        inputSizeClass="md:w-1/3"
-      />
+      <div>
+        <Input
+          label="Tirant"
+          name="depth"
+          type="text"
+          placeholder={data[0].depth}
+          value={instruData.depth ? instruData.depth.toString() : ''}
+          onChange={onChange}
+          inputSizeClass="md:w-1/3"
+        />
+        <Input
+          label="Profondeur"
+          name="rods"
+          type="text"
+          placeholder={data[0].rods}
+          value={instruData.rods ? instruData.rods.toString() : ''}
+          onChange={onChange}
+          inputSizeClass="md:w-1/3"
+        />
+        <Input
+          label="Poids"
+          name="weight"
+          type="text"
+          placeholder={data[0].weight}
+          value={instruData.weight ? instruData.weight.toString() : ''}
+          onChange={onChange}
+          inputSizeClass="md:w-1/3"
+        />
+      </div>
       <fieldset>
         <legend>Sticker</legend>
         <Radio
@@ -118,11 +119,14 @@ InstrumentEdit.propTypes = {
       code: PropTypes.string.isRequired,
       pupitre: PropTypes.string.isRequired,
       observation: PropTypes.string.isRequired,
-      depth: PropTypes.string.isRequired,
-      rods: PropTypes.string.isRequired,
-      weight: PropTypes.string.isRequired,
+      depth: PropTypes.number,
+      rods: PropTypes.number.isRequired,
+      weight: PropTypes.number.isRequired,
       sticker: PropTypes.bool.isRequired,
     }),
   ).isRequired,
+};
+InstrumentEdit.defaultProps = {
+  data: [{ depth: 0 }],
 };
 export default InstrumentEdit;
