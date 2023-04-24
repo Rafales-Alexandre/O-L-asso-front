@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import UserEdit from '../../Edit/UserEdit';
 import UserCreate from '../../Create/UserCreate';
 import { fetchUsers } from '../../../actions/userActions';
@@ -14,13 +15,23 @@ function User() {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
   const users = useSelector((state) => state.user.users.getAllUsers);
+  const userRole = useSelector((state) => state.user.loggedInUser.role);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userRole !== 'board' && userRole !== 'admin') {
+      navigate('/');
+    }
+  }, [userRole, navigate]);
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
   useEffect(() => {
-    setUserData(Object.values(users));
+    if (users) {
+      setUserData(Object.values(users));
+    }
   }, [users]);
 
   const toggleCollapse = (id) => {

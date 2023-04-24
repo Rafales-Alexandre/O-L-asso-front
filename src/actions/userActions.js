@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { gql } from '@apollo/client/core';
 import client from '../apolloClient';
 
@@ -106,9 +107,29 @@ export const updateUser = (updateUserId, input) => async (dispatch) => {
     /* console.error("Erreur lors de la création de l'utilisateur :", error); */
   }
 };
-/* TODO plusieurs actions car la c'est un peu too mutch */
-/* futur query d'auth
- query GetUserByCredential($email: String!, $password: String!) {
-  getUserByCredential(email: $email, password: $password) {
+
+/* export const getUserByCredential = gql`
+query GetUserByCredential($email: String!, $password: String!) {
+ getUserByCredential(email: $email, password: $password) {
+ }
+}
+`;
+
+export const auth = (email, password) => async (dispatch) => {
+  try {
+    const { data } = await client.query({
+      query: getUserByCredential,
+      variables: { email, password },
+    });
+    const user = data.getUserByCredential;
+
+    if (user) {
+      dispatch({ type: 'LOGIN_USER', payload: user });
+      return Promise.resolve();
+    }
+    return Promise.reject();
+  } catch (error) {
+    console.error(error);
+    return Promise.reject();
   }
-} */
+}; */

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from '../../actions/userActions';
+import { fetchUsers/* , auth  */ } from '../../actions/userActions';
 import LogIn from '../LogIn';
 import UserPanel from '../UserPanel';
 import DataView from '../DataView';
@@ -35,6 +35,10 @@ function App() {
     // ajouter le token en localStorage
     // (eventuellement stocker le token dans le store de redux)
     // ajouter le token dans le header autorization de votre client appollo
+
+    /* dispatch(auth(email, password))
+      .then(() => setRefused(false))
+      .catch(() => setRefused(true)); */
 
     const user = userData.find((u) => u.email === email && u.password === password);
 

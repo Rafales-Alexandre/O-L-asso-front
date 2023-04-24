@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { fetchSuits } from '../../../actions/suitActions';
 import SuitEdit from '../../Edit/SuitEdit';
 import SuitCreate from '../../Create/SuitCreate';
@@ -13,6 +14,14 @@ function Suits() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const userRole = useSelector((state) => state.user.loggedInUser.role);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userRole !== 'board' && userRole !== 'admin') {
+      navigate('/');
+    }
+  }, [userRole, navigate]);
 
   useEffect(() => {
     dispatch(fetchSuits());
