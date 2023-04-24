@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Select({
-  label, name, options, selected, onChange,
+  label,
+  name,
+  options,
+  selected,
+  onChange,
 }) {
   return (
     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -41,8 +45,10 @@ Select.propTypes = {
   selected: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
+
 Select.defaultProps = {
   selected: 'defaultValue',
+
 };
 
 export default Select;
