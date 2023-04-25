@@ -1,16 +1,24 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
+const httpLink = createHttpLink({
+  uri: 'http://anaelleighil-server.eddi.cloud/graphql',
+});
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token || '',
+    },
+  };
+});
 const client = new ApolloClient({
 
-  uri: 'http://localhost:3000/graphql',
-
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-
-// TODO
-// pour quand l'utilisateur recharge la page mais qu'il était connecté (et que vous avez bien stocké
-// le token dans le local storage à sa connexion):
-// ici récupérer le token dans le localStorage
-// le définir dans le header Autorization du client comme suit : `Bearer ${token}`
 
 export default client;

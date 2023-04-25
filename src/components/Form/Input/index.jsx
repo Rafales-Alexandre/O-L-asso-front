@@ -1,7 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function Input({ label, name, type, placeholder = '', onChange, value, inputSizeClass = '' }) {
+function Input({
+  label, name, type, placeholder = '', onChange, value, inputSizeClass = '',
+}) {
   return (
     <div className={`w-full px-3 ${inputSizeClass}`}>
       <label
@@ -25,7 +27,7 @@ function Input({ label, name, type, placeholder = '', onChange, value, inputSize
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'date', 'number', 'textarea', 'email']).isRequired,
+  type: PropTypes.oneOf(['text', 'date', 'number', 'textarea', 'email', 'tel']).isRequired,
   placeholder: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,

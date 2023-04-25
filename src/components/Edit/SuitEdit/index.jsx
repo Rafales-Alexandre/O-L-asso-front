@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import Input from '../../Form/Input';
-import Radio from '../../Form/Radio';
+/* import Radio from '../../Form/Radio'; */
 import Button from '../../Form/Button';
 
 function SuitEdit({ data }) {

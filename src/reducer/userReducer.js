@@ -3,6 +3,7 @@ const initialState = {
   users: [],
   instruments: [],
   suits: [],
+  token: null,
 };
 
 const userReducer = (state = initialState, action = { type: '', payload: null }) => {
@@ -19,6 +20,8 @@ const userReducer = (state = initialState, action = { type: '', payload: null })
       return { ...state, instruments: action.payload };
     case 'FETCH_SUITS':
       return { ...state, suits: action.payload };
+    case 'TOKEN':
+      return { ...state, token: action.payload };
     default:
       return state;
   }
