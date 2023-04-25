@@ -25,7 +25,7 @@ function Input({ label, name, type, placeholder = '', onChange, value, inputSize
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'date', 'number', 'textarea', 'email']).isRequired,
+  type: PropTypes.oneOf(['text', 'date', 'number', 'textarea', 'email', 'tel']).isRequired,
   placeholder: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,

@@ -34,7 +34,7 @@ export const fetchUsers = () => async (dispatch) => {
     const { data } = await client.query({ query: getUserReq });
     dispatch({ type: 'FETCH_USERS', payload: data });
   } catch (error) {
-    /* console.error('Erreur lors de la récupération des utilisateurs :', error); */
+    console.error('Erreur lors de la récupération des utilisateurs :', error);
   }
 };
 
@@ -108,28 +108,26 @@ export const updateUser = (updateUserId, input) => async (dispatch) => {
   }
 };
 
-/* export const getUserByCredential = gql`
-query GetUserByCredential($email: String!, $password: String!) {
- getUserByCredential(email: $email, password: $password) {
- }
+export const getUserByCredential = gql`
+mutation Mutation($input: LoginInput) {
+  loginUser(input: $input) {
+    token
+  }
 }
 `;
 
 export const auth = (email, password) => async (dispatch) => {
   try {
-    const { data } = await client.query({
-      query: getUserByCredential,
-      variables: { email, password },
+    const { data } = await client.mutate({
+      mutation: getUserByCredential,
+      variables: { input: { email, password } },
     });
-    const user = data.getUserByCredential;
-
+    const user = data.loginUser;
     if (user) {
-      dispatch({ type: 'LOGIN_USER', payload: user });
-      return Promise.resolve();
+      dispatch({ type: 'TOKEN', payload: user });
+      localStorage.setItem('token', user.token);
     }
-    return Promise.reject();
   } catch (error) {
     console.error(error);
-    return Promise.reject();
   }
-}; */
+};

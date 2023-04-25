@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 function Checkbox({
   label,
   name,
   onChange,
   value,
-  id,
 }) {
+  const id = uuidv4();
   return (
     <div className="flex items-center pl-3">
       <label
@@ -17,7 +18,6 @@ function Checkbox({
         {label}
         <input
           key={id}
-          id={name}
           type="checkbox"
           name={name}
           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:bg-gray-700 dark:border-gray-600"
@@ -34,7 +34,6 @@ Checkbox.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.bool.isRequired,
-  id: PropTypes.string.isRequired,
 
 };
 
