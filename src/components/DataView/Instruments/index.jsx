@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchInstruments } from '../../../actions/instrumentActions';
 import InstrumentEdit from '../../Edit/InstrumentEdit';
+import InstrumentCreate from '../../Create/InstrumentCreate';
 
 function Instruments() {
   const [collapse, setCollapse] = useState(null);
@@ -50,6 +51,7 @@ function Instruments() {
   return (
     <div className="bg-base-300">
       <h2 className="text-3xl font-bold">Instruments</h2>
+      <button type="submit" className="btn" onClick={() => toggleCreateModal()}>Ajouter un instrument</button>
       {instruData.map((u) => (
         <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
@@ -119,7 +121,7 @@ function Instruments() {
           >
             <div className="modal-box relative w-11/12 max-w-5xl">
               <button type="submit" onClick={() => { toggleCreateModal(); }} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-              {/* <InstruCreate data={[]} onSubmitFormUser={() => {}} /> */}
+              <InstrumentCreate data={[]} onSubmitFormUser={() => {}} />
             </div>
           </div>
         </>

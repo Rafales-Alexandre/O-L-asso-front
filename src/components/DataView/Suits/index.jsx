@@ -54,7 +54,7 @@ function Suits() {
         <i className="fa-solid fa-user-tie fa-xs mr-2" />
         Costumes
       </h2>
-      <button type="submit" className="btn" onClick={() => toggleCreateModal()}>CREATE SUIT</button>
+      <button type="submit" className="btn" onClick={() => toggleCreateModal()}>Ajouter un costume</button>
       {suitData.map((u) => (
         <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">

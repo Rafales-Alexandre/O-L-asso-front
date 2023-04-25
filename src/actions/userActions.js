@@ -125,6 +125,7 @@ export const auth = (email, password) => async (dispatch) => {
     const user = data.loginUser;
     if (user) {
       dispatch({ type: 'TOKEN', payload: user });
+      console.log(user.token)
       localStorage.setItem('token', user.token);
     }
   } catch (error) {

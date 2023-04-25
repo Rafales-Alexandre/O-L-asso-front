@@ -7,6 +7,7 @@ function Logout() {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT_USER' });
+    localStorage.clear();
     navigate('/');
   };
 

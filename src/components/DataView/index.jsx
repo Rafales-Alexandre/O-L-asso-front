@@ -12,7 +12,7 @@ function DataView({ loggedInUser }) {
     <Routes>
       <Route path="/" element={<UserView user={loggedInUser} />} />
       <Route path="/profil" element={<UserEdit data={[loggedInUser]} closeModal={() => {}} />} />
-      <Route path="/instuments" element={<Instruments />} />
+      <Route path="/instruments" element={<Instruments />} />
       <Route path="/suits" element={<Suits />} />
       <Route path="/users" element={<Users />} />
     </Routes>

@@ -17,8 +17,8 @@ function NavLinks({ user }) {
         </li>
         {(user.role === 'board' || user.role === 'admin') && (
           <>
-            <li className={currentPath === '/instuments' ? 'bordered' : ''}>
-              <Link to="/instuments">Instruments</Link>
+            <li className={currentPath === '/instruments' ? 'bordered' : ''}>
+              <Link to="/instruments">Instruments</Link>
             </li>
             <li className={currentPath === '/suits' ? 'bordered' : ''}>
               <Link to="/suits">Costumes</Link>
