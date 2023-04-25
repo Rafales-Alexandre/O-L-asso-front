@@ -1,24 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-function Checkbox({
-  label,
-  name,
-  onChange,
-  value,
-}) {
+function Checkbox({ label, name, onChange, value }) {
   return (
-    <div className="flex items-center pl-3">
-      <label
-        className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
-        htmlFor={name}
-      >
-        {label}
+    <div className="form-control">
+      <label className="label cursor-pointer" htmlFor={name}>
+        <span className="label-text font-semibold md:text-base">{label}</span>
         <input
           id={name}
           type="checkbox"
           name={name}
-          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:bg-gray-700 dark:border-gray-600"
+          className="checkbox checkbox-lg"
           onChange={onChange}
           value={value}
         />

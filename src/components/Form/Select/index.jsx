@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 function Select({
   label,
@@ -10,28 +10,25 @@ function Select({
   onChange,
 }) {
   return (
-    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-      <label
-        className="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
-        htmlFor={name}
-      >
-        {label}
+    <div className="">
+      <label className="label" htmlFor={name}>
+        <span className="label-text pr-4 font-semibold md:text-base">
+          {label}
+        </span>
         <select
-          className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          className="select-bordered select w-full max-w-xs"
           id={name}
           name={name}
         >
-          {
-            options.map((option) => (
-              <option
-                value={option.value}
-                selected={option.value === selected}
-                onChange={onChange}
-              >
-                {option.label}
-              </option>
-            ))
-          }
+          {options.map((option) => (
+            <option
+              value={option.value}
+              selected={option.value === selected}
+              onChange={onChange}
+            >
+              {option.label}
+            </option>
+          ))}
         </select>
       </label>
     </div>

@@ -1,7 +1,7 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import UserEdit from "../../Edit/UserEdit";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from '../../../actions/userActions';
+import { fetchUsers } from "../../../actions/userActions";
 
 function User() {
   const [collapse, setCollapse] = useState(null);
@@ -31,14 +31,13 @@ function User() {
     setShowModal(!showModal);
   };
 
-
   return (
     <div className="bg-base-300">
       <h2 className="text-3xl font-bold">Adherents</h2>
       {userData.map((u) => {
         return (
           <div
-            className="card card-side bg-base-100 shadow-md m-4 mt-10 p-4 flex flex-col relative"
+            className="card card-side relative m-4 mt-10 flex flex-col bg-base-100 p-4 shadow-md"
             key={u.id}
           >
             <div className="flex-grow">
@@ -50,7 +49,7 @@ function User() {
                   <img
                     src={u.url_img}
                     alt="User"
-                    className="rounded-full w-20 h-20"
+                    className="h-20 w-20 rounded-full"
                   />
                 </figure>
                 <div className="card-body">
@@ -61,7 +60,7 @@ function User() {
               </div>
               <button
                 onClick={() => toggleModal(u)}
-                className={`btn btn-primary mt-4 top-5 right-4 absolute`}
+                className={`btn-primary btn absolute right-4 top-5 mt-4`}
               >
                 Edition
               </button>
@@ -77,15 +76,20 @@ function User() {
 
       {showModal && (
         <>
-        <input type="checkbox" id="my-modal-3" className="modal-toggle"/>
-        <div
-          className={`modal  ${showModal ? "modal-open" : ""}`}
-        >
-          <div className="modal-box relative w-11/12 max-w-5xl">
-            <button onClick={()=>{toggleModal()}} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-            <UserEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+          <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+          <div className={`modal  ${showModal ? "modal-open" : ""}`}>
+            <div className="modal-box relative w-11/12 max-w-5xl">
+              <button
+                onClick={() => {
+                  toggleModal();
+                }}
+                className="btn-sm btn-circle btn absolute right-2 top-2"
+              >
+                ✕
+              </button>
+              <UserEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+            </div>
           </div>
-        </div>
         </>
       )}
     </div>
