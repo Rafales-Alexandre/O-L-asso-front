@@ -129,4 +129,5 @@ InstrumentEdit.propTypes = {
 InstrumentEdit.defaultProps = {
   data: [{ depth: 0 }],
 };
+
 export default InstrumentEdit;

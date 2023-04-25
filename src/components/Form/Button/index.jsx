@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 function Button({ children, onClick }) {
   return (
-    <div className="form-control mt-6">
+    <div className="form-control my-6">
       <button
         type="submit"
         className="btn btn-primary"

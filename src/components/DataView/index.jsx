@@ -18,6 +18,7 @@ function DataView({ loggedInUser }) {
     </Routes>
   );
 }
+
 DataView.propTypes = {
   loggedInUser: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -43,4 +44,5 @@ DataView.propTypes = {
     updated_at: PropTypes.string,
   }).isRequired,
 };
+
 export default DataView;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Button from '../../Form/Button';
+import ButtonRstPswd from "../../Form/ButtonRstPswd";
 import { updateUser } from '../../../actions/userActions';
 import Select from '../../Form/Select';
 import Input from '../../Form/Input';
@@ -13,8 +14,8 @@ function UserEdit({ data = 0, closeModal }) {
   const formatDate = (date) => {
     const d = new Date(date);
     const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
 
@@ -41,7 +42,7 @@ function UserEdit({ data = 0, closeModal }) {
     subscription: Boolean(data[0].subscription),
     deposit: Boolean(data[0].deposit),
   });
-  const Ismember = data[0].role === 'member';
+  const Ismember = data[0].role === "member";
 
   const handleCheckboxChange = (event) => {
     if (Ismember) {
@@ -74,14 +75,14 @@ function UserEdit({ data = 0, closeModal }) {
   return (
     <form
       onSubmit={onSubmitFormUser}
-      className="card-body"
+      className="m-2 md:m-0"
     >
       <div className="avatar">
-        <div className="w-24 mask mask-squircle">
+        <div className="m-4 w-12 items-center rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24">
           <img src={data[0].url_img} alt={data[0].url_img} />
         </div>
       </div>
-      <div className="flex flex-wrap">
+      <div className="">
         <Input
           label="Nom"
           name="lastname"
@@ -89,7 +90,7 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].lastname}
           value={formData.lastname}
           onChange={onChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
         />
 
         <Input
@@ -99,7 +100,7 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].firstname}
           value={formData.firstname}
           onChange={onChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
         />
 
         <Input
@@ -109,13 +110,13 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].nickname}
           value={formData.nickname}
           onChange={onChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
         />
         {/* <input type='url' />
 
          <button type='submit' >Ajouter une photo</button> */}
       </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
+      <div className="">
         <Input
           label="Email"
           name="email"
@@ -124,9 +125,9 @@ function UserEdit({ data = 0, closeModal }) {
           value={formData.email}
           onChange={onChange}
         />
-        <Button> Réinitialiser mot de passe </Button>
+        <ButtonRstPswd>Réinitialiser le mot de passe</ButtonRstPswd>
       </div>
-      <div className="flex flex-wrap -mx-3 mb-2">
+      <div className="">
         <Input
           label="Date de naissance"
           name="birthdate"
@@ -134,7 +135,7 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].birthdate}
           value={formData.birthdate}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
 
         <Input
@@ -144,11 +145,10 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].phone}
           value={formData.phone}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
 
-        <div className="flex flex-wrap -mx-3 mb-6">
-
+        <div className="">
           <Select
             label="Genre"
             name="gender"
@@ -156,17 +156,17 @@ function UserEdit({ data = 0, closeModal }) {
             onChange={onChange}
             options={[
               {
-                label: 'F',
-                value: 'F',
+                label: "F",
+                value: "F",
               },
               {
-                label: 'M',
-                value: 'M',
+                label: "M",
+                value: "M",
               },
 
               {
-                label: 'mixte',
-                value: 'mixte',
+                label: "mixte",
+                value: "mixte",
               },
             ]}
           />
@@ -177,32 +177,32 @@ function UserEdit({ data = 0, closeModal }) {
             onChange={onChange}
             options={[
               {
-                label: 'XS',
-                value: 'XS',
+                label: "XS",
+                value: "XS",
               },
               {
-                label: 'S',
-                value: 'S',
+                label: "S",
+                value: "S",
               },
               {
-                label: 'M',
-                value: 'M',
+                label: "M",
+                value: "M",
               },
               {
-                label: 'L',
-                value: 'L',
+                label: "L",
+                value: "L",
               },
               {
-                label: 'XL',
-                value: 'XL',
+                label: "XL",
+                value: "XL",
               },
               {
-                label: 'XXL',
-                value: 'XXL',
+                label: "XXL",
+                value: "XXL",
               },
               {
-                label: 'XXXL',
-                value: 'XXXL',
+                label: "XXXL",
+                value: "XXXL",
               },
             ]}
           />
@@ -213,38 +213,38 @@ function UserEdit({ data = 0, closeModal }) {
             onChange={onChange}
             options={[
               {
-                label: 'XS',
-                value: 'XS',
+                label: "XS",
+                value: "XS",
               },
               {
-                label: 'S',
-                value: 'S',
+                label: "S",
+                value: "S",
               },
               {
-                label: 'M',
-                value: 'M',
+                label: "M",
+                value: "M",
               },
               {
-                label: 'L',
-                value: 'L',
+                label: "L",
+                value: "L",
               },
               {
-                label: 'XL',
-                value: 'XL',
+                label: "XL",
+                value: "XL",
               },
               {
-                label: 'XXL',
-                value: 'XXL',
+                label: "XXL",
+                value: "XXL",
               },
               {
-                label: 'XXXL',
-                value: 'XXXL',
+                label: "XXXL",
+                value: "XXXL",
               },
             ]}
           />
         </div>
       </div>
-      <div className="flex flex-wrap -mx-3 mb-2">
+      <div className="">
         <Input
           label="Adresse"
           name="address"
@@ -252,7 +252,7 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].address}
           value={formData.address}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
         <Input
           label="Adresse Complémentaire"
@@ -261,10 +261,10 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].address_2}
           value={formData.address_2}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
       </div>
-      <div className="flex flex-wrap -mx-3 mb-2">
+      <div className="">
         <Input
           label="Code postal"
           name="zip_code"
@@ -272,7 +272,7 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].zip_code}
           value={formData.zip_code}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
         <Input
           label="Ville"
@@ -281,11 +281,11 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].city}
           value={formData.city}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
       </div>
       {/* PART Members and Admin */}
-      <div className="flex flex-wrap -mx-3 mb-6">
+      <div className="">
         <Input
           label="Rôle"
           name="role"
@@ -293,12 +293,12 @@ function UserEdit({ data = 0, closeModal }) {
           placeholder={data[0].role}
           value={formData.role}
           onChange={handleCheckboxChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
           disabled={Ismember}
         />
         <fieldset disabled={Ismember}>
           <legend>Adhésion</legend>
-          <div className="flex flex-wrap">
+          <div className="">
             <Checkbox
               label="Cotisation payée"
               name="subscription"
@@ -318,7 +318,7 @@ function UserEdit({ data = 0, closeModal }) {
             />
           </div>
         </fieldset>
-        {(data[0].role === 'admin') && (
+        {data[0].role === "admin" && (
           <Select
             label="Choisir un rôle"
             name="role"
@@ -326,16 +326,16 @@ function UserEdit({ data = 0, closeModal }) {
             onChange={onChange}
             options={[
               {
-                label: 'Adhérent',
-                value: 'member',
+                label: "Adhérent",
+                value: "member",
               },
               {
-                label: 'Bureau',
-                value: 'board',
+                label: "Bureau",
+                value: "board",
               },
               {
-                label: 'Admin',
-                value: 'admin',
+                label: "Admin",
+                value: "admin",
               },
             ]}
           />
@@ -368,7 +368,7 @@ UserEdit.propTypes = {
       gender: PropTypes.string.isRequired,
       top_size: PropTypes.string.isRequired,
       bottom_size: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
   closeModal: PropTypes.func.isRequired,
 };

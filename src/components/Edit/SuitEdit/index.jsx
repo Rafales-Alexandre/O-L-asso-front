@@ -27,7 +27,7 @@ function SuitEdit({ data }) {
   const onSubmitFormSuit = (e) => {
     e.preventDefault();
   };
-
+  
   return (
     <form
       onSubmit={onSubmitFormSuit}
@@ -97,28 +97,28 @@ function SuitEdit({ data }) {
               <td>8</td>
             </tr>
             <tr>
-              <td className="border border-slate-300 ... ">S</td>
-              <td className="border border-slate-300 ... ">7</td>
+              <td>S</td>
+              <td>7</td>
             </tr>
             <tr>
-              <td className="border border-slate-300 ... ">M</td>
-              <td className="border border-slate-300 ... ">6</td>
+              <td>M</td>
+              <td>6</td>
             </tr>
             <tr>
-              <td className="border border-slate-300 ... ">L</td>
-              <td className="border border-slate-300 ... ">3</td>
+              <td>L</td>
+              <td>3</td>
             </tr>
             <tr>
-              <td className="border border-slate-300 ... ">XL</td>
-              <td className="border border-slate-300 ... ">6</td>
+              <td>XL</td>
+              <td>6</td>
             </tr>
             <tr>
-              <td className="border border-slate-300 ... ">XXL</td>
-              <td className="border border-slate-300 ... ">5</td>
+              <td>XXL</td>
+              <td>5</td>
             </tr>
             <tr>
-              <td className="border border-slate-300 ... ">XXXL</td>
-              <td className="border border-slate-300 ... ">8</td>
+              <td>XXXL</td>
+              <td>8</td>
             </tr>
           </tbody>
         </table>

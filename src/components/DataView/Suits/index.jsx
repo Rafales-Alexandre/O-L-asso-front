@@ -49,25 +49,25 @@ function Suits() {
   };
 
   return (
-    <div className="bg-base-200">
-      <h2 className="text-3xl font-bold">
-        <i className="fa-solid fa-user-tie fa-xs mr-3" />
+    <div>
+      <h2 className="ml-4 text-xl md:text-2xl font-bold">
+        <i className="fa-solid fa-user-tie fa-xs mr-2" />
         Costumes
       </h2>
       <button type="submit" className="btn" onClick={() => toggleCreateModal()}>CREATE SUIT</button>
       {suitData.map((u) => (
-        <div className="card card-side relative m-4 flex flex-col bg-base-100 p-4 shadow-md" key={u.id}>
+        <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
-            <figure className="mr-4">
+            <figure className="">
               <img
-                src="https://fakeimg.pl/100x100/?text=Suit"
+                src="https://fakeimg.pl/300x300/?text=Suit"
                 alt="Aperçu"
-                className="rounded-full"
+                className=""
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-xl font-bold">{u.label}</h2>
-              <p className="normal-case first-letter:capitalize text-gray-600">
+              <h2 className="card-title">{u.label}</h2>
+              <p className="first-letter:capitalize">
                 {u.observation}
               </p>
             </div>
@@ -87,6 +87,15 @@ function Suits() {
               </div>
             </div>
           )}
+          <div className="card-actions justify-end">
+          <button
+            onClick={() => toggleCollapse(u.id)}
+            className="btn-primary btn"
+          >
+            Edition
+          </button>
+          </div>
+          
         </div>
       ))}
       {showModal && (

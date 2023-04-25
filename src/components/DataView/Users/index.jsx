@@ -45,6 +45,7 @@ function User() {
     setSelectedUser(user);
     setShowModal(!showModal);
   };
+
   const toggleCreateModal = () => {
     setShowCreateModal(!showCreateModal);
   };
@@ -52,7 +53,6 @@ function User() {
   return (
     <div className="bg-base-300">
       <h2 className="text-3xl font-bold">Adherents</h2>
-
       <button type="submit" className="btn" onClick={() => toggleCreateModal()}>Ajouter un utilisateur</button>
       {userData.map((u) => (
         <div

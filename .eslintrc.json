@@ -1,30 +1,29 @@
 {
-    "extends": [
-      "plugin:react/recommended",
-      "plugin:react-hooks/recommended",
-      "airbnb"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2021,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "airbnb",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["../package"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
-    },
-    "env": {
-      "browser": true,
-      "es2021": true,
-      "node": true
-    },
-    
-      "settings": {
-        "import/resolver": {
-          "node": {
-            "paths": ["../package"],
-            "extensions": [".js", ".jsx", ".ts", ".tsx"]
-          }
-        }
-      }
-    
+    }
   }
-  
+}
