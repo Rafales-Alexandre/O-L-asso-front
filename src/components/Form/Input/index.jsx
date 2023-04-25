@@ -1,14 +1,8 @@
-import React from "react";
-// import PropTypes from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function Input({
-  label,
-  name,
-  type,
-  placeholder = "",
-  onChange,
-  value,
-  inputSizeClass = "",
+  label, name, type, placeholder = '', onChange, value, inputSizeClass = '',
 }) {
   return (
     <div className={`${inputSizeClass}`}>
@@ -29,5 +23,26 @@ function Input({
     </div>
   );
 }
-
+Input.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'date', 'number', 'textarea', 'email', 'tel']).isRequired,
+  placeholder: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.oneOf([null]),
+  ]),
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date),
+    PropTypes.oneOf([null, undefined]),
+  ]),
+  inputSizeClass: PropTypes.string,
+};
+Input.defaultProps = {
+  placeholder: null,
+  inputSizeClass: '',
+  value: null,
+};
 export default Input;

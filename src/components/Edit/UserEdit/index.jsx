@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { useMutation } from "@apollo/client";
-import { useDispatch } from "react-redux";
-import Button from "../../Form/Button";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import Button from '../../Form/Button';
 import ButtonRstPswd from "../../Form/ButtonRstPswd";
-import Select from "../../Form/Select";
-import Input from "../../Form/Input";
-import { updateUser } from "../../../actions/userActions";
-import Checkbox from "../../Form/Checkbox";
+import { updateUser } from '../../../actions/userActions';
+import Select from '../../Form/Select';
+import Input from '../../Form/Input';
+import Checkbox from '../../Form/Checkbox';
 
-function UserEdit({ data }) {
+function UserEdit({ data = 0, closeModal }) {
   const dispatch = useDispatch();
 
   const formatDate = (date) => {
@@ -40,8 +39,8 @@ function UserEdit({ data }) {
 
   updateUser(data[0].id, formData);
   const [isChecked, setIsChecked] = useState({
-    subscription: toString(data[0].subscription),
-    deposit: toString(data[0].deposit),
+    subscription: Boolean(data[0].subscription),
+    deposit: Boolean(data[0].deposit),
   });
   const Ismember = data[0].role === "member";
 
@@ -51,7 +50,10 @@ function UserEdit({ data }) {
       return;
     }
 
-    setIsChecked(event.target.checked);
+    setIsChecked({
+      ...isChecked,
+      [event.target.name]: event.target.checked.toString(),
+    });
   };
 
   const onChange = (e) => {
@@ -62,16 +64,17 @@ function UserEdit({ data }) {
   };
   const onSubmitFormUser = async (e) => {
     e.preventDefault();
-    dispatch(updateUser(data[0].id, formData));
-    console.log(data);
+    dispatch(updateUser(data[0].id, {
+      ...formData,
+      subscription: isChecked.subscription === 'true',
+      deposit: isChecked.deposit === 'true',
+    }));
+    closeModal();
   };
-  useEffect(() => {
-    onSubmitFormUser();
-  }, [formData]);
+
   return (
     <form
       onSubmit={onSubmitFormUser}
-      //  autoComplete="off"
       className="m-2 md:m-0"
     >
       <div className="avatar">
@@ -300,18 +303,18 @@ function UserEdit({ data }) {
               label="Cotisation payée"
               name="subscription"
               type="checkbox"
-              checked={isChecked}
-              value={formData.subscription}
-              onClick={handleCheckboxChange}
+              checked={isChecked.subscription}
+              onChange={handleCheckboxChange}
+              value={isChecked.subscription}
             />
 
             <Checkbox
               label="Caution versée"
               name="deposit"
               type="checkbox"
-              checked={isChecked}
-              value={formData.deposit}
-              onClick={handleCheckboxChange}
+              checked={isChecked.deposit}
+              onChange={handleCheckboxChange}
+              value={isChecked.deposit}
             />
           </div>
         </fieldset>
@@ -367,6 +370,7 @@ UserEdit.propTypes = {
       bottom_size: PropTypes.string.isRequired,
     })
   ).isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default UserEdit;

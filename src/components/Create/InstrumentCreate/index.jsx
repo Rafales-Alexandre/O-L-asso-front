@@ -5,15 +5,15 @@ import Input from '../../Form/Input';
 import Radio from '../../Form/Radio';
 import Button from '../../Form/Button';
 
-function InstrumentEdit({ data }) {
+function InstrumentCreate({ data = [] }) {
   const [instruData, setInstruData] = useState({
-    code: data[0].code,
-    pupitre: data[0].pupitre,
-    observation: data[0].observation,
-    depth: data[0].depth,
-    rods: data[0].rods,
-    weight: data[0].weight,
-    sticker: data[0].sticker,
+    code: '',
+    pupitre: '',
+    observation: '',
+    depth: '',
+    rods: '',
+    weight: '',
+    sticker: '',
   });
 
   const onChange = (e) => {
@@ -34,7 +34,7 @@ function InstrumentEdit({ data }) {
           label="Code"
           name="code"
           type="text"
-          placeholder={data[0].code}
+          placeholder=""
           value={instruData.code}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -43,7 +43,7 @@ function InstrumentEdit({ data }) {
           label="Pupitre"
           name="pupitre"
           type="text"
-          placeholder={data[0].pupitre}
+          placeholder=""
           value={instruData.pupitre}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -54,7 +54,7 @@ function InstrumentEdit({ data }) {
           label="Osbervation"
           name="observation"
           type="textarea"
-          placeholder={data[0].observation}
+          placeholder=""
           value={instruData.observation}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -65,7 +65,7 @@ function InstrumentEdit({ data }) {
           label="Tirant"
           name="depth"
           type="text"
-          placeholder={data[0].depth}
+          placeholder=""
           value={instruData.depth ? instruData.depth.toString() : ''}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -74,7 +74,7 @@ function InstrumentEdit({ data }) {
           label="Profondeur"
           name="rods"
           type="text"
-          placeholder={data[0].rods}
+          placeholder=""
           value={instruData.rods ? instruData.rods.toString() : ''}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -83,7 +83,7 @@ function InstrumentEdit({ data }) {
           label="Poids"
           name="weight"
           type="text"
-          placeholder={data[0].weight}
+          placeholder=""
           value={instruData.weight ? instruData.weight.toString() : ''}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -113,7 +113,7 @@ function InstrumentEdit({ data }) {
     </form>
   );
 }
-InstrumentEdit.propTypes = {
+InstrumentCreate.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       code: PropTypes.string.isRequired,
@@ -126,8 +126,7 @@ InstrumentEdit.propTypes = {
     }),
   ).isRequired,
 };
-InstrumentEdit.defaultProps = {
+InstrumentCreate.defaultProps = {
   data: [{ depth: 0 }],
 };
-
-export default InstrumentEdit;
+export default InstrumentCreate;

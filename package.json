@@ -16,6 +16,7 @@
     "apollo-client": "^2.6.10",
     "axios": "^1.3.5",
     "daisyui": "^2.51.5",
+    "generate-password": "^1.7.0",
     "graphql": "^15.8.0",
     "jsx": "^0.9.89",
     "prop-types": "^15.8.1",
@@ -25,7 +26,8 @@
     "react-router-dom": "^6.10.0",
     "react-select": "^5.7.2",
     "redux": "^4.2.1",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.62",

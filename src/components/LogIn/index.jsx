@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function LogIn({ onLogin, refused }) {
   const [email, setEmail] = useState('');
@@ -52,14 +54,21 @@ function LogIn({ onLogin, refused }) {
                 </p>
               )}
             </div>
-            <a className="link-hover link mt-3 text-center hover:link-info">
+            <button
+              type="button"
+              className="link-hover link mt-3 text-center hover:link-info"
+            >
               Mot de passe oublié ?
-            </a>
+            </button>
           </form>
         </div>
       </div>
     </div>
   );
 }
+LogIn.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+  refused: PropTypes.bool.isRequired,
+};
 
 export default LogIn;

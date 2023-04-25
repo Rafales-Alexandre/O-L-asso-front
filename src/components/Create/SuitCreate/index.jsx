@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
-
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { createSuit } from '../../../actions/suitActions';
 import Input from '../../Form/Input';
-/* import Radio from '../../Form/Radio'; */
 import Button from '../../Form/Button';
 
-function SuitEdit({ data }) {
+export default function SuitCreate({ data = [], closeModal }) {
+  const dispatch = useDispatch();
+
   const [suitData, setSuitData] = useState({
-    label: data[0] && data[0].label,
-    gender: data[0] && data[0].gender,
-    observation: data[0] && data[0].observation,
-    quantity_s: data[0] && data[0].quantity_s,
-    quantity_m: data[0] && data[0].quantity_m,
-    quantity_l: data[0] && data[0].quantity_l,
-    quantity_xl: data[0] && data[0].quantity_xl,
-    quantity_xxl: data[0] && data[0].quantity_xxl,
-    quantity_xxxl: data[0] && data[0].quantity_xxxl,
+    label: '',
+    gender: '',
+    observation: '',
+    quantity_s: '',
+    quantity_m: '',
+    quantity_l: '',
+    quantity_xl: '',
+    quantity_xxl: '',
+    quantity_xxxl: '',
   });
 
   const onChange = (e) => {
@@ -26,8 +28,9 @@ function SuitEdit({ data }) {
   };
   const onSubmitFormSuit = (e) => {
     e.preventDefault();
+    dispatch(createSuit(suitData));
   };
-  
+
   return (
     <form
       onSubmit={onSubmitFormSuit}
@@ -38,7 +41,7 @@ function SuitEdit({ data }) {
           label="Label"
           name="label"
           type="text"
-          placeholder={data[0].label}
+          placeholder=""
           value={suitData.label}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -47,7 +50,7 @@ function SuitEdit({ data }) {
           label="Genre"
           name="gender"
           type="text"
-          placeholder={data[0].gender}
+          placeholder=""
           value={suitData.gender}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -58,7 +61,7 @@ function SuitEdit({ data }) {
           label="Osbervation"
           name="observation"
           type="textarea"
-          placeholder={data[0].observation}
+          placeholder=""
           value={suitData.observation}
           onChange={onChange}
           inputSizeClass="md:w-1/1"
@@ -97,28 +100,28 @@ function SuitEdit({ data }) {
               <td>8</td>
             </tr>
             <tr>
-              <td>S</td>
-              <td>7</td>
+              <td className="border border-slate-300 ... ">S</td>
+              <td className="border border-slate-300 ... ">7</td>
             </tr>
             <tr>
-              <td>M</td>
-              <td>6</td>
+              <td className="border border-slate-300 ... ">M</td>
+              <td className="border border-slate-300 ... ">6</td>
             </tr>
             <tr>
-              <td>L</td>
-              <td>3</td>
+              <td className="border border-slate-300 ... ">L</td>
+              <td className="border border-slate-300 ... ">3</td>
             </tr>
             <tr>
-              <td>XL</td>
-              <td>6</td>
+              <td className="border border-slate-300 ... ">XL</td>
+              <td className="border border-slate-300 ... ">6</td>
             </tr>
             <tr>
-              <td>XXL</td>
-              <td>5</td>
+              <td className="border border-slate-300 ... ">XXL</td>
+              <td className="border border-slate-300 ... ">5</td>
             </tr>
             <tr>
-              <td>XXXL</td>
-              <td>8</td>
+              <td className="border border-slate-300 ... ">XXXL</td>
+              <td className="border border-slate-300 ... ">8</td>
             </tr>
           </tbody>
         </table>
@@ -129,7 +132,7 @@ function SuitEdit({ data }) {
   );
 }
 
-SuitEdit.propTypes = {
+SuitCreate.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -144,5 +147,3 @@ SuitEdit.propTypes = {
     }),
   ).isRequired,
 };
-
-export default SuitEdit;

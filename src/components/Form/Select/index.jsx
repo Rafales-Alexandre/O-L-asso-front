@@ -6,7 +6,6 @@ function Select({
   name,
   options,
   selected,
-
   onChange,
 }) {
   return (
@@ -19,13 +18,11 @@ function Select({
           className="select-bordered select w-full max-w-xs"
           id={name}
           name={name}
+          value={selected}
+          onChange={onChange}
         >
           {options.map((option) => (
-            <option
-              value={option.value}
-              selected={option.value === selected}
-              onChange={onChange}
-            >
+            <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
@@ -38,12 +35,19 @@ function Select({
 Select.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf({
-    value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-  }).isRequired,
-  selected: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  selected: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
+
+Select.defaultProps = {
+  selected: 'defaultValue',
+
 };
 
 export default Select;

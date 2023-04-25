@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function NavLinks({ user }) {
   const location = useLocation();
@@ -31,5 +32,11 @@ function NavLinks({ user }) {
     </div>
   );
 }
+
+NavLinks.propTypes = {
+  user: PropTypes.shape({
+    role: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default NavLinks;
