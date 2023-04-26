@@ -2,20 +2,29 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchSuits } from '../../../actions/suitActions';
+import { fetchSuits, deleteSuit } from '../../../actions/suitActions';
 import SuitEdit from '../../Edit/SuitEdit';
 import SuitCreate from '../../Create/SuitCreate';
 
 function Suits() {
   const [collapse, setCollapse] = useState(null);
   const dispatch = useDispatch();
-  const [suitData, setsuitData] = useState([]);
+  const [suitData, setSuitData] = useState([]);
   const suits = useSelector((state) => state.user.suits.getAllSuits);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const userRole = useSelector((state) => state.user.loggedInUser.role);
+  const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredSuits = suitData.filter((suit) =>
+    `${suit.label}`.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
     if (userRole !== 'board' && userRole !== 'admin') {
@@ -29,7 +38,7 @@ function Suits() {
 
   useEffect(() => {
     if (suits) {
-      setsuitData(Object.values(suits));
+      setSuitData(Object.values(suits));
     }
   }, [suits]);
 
@@ -48,14 +57,32 @@ function Suits() {
     setShowCreateModal(!showCreateModal);
   };
 
+  const handleDelete = async (suitId) => {
+    try {
+      await deleteSuit(suitId);
+      setSuitData(suitData.filter((suit) => suit.id !== suitId));
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
   return (
-    <div>
+    <div className='h-full'>
       <h2 className="ml-4 text-xl md:text-2xl font-bold">
         <i className="fa-solid fa-user-tie fa-xs mr-2" />
         Costumes
       </h2>
-      <button type="submit" className="btn" onClick={() => toggleCreateModal()}>Ajouter un costume</button>
-      {suitData.map((u) => (
+      <div className='flex flex-col md:flex-row md:justify-between'>
+        <input
+          type="text"
+          placeholder="Recherche..."
+          className="input input-bordered mb-4"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        <button type="submit" className="btn hover:bg-green-500 " onClick={() => toggleCreateModal()}>Ajouter un Costume</button>
+      </div>
+      {filteredSuits.map((u) => (
         <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
             <figure className="">
@@ -72,9 +99,14 @@ function Suits() {
               </p>
             </div>
           </div>
-          <button type="submit" onClick={() => toggleModal(u)} className="btn btn-primary mt-4 top-5 right-4 absolute">
-            Edition
-          </button>
+          <div className='flex flex-col items-end'>
+              <button type="submit" onClick={() => toggleModal(u)} className="btn mt-4 absolute top-0 right-4 hover:bg-sky-500">
+                Edition
+              </button>
+              <button type="submit" className="btn mt-4 top-10 right-4 hover:btn-warning" onClick={() => handleDelete(u.id)}>
+                suppression
+              </button>
+            </div>
           {collapse === u.id && (
             <div className="card-body mt-4">
               <div>
@@ -87,14 +119,6 @@ function Suits() {
               </div>
             </div>
           )}
-          <div className="card-actions justify-end">
-          <button
-            onClick={() => toggleCollapse(u.id)}
-            className="btn-primary btn"
-          >
-            Edition
-          </button>
-          </div>
           
         </div>
       ))}

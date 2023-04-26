@@ -34,7 +34,7 @@ export const fetchUsers = () => async (dispatch) => {
     const { data } = await client.query({ query: getUserReq });
     dispatch({ type: 'FETCH_USERS', payload: data });
   } catch (error) {
-    console.error('Erreur lors de la récupération des utilisateurs :', error);
+    /* console.error('Erreur lors de la récupération des utilisateurs :', error); */
   }
 };
 
@@ -108,10 +108,50 @@ export const updateUser = (updateUserId, input) => async (dispatch) => {
   }
 };
 
+export const deleteUserReq = gql`
+mutation Mutation($deleteUserId: ID!) {
+  deleteUser(id: $deleteUserId)
+}
+`;
+export const deleteUser = async (deleteUserId) => {
+  try {
+    await client.mutate({
+      mutation: deleteUserReq,
+      variables: {
+        deleteUserId,
+      },
+    });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+}
+};
 export const getUserByCredential = gql`
 mutation Mutation($input: LoginInput) {
   loginUser(input: $input) {
     token
+    user {
+      id
+      url_img
+      lastname
+      firstname
+      nickname
+      email
+      password
+      birthdate
+      phone
+      address
+      address_2
+      zip_code
+      city
+      gender
+      top_size
+      bottom_size
+      subscription
+      deposit
+      role
+      created_at
+      updated_at
+      }
   }
 }
 `;
@@ -125,10 +165,10 @@ export const auth = (email, password) => async (dispatch) => {
     const user = data.loginUser;
     if (user) {
       dispatch({ type: 'TOKEN', payload: user });
-      console.log(user.token)
+      dispatch({type: 'LOGIN_USER', payload:user});
       localStorage.setItem('token', user.token);
     }
   } catch (error) {
-    console.error(error);
+    /* console.error(error); */
   }
 };

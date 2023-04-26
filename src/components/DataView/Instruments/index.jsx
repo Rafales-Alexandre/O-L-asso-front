@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchInstruments } from '../../../actions/instrumentActions';
+import { fetchInstruments, deleteInstru } from '../../../actions/instrumentActions';
 import InstrumentEdit from '../../Edit/InstrumentEdit';
 import InstrumentCreate from '../../Create/InstrumentCreate';
 
@@ -14,9 +14,17 @@ function Instruments() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const userRole = useSelector((state) => state.user.loggedInUser.role);
+  const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredInstruments = instruData.filter((instru) =>
+    `${instru.pupitre}`.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   useEffect(() => {
     if (userRole !== 'board' && userRole !== 'admin') {
       navigate('/');
@@ -47,12 +55,29 @@ function Instruments() {
   const toggleCreateModal = () => {
     setShowCreateModal(!showCreateModal);
   };
+  const handleDelete = async (instruId) => {
+    try {
+      await deleteInstru(instruId);
+      setInstruData(instruData.filter((instru) => instru.id !== instruId));
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
 
   return (
-    <div className="bg-base-300">
+    <div className="bg-base-300 h-full">
       <h2 className="text-3xl font-bold">Instruments</h2>
-      <button type="submit" className="btn" onClick={() => toggleCreateModal()}>Ajouter un instrument</button>
-      {instruData.map((u) => (
+      <div className='flex flex-col md:flex-row md:justify-between'>
+        <input
+          type="text"
+          placeholder="Recherche..."
+          className="input input-bordered mb-4"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        <button type="submit" className="btn hover:bg-green-500 " onClick={() => toggleCreateModal()}>Ajouter un instrument</button>
+      </div>
+      {filteredInstruments.map((u) => (
         <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
             <figure className="mr-4">
@@ -69,9 +94,14 @@ function Instruments() {
               </p>
             </div>
           </div>
-          <button type="submit" onClick={() => toggleModal(u)} className="btn btn-primary mt-4 top-5 right-4 absolute">
-            Edition
-          </button>
+          <div className='flex flex-col items-end'>
+              <button type="submit" onClick={() => toggleModal(u)} className="btn mt-4 absolute top-0 right-4 hover:bg-sky-500">
+                Edition
+              </button>
+              <button type="submit" className="btn mt-4 top-10 right-4 hover:btn-warning" onClick={() => handleDelete(u.id)}>
+                suppression
+              </button>
+            </div>
           {collapse === u.id && (
           <div className="card-body mt-4">
             <div>
