@@ -16,6 +16,7 @@ function Instruments() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const navigate = useNavigate();
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearchChange = (event) => {
@@ -25,6 +26,7 @@ function Instruments() {
   const filteredInstruments = instruData.filter((instru) =>
     `${instru.pupitre}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   useEffect(() => {
     if (userRole !== 'board' && userRole !== 'admin') {
       navigate('/');

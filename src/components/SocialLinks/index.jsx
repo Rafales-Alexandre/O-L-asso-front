@@ -2,7 +2,7 @@ import React from 'react';
 
 function SocialLinks() {
   return (
-    <div className="flex justify-evenly invisible md:visible w-48 mt-16 text-primary">
+    <div className="flex justify-evenly hidden md:block w-48 mt-16 text-primary">
       <a href="https://www.facebook.com/BatalaLaRochelle" target="_blank" rel="noreferrer">
         <i className="fa-brands fa-square-facebook fa-2xl hover:text-accent" />
       </a>
