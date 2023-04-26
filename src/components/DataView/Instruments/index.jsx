@@ -15,7 +15,7 @@ function Instruments() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.role);
   const navigate = useNavigate();
-
+console.log(userRole)
   useEffect(() => {
     if (userRole !== 'board' && userRole !== 'admin') {
       navigate('/');

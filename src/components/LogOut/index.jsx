@@ -7,11 +7,12 @@ function Logout() {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT_USER' });
+    localStorage.clear();
     navigate('/');
   };
 
   return (
-    <button className="btn btn-primary invisible md:visible w-48 md:hover:btn-warning" type="button" onClick={handleLogout}>
+    <button className="btn btn-primary hidden md:block w-48 md:hover:btn-warning" type="button" onClick={handleLogout}>
       Déconnexion
     </button>
   );

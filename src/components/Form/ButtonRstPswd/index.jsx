@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 function ButtonRstPswd({ children, onClick }) {
   return (
@@ -15,9 +15,14 @@ function ButtonRstPswd({ children, onClick }) {
   );
 }
 
-/* ButtonRstPswd.propTypes = {
+ButtonRstPswd.propTypes = {
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
-}; */
+  onClick: PropTypes.func,
+};
+ButtonRstPswd.defaultProps = {
+  onClick: () => {},
+};
+
+
 
 export default ButtonRstPswd;

@@ -55,8 +55,10 @@ function UserEdit({ data = 0, closeModal }) {
       [event.target.name]: event.target.checked.toString(),
     });
   };
-
-  const onChange = (e) => {
+  const [selected, setSelected] =useState(data[0].gender)
+    
+    const onChange = (e) => {
+    setSelected(e.target.value)
     setFormData({
       ...formData,
       [e.currentTarget.name]: e.currentTarget.value,
@@ -152,7 +154,7 @@ function UserEdit({ data = 0, closeModal }) {
           <Select
             label="Genre"
             name="gender"
-            selected={data[0].gender}
+            placeholder={selected}
             onChange={onChange}
             options={[
               {
@@ -176,10 +178,6 @@ function UserEdit({ data = 0, closeModal }) {
             selected={data[0].top_size}
             onChange={onChange}
             options={[
-              {
-                label: "XS",
-                value: "XS",
-              },
               {
                 label: "S",
                 value: "S",
@@ -212,10 +210,6 @@ function UserEdit({ data = 0, closeModal }) {
             selected={data[0].bottom_size}
             onChange={onChange}
             options={[
-              {
-                label: "XS",
-                value: "XS",
-              },
               {
                 label: "S",
                 value: "S",
