@@ -26,7 +26,7 @@ function SuitEdit({ data }) {
   const onSubmitFormSuit = (e) => {
     e.preventDefault();
   };
-
+  
   return (
     <form
       onSubmit={onSubmitFormSuit}
@@ -73,6 +73,7 @@ function SuitEdit({ data }) {
           </thead>
           <tbody>
             <tr>
+
               <td className="border border-slate-300 ... ">S</td>
               <td className="border border-slate-300 ... ">
                 <input

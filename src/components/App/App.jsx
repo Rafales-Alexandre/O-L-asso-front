@@ -14,7 +14,7 @@ function App() {
   const loggedInUserInTheStore = useSelector((state) => state.user.loggedInUser);
   const loggedInUser = loggedInUserInTheStore
     ? {
-      ...loggedInUserInTheStore,
+      ...loggedInUserInTheStore.user,
       id: parseInt(loggedInUserInTheStore.id, 10),
     }
     : null;
@@ -29,20 +29,13 @@ function App() {
     dispatch(fetchUsers());
   }, [loggedInUser]);
 
+
   const handleLogin = (email, password) => {
     dispatch(auth(email, password))
       .then(() => {
-        setRefused(false);
-        const user = userData.find((u) => u.email === email && u.password === password);
-        console.log(user);
-        if (user) {
-          dispatch({ type: 'LOGIN_USER', payload: user });
-        } else {
-        console.log('refused');
+        setRefused(false); }
+      )
 
-          setRefused(true);
-        }
-      })
       .catch(() => setRefused(true));
   };
   const handleLogout = () => {
@@ -53,7 +46,8 @@ function App() {
       <div className="App">
         {loggedInUser ? (
           <div className="flex h-screen w-full flex-col md:flex-row">
-            <div className="sticky top-0 h-screen md:w-1/5">
+
+            <div className="sticky top-0 md:w-1/5">
               <UserPanel user={loggedInUser} onLogout={handleLogout} />
             </div>
             <div className="h-screen overflow-y-scroll md:w-4/5">
