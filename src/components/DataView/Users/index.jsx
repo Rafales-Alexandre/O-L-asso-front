@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import UserEdit from "../../Edit/UserEdit";
-import UserCreate from "../../Create/UserCreate";
-import { fetchUsers } from "../../../actions/userActions";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import UserEdit from '../../Edit/UserEdit';
+import UserCreate from '../../Create/UserCreate';
+import { fetchUsers, deleteUser } from '../../../actions/userActions';
 
 function User() {
   const [collapse, setCollapse] = useState(null);
@@ -15,9 +15,17 @@ function User() {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
   const users = useSelector((state) => state.user.users.getAllUsers);
-  const userRole = useSelector((state) => state.user.loggedInUser.role);
+  const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredUsers = userData.filter((user) =>
+    `${user.firstname} ${user.lastname} ${user.nickname}`.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   useEffect(() => {
     if (userRole !== "board" && userRole !== "admin") {
       navigate("/");
@@ -49,14 +57,29 @@ function User() {
   const toggleCreateModal = () => {
     setShowCreateModal(!showCreateModal);
   };
+  const handleDelete = async (userId) => {
+    try {
+      await deleteUser(userId);
+      setUserData(userData.filter((user) => user.id !== userId));
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
 
   return (
-    <div className="m-2">
-      <h2 className="mb-4 text-2xl font-bold">Adhérents</h2>
-      <button type="submit" className="btn" onClick={() => toggleCreateModal()}>
-        Ajouter un utilisateur
-      </button>
-      {userData.map((u) => (
+    <div className="">
+      <h2 className="text-3xl font-bold">Adherents</h2>
+      <div className='flex flex-col md:flex-row md:justify-between'>
+        <input
+          type="text"
+          placeholder="Recherche..."
+          className="input input-bordered mb-4"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        <button type="submit" className="btn hover:bg-green-500 " onClick={() => toggleCreateModal()}>Ajouter un utilisateur</button>
+      </div>
+      {filteredUsers.map((u) => (
         <div
           className="card card-side relative m-4 mt-10 flex flex-col bg-base-100 p-4 shadow-md"
           key={u.id}
@@ -81,13 +104,14 @@ function User() {
                 </h2>
               </div>
             </div>
-            <button
-              type="submit"
-              onClick={() => toggleModal(u)}
-              className="btn-primary btn absolute right-4 top-5 mt-4"
-            >
-              Edition
-            </button>
+            <div className='flex flex-col items-end'>
+              <button type="submit" onClick={() => toggleModal(u)} className="btn mt-4 absolute top-0 right-4 hover:bg-sky-500">
+                Edition
+              </button>
+              <button type="submit" className="btn mt-4 top-10 right-4 hover:btn-warning" onClick={() => handleDelete(u.id)}>
+                suppression
+              </button>
+            </div>
           </div>
           {collapse === u.id && (
             <div className="card-body mt-4">
