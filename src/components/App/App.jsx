@@ -10,6 +10,7 @@ function App() {
   const users = useSelector((state) => state.user.users.getAllUsers);
   const [refused, setRefused] = useState(false);
   const [userData, setUserData] = useState([]);
+  const token = useSelector((state) => state.user.token);
   const loggedInUserInTheStore = useSelector((state) => state.user.loggedInUser);
   const loggedInUser = loggedInUserInTheStore
     ? {
@@ -28,11 +29,13 @@ function App() {
     dispatch(fetchUsers());
   }, [loggedInUser]);
 
+
   const handleLogin = (email, password) => {
     dispatch(auth(email, password))
       .then(() => {
         setRefused(false); }
       )
+
       .catch(() => setRefused(true));
   };
   const handleLogout = () => {

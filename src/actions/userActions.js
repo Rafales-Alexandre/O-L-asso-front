@@ -34,7 +34,7 @@ export const fetchUsers = () => async (dispatch) => {
     const { data } = await client.query({ query: getUserReq });
     dispatch({ type: 'FETCH_USERS', payload: data });
   } catch (error) {
-    /* console.error('Erreur lors de la récupération des utilisateurs :', error); */
+    console.error('Erreur lors de la récupération des utilisateurs :', error);
   }
 };
 
@@ -108,6 +108,7 @@ export const updateUser = (updateUserId, input) => async (dispatch) => {
   }
 };
 
+
 export const deleteUserReq = gql`
 mutation Mutation($deleteUserId: ID!) {
   deleteUser(id: $deleteUserId)
@@ -125,10 +126,12 @@ export const deleteUser = async (deleteUserId) => {
     console.error('Error deleting user:', error);
 }
 };
+
 export const getUserByCredential = gql`
 mutation Mutation($input: LoginInput) {
   loginUser(input: $input) {
     token
+
     user {
       id
       url_img
@@ -164,11 +167,11 @@ export const auth = (email, password) => async (dispatch) => {
     });
     const user = data.loginUser;
     if (user) {
-      dispatch({ type: 'TOKEN', payload: user });
       dispatch({type: 'LOGIN_USER', payload:user});
       localStorage.setItem('token', user.token);
     }
   } catch (error) {
     /* console.error(error); */
+
   }
 };
