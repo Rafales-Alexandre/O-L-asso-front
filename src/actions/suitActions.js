@@ -100,3 +100,21 @@ export const createSuit = (input) => async (dispatch) => {
     /* console.error('Erreur lors de la création du costume :', error); */
   }
 };
+
+export const deleteSuitReq = gql`
+mutation DeleteSuit($deleteSuitId: ID!) {
+  deleteSuit(id: $deleteSuitId)
+}
+`;
+export const deleteSuit = async (deleteSuitId) => {
+  try {
+    await client.mutate({
+      mutation: deleteSuitReq,
+      variables: {
+        deleteSuitId,
+      },
+    });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+}
+};

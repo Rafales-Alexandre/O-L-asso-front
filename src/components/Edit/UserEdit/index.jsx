@@ -55,17 +55,21 @@ function UserEdit({ data = 0, closeModal }) {
       [event.target.name]: event.target.checked.toString(),
     });
   };
+
   const [selected, setSelected] =useState(data[0].gender)
     
-    const onChange = (e) => {
-    setSelected(e.target.value)
+    const onChangeSelect = (e) => {
+      setSelected(e.target.value)
+     };
+  
+  const onChange = (e) => {
     setFormData({
       ...formData,
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
-  const onSubmitFormUser = async (e) => {
-    e.preventDefault();
+
+  const onSubmitFormUser = async () => {
     dispatch(updateUser(data[0].id, {
       ...formData,
       subscription: isChecked.subscription === 'true',
@@ -154,7 +158,7 @@ function UserEdit({ data = 0, closeModal }) {
           <Select
             label="Genre"
             name="gender"
-            placeholder={selected}
+            selected={selected}
             onChange={onChange}
             options={[
               {

@@ -106,14 +106,14 @@ function UserCreate({ data = [], closeModal }) {
     <form
       onSubmit={onSubmitFormUser}
       //  autoComplete="off"
-      className="card-body"
+      className="m-2 md:m-0"
     >
       <div className="avatar">
-        <div className="w-24 mask mask-squircle">
+        <div className="m-4 w-12 items-center rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24">
           <img src={logo} alt={logo} />
         </div>
       </div>
-      <div className="flex flex-wrap">
+      <div className="">
         <Input
           label="Nom"
           name="lastname"
@@ -147,7 +147,7 @@ function UserCreate({ data = [], closeModal }) {
 
          <button type='submit' >Ajouter une photo</button> */}
       </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
+      <div className="">
         <Input
           label="Email"
           name="email"
@@ -158,7 +158,7 @@ function UserCreate({ data = [], closeModal }) {
         />
         <Button> Réinitialiser mot de passe </Button>
       </div>
-      <div className="flex flex-wrap -mx-3 mb-2">
+      <div className="">
         <Input
           label="Date de naissance"
           name="birthdate"
@@ -179,7 +179,7 @@ function UserCreate({ data = [], closeModal }) {
           inputSizeClass="md:w-1/2"
         />
 
-        <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="">
 
           <Select
             label="Genre"
@@ -273,7 +273,7 @@ function UserCreate({ data = [], closeModal }) {
           />
         </div>
       </div>
-      <div className="flex flex-wrap -mx-3 mb-2">
+      <div className="">
         <Input
           label="Adresse"
           name="address"
@@ -293,7 +293,7 @@ function UserCreate({ data = [], closeModal }) {
           inputSizeClass="md:w-1/2"
         />
       </div>
-      <div className="flex flex-wrap -mx-3 mb-2">
+      <div className="">
         <Input
           label="Code postal"
           name="zip_code"
@@ -314,7 +314,7 @@ function UserCreate({ data = [], closeModal }) {
         />
       </div>
       {/* PART Members and Admin */}
-      <div className="flex flex-wrap -mx-3 mb-6">
+      <div className="">
         <Input
           label="Rôle"
           name="role"

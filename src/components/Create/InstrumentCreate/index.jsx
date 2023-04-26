@@ -5,7 +5,7 @@ import Input from '../../Form/Input';
 import Radio from '../../Form/Radio';
 import Button from '../../Form/Button';
 
-function InstrumentCreate({ data = [] }) {
+function InstrumentCreate({ data = [], closemodal }) {
   const [instruData, setInstruData] = useState({
     code: '',
     pupitre: '',
@@ -34,7 +34,7 @@ function InstrumentCreate({ data = [] }) {
           label="Code"
           name="code"
           type="text"
-          placeholder=""
+          placeholder=''
           value={instruData.code}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -43,7 +43,7 @@ function InstrumentCreate({ data = [] }) {
           label="Pupitre"
           name="pupitre"
           type="text"
-          placeholder=""
+          placeholder=''
           value={instruData.pupitre}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -54,7 +54,7 @@ function InstrumentCreate({ data = [] }) {
           label="Osbervation"
           name="observation"
           type="textarea"
-          placeholder=""
+          placeholder=''
           value={instruData.observation}
           onChange={onChange}
           inputSizeClass="md:w-1/2"
@@ -65,7 +65,7 @@ function InstrumentCreate({ data = [] }) {
           label="Tirant"
           name="depth"
           type="text"
-          placeholder=""
+          placeholder=''
           value={instruData.depth ? instruData.depth.toString() : ''}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -74,7 +74,7 @@ function InstrumentCreate({ data = [] }) {
           label="Profondeur"
           name="rods"
           type="text"
-          placeholder=""
+          placeholder=''
           value={instruData.rods ? instruData.rods.toString() : ''}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -83,7 +83,7 @@ function InstrumentCreate({ data = [] }) {
           label="Poids"
           name="weight"
           type="text"
-          placeholder=""
+          placeholder=''
           value={instruData.weight ? instruData.weight.toString() : ''}
           onChange={onChange}
           inputSizeClass="md:w-1/3"
@@ -124,9 +124,10 @@ InstrumentCreate.propTypes = {
       weight: PropTypes.number.isRequired,
       sticker: PropTypes.bool.isRequired,
     }),
-  ).isRequired,
+  ),
 };
 InstrumentCreate.defaultProps = {
   data: [{ depth: 0 }],
 };
+
 export default InstrumentCreate;

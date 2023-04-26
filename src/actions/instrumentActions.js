@@ -97,3 +97,21 @@ export const createInstrument = (input) => async (dispatch) => {
     /* console.error("Erreur lors de la création de l'instrument :", error); */
   }
 };
+
+export const deleteInstruReq = gql`
+mutation DeleteSuit($deleteInstrumentId: ID!) {
+  deleteInstrument(id: $deleteInstrumentId)
+}
+`;
+export const deleteInstru = async (deleteInstruId) => {
+  try {
+    await client.mutate({
+      mutation: deleteInstruReq,
+      variables: {
+        deleteInstruId,
+      },
+    });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+}
+};
