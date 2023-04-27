@@ -76,11 +76,19 @@ function UserEdit({ data = 0, closeModal }) {
 
   return (
     <form onSubmit={onSubmitFormUser} className="m-2 md:m-0">
-      <div className="avatar">
+      {/* <div className="avatar">
         <div className="m-4 w-12 items-center rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24">
           <img src={data[0].url_img} alt={data[0].url_img} />
         </div>
-      </div>
+      </div> */}
+      <h1 className="text-3xl font-semibold my-8">Modifiez votre profil</h1>
+
+      <div className="flex">
+      <label className="label">
+        <span className="label-text font-semibold md:text-base">Avatar</span>
+        <input type="file" className="file-input w-full max-w-xs" />
+      </label>
+    </div>
 
       <Input
         label="Nom"
