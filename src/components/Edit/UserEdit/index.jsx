@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import Button from '../../Form/Button';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import Button from "../../Form/Button";
 import ButtonRstPswd from "../../Form/ButtonRstPswd";
-import { updateUser } from '../../../actions/userActions';
-import Select from '../../Form/Select';
-import Input from '../../Form/Input';
-import Checkbox from '../../Form/Checkbox';
+import { updateUser } from "../../../actions/userActions";
+import Select from "../../Form/Select";
+import Input from "../../Form/Input";
+import Checkbox from "../../Form/Checkbox";
 
 function UserEdit({ data = 0, closeModal }) {
   const dispatch = useDispatch();
@@ -64,283 +64,274 @@ function UserEdit({ data = 0, closeModal }) {
   };
   const onSubmitFormUser = async (e) => {
     e.preventDefault();
-    dispatch(updateUser(data[0].id, {
-      ...formData,
-      subscription: isChecked.subscription === 'true',
-      deposit: isChecked.deposit === 'true',
-    }));
+    dispatch(
+      updateUser(data[0].id, {
+        ...formData,
+        subscription: isChecked.subscription === "true",
+        deposit: isChecked.deposit === "true",
+      })
+    );
     closeModal();
   };
 
   return (
-    <form
-      onSubmit={onSubmitFormUser}
-      className="m-2 md:m-0"
-    >
+    <form onSubmit={onSubmitFormUser} className="m-2 md:m-0">
       <div className="avatar">
         <div className="m-4 w-12 items-center rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24">
           <img src={data[0].url_img} alt={data[0].url_img} />
         </div>
       </div>
-      <div className="">
-        <Input
-          label="Nom"
-          name="lastname"
-          type="text"
-          placeholder={data[0].lastname}
-          value={formData.lastname}
-          onChange={onChange}
-          inputSizeClass=""
-        />
 
-        <Input
-          label="Prénom"
-          name="firstname"
-          type="text"
-          placeholder={data[0].firstname}
-          value={formData.firstname}
-          onChange={onChange}
-          inputSizeClass=""
-        />
+      <Input
+        label="Nom"
+        name="lastname"
+        type="text"
+        placeholder={data[0].lastname}
+        value={formData.lastname}
+        onChange={onChange}
+        inputSizeClass=""
+      />
 
-        <Input
-          label="Pseudo"
-          name="nickname"
-          type="text"
-          placeholder={data[0].nickname}
-          value={formData.nickname}
-          onChange={onChange}
-          inputSizeClass=""
-        />
-        {/* <input type='url' />
+      <Input
+        label="Prénom"
+        name="firstname"
+        type="text"
+        placeholder={data[0].firstname}
+        value={formData.firstname}
+        onChange={onChange}
+        inputSizeClass=""
+      />
+
+      <Input
+        label="Pseudo"
+        name="nickname"
+        type="text"
+        placeholder={data[0].nickname}
+        value={formData.nickname}
+        onChange={onChange}
+        inputSizeClass=""
+      />
+      {/* <input type='url' />
 
          <button type='submit' >Ajouter une photo</button> */}
-      </div>
-      <div className="">
-        <Input
-          label="Email"
-          name="email"
-          type="email"
-          placeholder={data[0].email}
-          value={formData.email}
-          onChange={onChange}
-        />
-        <ButtonRstPswd>Réinitialiser le mot de passe</ButtonRstPswd>
-      </div>
-      <div className="">
-        <Input
-          label="Date de naissance"
-          name="birthdate"
-          type="date"
-          placeholder={data[0].birthdate}
-          value={formData.birthdate}
-          onChange={onChange}
-          inputSizeClass=""
-        />
 
-        <Input
-          label="Téléphone"
-          name="phone"
-          type="tel"
-          placeholder={data[0].phone}
-          value={formData.phone}
-          onChange={onChange}
-          inputSizeClass=""
-        />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        placeholder={data[0].email}
+        value={formData.email}
+        onChange={onChange}
+      />
+      <ButtonRstPswd>Réinitialiser le mot de passe</ButtonRstPswd>
 
-        <div className="">
-          <Select
-            label="Genre"
-            name="gender"
-            selected={data[0].gender}
-            onChange={onChange}
-            options={[
-              {
-                label: "F",
-                value: "F",
-              },
-              {
-                label: "M",
-                value: "M",
-              },
+      <Input
+        label="Date de naissance"
+        name="birthdate"
+        type="date"
+        placeholder={data[0].birthdate}
+        value={formData.birthdate}
+        onChange={onChange}
+        inputSizeClass=""
+      />
 
-              {
-                label: "mixte",
-                value: "mixte",
-              },
-            ]}
-          />
-          <Select
-            label="Taille Haut"
-            name="top_size"
-            selected={data[0].top_size}
-            onChange={onChange}
-            options={[
-              {
-                label: "XS",
-                value: "XS",
-              },
-              {
-                label: "S",
-                value: "S",
-              },
-              {
-                label: "M",
-                value: "M",
-              },
-              {
-                label: "L",
-                value: "L",
-              },
-              {
-                label: "XL",
-                value: "XL",
-              },
-              {
-                label: "XXL",
-                value: "XXL",
-              },
-              {
-                label: "XXXL",
-                value: "XXXL",
-              },
-            ]}
-          />
-          <Select
-            label="Taille Bas"
-            name="bottom_size"
-            selected={data[0].bottom_size}
-            onChange={onChange}
-            options={[
-              {
-                label: "XS",
-                value: "XS",
-              },
-              {
-                label: "S",
-                value: "S",
-              },
-              {
-                label: "M",
-                value: "M",
-              },
-              {
-                label: "L",
-                value: "L",
-              },
-              {
-                label: "XL",
-                value: "XL",
-              },
-              {
-                label: "XXL",
-                value: "XXL",
-              },
-              {
-                label: "XXXL",
-                value: "XXXL",
-              },
-            ]}
-          />
-        </div>
-      </div>
-      <div className="">
-        <Input
-          label="Adresse"
-          name="address"
-          type="text"
-          placeholder={data[0].address}
-          value={formData.address}
-          onChange={onChange}
-          inputSizeClass=""
-        />
-        <Input
-          label="Adresse Complémentaire"
-          name="address_2"
-          type="text"
-          placeholder={data[0].address_2}
-          value={formData.address_2}
-          onChange={onChange}
-          inputSizeClass=""
-        />
-      </div>
-      <div className="">
-        <Input
-          label="Code postal"
-          name="zip_code"
-          type="number"
-          placeholder={data[0].zip_code}
-          value={formData.zip_code}
-          onChange={onChange}
-          inputSizeClass=""
-        />
-        <Input
-          label="Ville"
-          name="city"
-          type="text"
-          placeholder={data[0].city}
-          value={formData.city}
-          onChange={onChange}
-          inputSizeClass=""
-        />
-      </div>
+      <Input
+        label="Téléphone"
+        name="phone"
+        type="tel"
+        placeholder={data[0].phone}
+        value={formData.phone}
+        onChange={onChange}
+        inputSizeClass=""
+      />
+
+      <Select
+        label="Genre"
+        name="gender"
+        selected={data[0].gender}
+        onChange={onChange}
+        options={[
+          {
+            label: "F",
+            value: "F",
+          },
+          {
+            label: "M",
+            value: "M",
+          },
+
+          {
+            label: "mixte",
+            value: "mixte",
+          },
+        ]}
+      />
+      <Select
+        label="Taille Haut"
+        name="top_size"
+        selected={data[0].top_size}
+        onChange={onChange}
+        options={[
+          {
+            label: "XS",
+            value: "XS",
+          },
+          {
+            label: "S",
+            value: "S",
+          },
+          {
+            label: "M",
+            value: "M",
+          },
+          {
+            label: "L",
+            value: "L",
+          },
+          {
+            label: "XL",
+            value: "XL",
+          },
+          {
+            label: "XXL",
+            value: "XXL",
+          },
+          {
+            label: "XXXL",
+            value: "XXXL",
+          },
+        ]}
+      />
+      <Select
+        label="Taille Bas"
+        name="bottom_size"
+        selected={data[0].bottom_size}
+        onChange={onChange}
+        options={[
+          {
+            label: "XS",
+            value: "XS",
+          },
+          {
+            label: "S",
+            value: "S",
+          },
+          {
+            label: "M",
+            value: "M",
+          },
+          {
+            label: "L",
+            value: "L",
+          },
+          {
+            label: "XL",
+            value: "XL",
+          },
+          {
+            label: "XXL",
+            value: "XXL",
+          },
+          {
+            label: "XXXL",
+            value: "XXXL",
+          },
+        ]}
+      />
+
+      <Input
+        label="Adresse"
+        name="address"
+        type="text"
+        placeholder={data[0].address}
+        value={formData.address}
+        onChange={onChange}
+        inputSizeClass=""
+      />
+      <Input
+        label="Adresse Complémentaire"
+        name="address_2"
+        type="text"
+        placeholder={data[0].address_2}
+        value={formData.address_2}
+        onChange={onChange}
+        inputSizeClass=""
+      />
+
+      <Input
+        label="Code postal"
+        name="zip_code"
+        type="number"
+        placeholder={data[0].zip_code}
+        value={formData.zip_code}
+        onChange={onChange}
+        inputSizeClass=""
+      />
+      <Input
+        label="Ville"
+        name="city"
+        type="text"
+        placeholder={data[0].city}
+        value={formData.city}
+        onChange={onChange}
+        inputSizeClass=""
+      />
+
       {/* PART Members and Admin */}
-      <div className="">
-        <Input
-          label="Rôle"
-          name="role"
-          type="text"
-          placeholder={data[0].role}
-          value={formData.role}
-          onChange={handleCheckboxChange}
-          inputSizeClass=""
-          disabled={Ismember}
-        />
-        <fieldset disabled={Ismember}>
-          <legend>Adhésion</legend>
-          <div className="">
-            <Checkbox
-              label="Cotisation payée"
-              name="subscription"
-              type="checkbox"
-              checked={isChecked.subscription}
-              onChange={handleCheckboxChange}
-              value={isChecked.subscription}
-            />
 
-            <Checkbox
-              label="Caution versée"
-              name="deposit"
-              type="checkbox"
-              checked={isChecked.deposit}
-              onChange={handleCheckboxChange}
-              value={isChecked.deposit}
-            />
-          </div>
-        </fieldset>
-        {data[0].role === "admin" && (
-          <Select
-            label="Choisir un rôle"
-            name="role"
-            selected="Adhérent"
-            onChange={onChange}
-            options={[
-              {
-                label: "Adhérent",
-                value: "member",
-              },
-              {
-                label: "Bureau",
-                value: "board",
-              },
-              {
-                label: "Admin",
-                value: "admin",
-              },
-            ]}
-          />
-        )}
-      </div>
+      <Input
+        label="Rôle"
+        name="role"
+        type="text"
+        placeholder={data[0].role}
+        value={formData.role}
+        onChange={handleCheckboxChange}
+        inputSizeClass=""
+        disabled={Ismember}
+      />
+      <fieldset disabled={Ismember}>
+        {/* <legend>Adhésion</legend> */}
+
+        <Checkbox
+          label="Cotisation payée"
+          name="subscription"
+          type="checkbox"
+          checked={isChecked.subscription}
+          onChange={handleCheckboxChange}
+          value={isChecked.subscription}
+        />
+
+        <Checkbox
+          label="Caution versée"
+          name="deposit"
+          type="checkbox"
+          checked={isChecked.deposit}
+          onChange={handleCheckboxChange}
+          value={isChecked.deposit}
+        />
+      </fieldset>
+      {data[0].role === "admin" && (
+        <Select
+          label="Choisir un rôle"
+          name="role"
+          selected="Adhérent"
+          onChange={onChange}
+          options={[
+            {
+              label: "Adhérent",
+              value: "member",
+            },
+            {
+              label: "Bureau",
+              value: "board",
+            },
+            {
+              label: "Admin",
+              value: "admin",
+            },
+          ]}
+        />
+      )}
 
       {/* Validate form */}
       <Button>Valider</Button>

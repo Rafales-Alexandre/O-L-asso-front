@@ -1,13 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Checkbox({
-  label,
-  name,
-  onChange,
-  value,
-  id,
-}) {
+function Checkbox({ label, name, onChange, value, id }) {
   return (
     <div className="form-control">
       <label className="label cursor-pointer" htmlFor={name}>
@@ -32,10 +26,9 @@ Checkbox.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.bool.isRequired,
   id: PropTypes.string,
-
 };
 Checkbox.defaultProps = {
-  id: '',
+  id: "",
 };
 
 export default Checkbox;

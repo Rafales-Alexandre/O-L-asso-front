@@ -11,7 +11,7 @@ function Logout() {
   };
 
   return (
-    <button className="btn btn-primary invisible md:visible w-48 md:hover:btn-warning" type="button" onClick={handleLogout}>
+    <button className="btn btn-primary invisible md:visible w-full max-w-xs self-center md:hover:btn-warning" type="button" onClick={handleLogout}>
       Déconnexion
     </button>
   );
