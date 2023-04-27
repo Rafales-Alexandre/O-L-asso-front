@@ -6,14 +6,14 @@ import UserView from './UserView';
 import Suits from './Suits';
 import Users from './Users';
 import Instruments from './Instruments';
-import UserEdit from '../Edit/UserEdit';
+import UserForm from '../Create/UserForm';
 
 function DataView() {
   const user = useSelector((state) => state.user.loggedInUser.user);
   return (
     <Routes>
       <Route path="/" element={<UserView user={user} />} />
-      <Route path="/profil" element={<UserEdit data={[user]} closeModal={() => {}} />} />
+      <Route path="/profil" element={<UserForm mode="edit" data={[user]} closeModal={() => {}} />} />
       <Route path="/instruments" element={<Instruments />} />
       <Route path="/suits" element={<Suits />} />
       <Route path="/users" element={<Users />} />

@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import UserEdit from '../../Edit/UserEdit';
-import UserCreate from '../../Create/UserCreate';
 import { fetchUsers, deleteUser } from '../../../actions/userActions';
 import UserForm from '../../Create/UserForm';
 
@@ -28,8 +26,8 @@ function User() {
     `${user.firstname} ${user.lastname} ${user.nickname}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
   useEffect(() => {
-    if (userRole !== 'board' && userRole !== 'admin') {
-      navigate('/');
+    if (userRole !== "board" && userRole !== "admin") {
+      navigate("/");
     }
   }, [userRole, navigate]);
 
@@ -82,21 +80,26 @@ function User() {
       </div>
       {filteredUsers.map((u) => (
         <div
-          className="card card-side bg-base-100 shadow-md m-4 mt-10 p-4 flex flex-col relative"
+          className="card card-side relative m-4 mt-10 flex flex-col bg-base-100 p-4 shadow-md"
           key={u.id}
         >
           <div className="flex-grow">
-            <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
+            <div
+              onClick={() => toggleCollapse(u.id)}
+              onKeyDown={() => {}}
+              className="flex items-center"
+            >
               <figure className="mr-4">
-                <img src={u.url_img} alt="User" className="rounded-full w-20 h-20" />
+                <img
+                  src={u.url_img}
+                  alt="User"
+                  className="h-20 w-20 rounded-full"
+                />
               </figure>
               <div className="card-body">
                 <h2 className="card-title text-xl">
                   {u.firstname}
-                  {u.lastname}
-                  (
-                  {u.nickname}
-                  )
+                  {u.lastname}({u.nickname})
                 </h2>
               </div>
             </div>
@@ -184,9 +187,11 @@ function User() {
       {showModal && (
         <>
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-          <div className={`modal  ${showModal ? 'modal-open' : ''}`}>
+          <div className={`modal  ${showModal ? "modal-open" : ""}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <button type="submit" onClick={() => { toggleModal(); }} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+              <button type="submit" onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+              ✕
+              </button>
               <UserForm data={[selectedUser]} mode="edit" closeModal={toggleModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
@@ -195,9 +200,11 @@ function User() {
       {showCreateModal && (
         <>
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-          <div className={`modal  ${showCreateModal ? 'modal-open' : ''}`}>
+          <div className={`modal  ${showCreateModal ? "modal-open" : ""}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <button type="submit" onClick={() => { toggleCreateModal(); }} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+              <button type="submit" onClick={() => {toggleCreateModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+              ✕
+              </button>
               <UserForm data={[]} mode="create" closeModal={toggleCreateModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
