@@ -6,17 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import UserEdit from '../../Edit/UserEdit';
 import UserCreate from '../../Create/UserCreate';
 import { fetchUsers, deleteUser } from '../../../actions/userActions';
+import UserForm from '../../Create/UserForm';
 
 function User() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [collapse, setCollapse] = useState(null);
+  const [userData, setUserData] = useState([]);
+  const users = useSelector((state) => state.user.users);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const dispatch = useDispatch();
-  const [userData, setUserData] = useState([]);
-  const users = useSelector((state) => state.user.users.getAllUsers);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
-  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearchChange = (event) => {
@@ -38,7 +39,7 @@ function User() {
 
   useEffect(() => {
     if (users) {
-      setUserData(Object.values(users));
+      setUserData(users);
     }
   }, [users]);
 
@@ -59,10 +60,10 @@ function User() {
   };
   const handleDelete = async (userId) => {
     try {
-      await deleteUser(userId);
+      await dispatch(deleteUser(userId));
       setUserData(userData.filter((user) => user.id !== userId));
     } catch (error) {
-      console.error('Error deleting user:', error);
+      /* console.error('Error deleting user:', error); */
     }
   };
 
@@ -186,7 +187,7 @@ function User() {
           <div className={`modal  ${showModal ? 'modal-open' : ''}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
               <button type="submit" onClick={() => { toggleModal(); }} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-              <UserEdit data={[selectedUser]} closeModal={toggleModal} onSubmitFormUser={() => {}} />
+              <UserForm data={[selectedUser]} mode="edit" closeModal={toggleModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
         </>
@@ -197,7 +198,7 @@ function User() {
           <div className={`modal  ${showCreateModal ? 'modal-open' : ''}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
               <button type="submit" onClick={() => { toggleCreateModal(); }} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-              <UserCreate data={[]} closeModal={toggleCreateModal} onSubmitFormUser={() => {}} />
+              <UserForm data={[]} mode="create" closeModal={toggleCreateModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
         </>

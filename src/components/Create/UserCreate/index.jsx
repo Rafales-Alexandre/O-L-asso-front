@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { createUser } from '../../../actions/userActions';
 import Button from '../../Form/Button';
+import ButtonRstPswd from "../../Form/ButtonRstPswd";
 import Select from '../../Form/Select';
 import Input from '../../Form/Input';
 import Checkbox from '../../Form/Checkbox';
@@ -36,7 +37,11 @@ function UserCreate({ data = [], closeModal }) {
   };
   const [formData, setFormData] = useState(initialFormData);
   const [isChecked, setIsChecked] = useState(initialIsChecked);
+  const [selectedValue, setSelectedValue] = useState('F');
 
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
   function generateRandomPassword() {
     const length = 12;
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+<>/?';
@@ -85,9 +90,7 @@ function UserCreate({ data = [], closeModal }) {
 
   const onSubmitFormUser = useCallback(
     async (e, newPassword = null) => {
-      if (e) {
-        e.preventDefault();
-      }
+      e.preventDefault()
       const passwordToUse = newPassword || generatePassword();
       dispatch(createUser({ ...formData, password: passwordToUse }));
       closeModal();
@@ -105,7 +108,6 @@ function UserCreate({ data = [], closeModal }) {
   return (
     <form
       onSubmit={onSubmitFormUser}
-      //  autoComplete="off"
       className="m-2 md:m-0"
     >
       <div className="avatar">
@@ -118,30 +120,30 @@ function UserCreate({ data = [], closeModal }) {
           label="Nom"
           name="lastname"
           type="text"
-          placeholder="Votre Nom"
+          placeholder='Nom'
           value={formData.lastname}
           onChange={onChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
         />
 
         <Input
           label="Prénom"
           name="firstname"
           type="text"
-          placeholder="Votre Prénom"
+          placeholder="Prénom"
           value={formData.firstname}
           onChange={onChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
         />
 
         <Input
           label="Pseudo"
           name="nickname"
           type="text"
-          placeholder="Votre Pseudo"
+          placeholder="Pseudo"
           value={formData.nickname}
           onChange={onChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
         />
         {/* <input type='url' />
 
@@ -152,122 +154,116 @@ function UserCreate({ data = [], closeModal }) {
           label="Email"
           name="email"
           type="email"
-          placeholder="Votre Email"
+          placeholder="Email"
           value={formData.email}
           onChange={onChange}
         />
-        <Button> Réinitialiser mot de passe </Button>
+        <ButtonRstPswd>Réinitialiser le mot de passe</ButtonRstPswd>
       </div>
       <div className="">
         <Input
           label="Date de naissance"
           name="birthdate"
           type="date"
-          placeholder="Votre Date de naissance"
+          placeholder="Date de naissance"
           value={formData.birthdate}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
 
         <Input
           label="Téléphone"
           name="phone"
           type="tel"
-          placeholder="Votre Téléphone"
+          placeholder="Téléphone"
           value={formData.phone}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
 
         <div className="">
-
           <Select
             label="Genre"
             name="gender"
+            selected={selectedValue}
             onChange={onChange}
             options={[
               {
-                label: 'F',
-                value: 'F',
+                label: "F",
+                value: "F",
               },
               {
-                label: 'M',
-                value: 'M',
+                label: "M",
+                value: "M",
               },
 
               {
-                label: 'mixte',
-                value: 'mixte',
+                label: "mixte",
+                value: "mixte",
               },
             ]}
           />
           <Select
             label="Taille Haut"
             name="top_size"
-            onChange={onChange}
+            value={selectedValue}
+            onChange={handleChange}
             options={[
               {
-                label: 'XS',
-                value: 'XS',
+                label: "S",
+                value: "S",
               },
               {
-                label: 'S',
-                value: 'S',
+                label: "M",
+                value: "M",
               },
               {
-                label: 'M',
-                value: 'M',
+                label: "L",
+                value: "L",
               },
               {
-                label: 'L',
-                value: 'L',
+                label: "XL",
+                value: "XL",
               },
               {
-                label: 'XL',
-                value: 'XL',
+                label: "XXL",
+                value: "XXL",
               },
               {
-                label: 'XXL',
-                value: 'XXL',
-              },
-              {
-                label: 'XXXL',
-                value: 'XXXL',
+                label: "XXXL",
+                value: "XXXL",
               },
             ]}
           />
           <Select
             label="Taille Bas"
             name="bottom_size"
-            onChange={onChange}
+            value={selectedValue}
+            onChange={handleChange}
             options={[
               {
-                label: 'XS',
-                value: 'XS',
+                label: "S",
+                value: "S",
               },
               {
-                label: 'S',
-                value: 'S',
+                label: "M",
+                value: "M",
               },
               {
-                label: 'M',
-                value: 'M',
+                label: "L",
+                value: "L",
               },
               {
-                label: 'L',
-                value: 'L',
+                label: "XL",
+                value: "XL",
               },
               {
-                label: 'XL',
-                value: 'XL',
+                label: "XXL",
+                value: "XXL",
               },
               {
-                label: 'XXL',
-                value: 'XXL',
-              },
-              {
-                label: 'XXXL',
-                value: 'XXXL',
+                label: "XXXL",
+                value: "XXXL",
               },
             ]}
           />
@@ -278,10 +274,10 @@ function UserCreate({ data = [], closeModal }) {
           label="Adresse"
           name="address"
           type="text"
-          placeholder="Votre adresse"
+          placeholder="Adresse"
           value={formData.address}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
         <Input
           label="Adresse Complémentaire"
@@ -290,7 +286,7 @@ function UserCreate({ data = [], closeModal }) {
           placeholder="Adresse Complémentaire"
           value={formData.address_2}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
       </div>
       <div className="">
@@ -301,7 +297,7 @@ function UserCreate({ data = [], closeModal }) {
           placeholder="Code postal"
           value={formData.zip_code}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
         <Input
           label="Ville"
@@ -310,7 +306,7 @@ function UserCreate({ data = [], closeModal }) {
           placeholder="Ville"
           value={formData.city}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
       </div>
       {/* PART Members and Admin */}
@@ -322,53 +318,53 @@ function UserCreate({ data = [], closeModal }) {
           placeholder="Rôle"
           value={formData.role}
           onChange={handleCheckboxChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
           disabled={Ismember}
         />
         <fieldset disabled={Ismember}>
           <legend>Adhésion</legend>
-          <div className="flex flex-wrap">
+          <div className="">
             <Checkbox
               label="Cotisation payée"
               name="subscription"
               type="checkbox"
-              checked={isChecked.subscription === 'true'}
-              value={formData.subscription || false}
+              checked={Boolean(isChecked.subscription)}
               onChange={handleCheckboxChange}
+              value={Boolean(isChecked.subscription)}
             />
 
             <Checkbox
               label="Caution versée"
               name="deposit"
               type="checkbox"
-              checked={isChecked.deposit === 'true'}
-              value={formData.deposit || false}
+              checked={Boolean(isChecked.deposit)}
               onChange={handleCheckboxChange}
+              value={Boolean(isChecked.deposit)}
             />
           </div>
         </fieldset>
-        {(role === 'admin') && (
-          <Select
-            label="Choisir un rôle"
-            name="role"
-            selected="Adhérent"
-            onChange={onChange}
-            options={[
-              {
-                label: 'Adhérent',
-                value: 'member',
-              },
-              {
-                label: 'Bureau',
-                value: 'board',
-              },
-              {
-                label: 'Admin',
-                value: 'admin',
-              },
-            ]}
-          />
-        )}
+        {data[0] && data[0].role === "admin" && (
+    <Select
+      label="Choisir un rôle"
+      name="role"
+      selected="Adhérent"
+      onChange={onChange}
+      options={[      
+        {        
+          label: "Adhérent",        
+          value: "member",      
+        },      
+        {        
+          label: "Bureau",        
+          value: "board",      
+        },      
+        {        
+          label: "Admin",        
+          value: "admin",      
+        },    
+      ]}
+    />
+)}
       </div>
 
       {/* Validate form */}

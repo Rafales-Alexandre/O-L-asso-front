@@ -3,19 +3,18 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchSuits, deleteSuit } from '../../../actions/suitActions';
-import SuitEdit from '../../Edit/SuitEdit';
-import SuitCreate from '../../Create/SuitCreate';
+import SuitForm from '../../Create/SuitForm';
 
 function Suits() {
-  const [collapse, setCollapse] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [collapse, setCollapse] = useState(null);
   const [suitData, setSuitData] = useState([]);
-  const suits = useSelector((state) => state.user.suits.getAllSuits);
+  const suits = useSelector((state) => state.suit.suits);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
-  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearchChange = (event) => {
@@ -38,7 +37,7 @@ function Suits() {
 
   useEffect(() => {
     if (suits) {
-      setSuitData(Object.values(suits));
+      setSuitData(suits);
     }
   }, [suits]);
 
@@ -59,10 +58,10 @@ function Suits() {
 
   const handleDelete = async (suitId) => {
     try {
-      await deleteSuit(suitId);
+      await dispatch(deleteSuit(suitId));
       setSuitData(suitData.filter((suit) => suit.id !== suitId));
     } catch (error) {
-      console.error('Error deleting user:', error);
+      /* console.error('Error deleting user:', error); */
     }
   };
 
@@ -128,7 +127,7 @@ function Suits() {
           <div className={`modal  ${showModal ? 'modal-open' : ''}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
               <button type="submit" onClick={() => toggleModal()} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-              <SuitEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+              <SuitForm data={[selectedUser]} isEditMode closeModal={toggleModal} onSubmitFormSuit={() => {}} />
             </div>
           </div>
         </>
@@ -139,7 +138,7 @@ function Suits() {
           <div className={`modal  ${showCreateModal ? 'modal-open' : ''}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
               <button type="submit" onClick={() => toggleCreateModal()} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-              <SuitCreate data={[]} onSubmitFormUser={() => {}} />
+              <SuitForm data={[]} closeModal={toggleCreateModal} isEditMode={false} onSubmitFormSuit={() => {}} />
             </div>
           </div>
         </>

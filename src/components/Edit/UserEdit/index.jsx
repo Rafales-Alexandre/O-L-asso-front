@@ -19,7 +19,7 @@ function UserEdit({ data = 0, closeModal }) {
     return `${year}-${month}-${day}`;
   };
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(data && data.length > 0 && data[0] ? {
     lastname: data[0].lastname,
     firstname: data[0].firstname,
     nickname: data[0].nickname,
@@ -35,8 +35,10 @@ function UserEdit({ data = 0, closeModal }) {
     gender: data[0].gender,
     top_size: data[0].top_size,
     bottom_size: data[0].bottom_size,
-  });
-
+  } : {});
+  if (!formData || Object.keys(formData).length === 0) {
+    return null;
+  }
   updateUser(data[0].id, formData);
   const [isChecked, setIsChecked] = useState({
     subscription: Boolean(data[0].subscription),
@@ -56,7 +58,7 @@ function UserEdit({ data = 0, closeModal }) {
     });
   };
 
-  const [selected, setSelected] =useState(data[0].gender)
+  const [selected, setSelected] = useState(data[0].gender)
     
     const onChangeSelect = (e) => {
       setSelected(e.target.value)
@@ -69,12 +71,13 @@ function UserEdit({ data = 0, closeModal }) {
     });
   };
 
-  const onSubmitFormUser = async () => {
+  const onSubmitFormUser = async (e) => {
     dispatch(updateUser(data[0].id, {
       ...formData,
       subscription: isChecked.subscription === 'true',
       deposit: isChecked.deposit === 'true',
     }));
+    e.preventDefault();
     closeModal();
   };
 

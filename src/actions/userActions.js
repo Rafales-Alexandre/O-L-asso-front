@@ -2,6 +2,14 @@
 import { gql } from '@apollo/client/core';
 import client from '../apolloClient';
 
+export const FETCH_USERS = 'FETCH_USERS';
+export const FETCH_USERS_SUIT = 'FETCH_USERS_SUIT';
+export const FETCH_USERS_INSTRUMENT = 'FETCH_USERS_INSTRUMENT';
+export const ADD_USER = 'ADD_USER';
+export const UPDATE_USER = 'UPDATE_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const LOGIN_USER = 'LOGIN_USER';
+
 const getUserReq = gql`
 query Query {
   getAllUsers {
@@ -28,16 +36,12 @@ query Query {
     updated_at
   }
 }`;
-
-export const fetchUsers = () => async (dispatch) => {
-  try {
-    const { data } = await client.query({ query: getUserReq });
-    dispatch({ type: 'FETCH_USERS', payload: data });
-  } catch (error) {
-    console.error('Erreur lors de la récupération des utilisateurs :', error);
+const getUserSuit =gql`
+query Query($getSuitsByUserId: ID!) {
+  getSuitsByUser(id: $getSuitsByUserId) {
+    label
   }
-};
-
+}`;
 export const createUserReq = gql`
 mutation Mutation($input: UserInput) {
   addUser(input: $input) {
@@ -45,23 +49,6 @@ mutation Mutation($input: UserInput) {
   }
 }
 `;
-export const createUser = (input) => async (dispatch) => {
-  try {
-    const response = await client.mutate({
-      mutation: createUserReq,
-      variables: {
-        input,
-      },
-    });
-    dispatch({
-      type: 'createUserReq',
-      payload: response.data.createUser,
-    });
-  } catch (error) {
-    /* console.error("Erreur lors de la creation de l'utilisateur", error); */
-  }
-};
-
 export const updateUserReq = gql`
 mutation Mutation($updateUserId: ID!, $input: UserInput) {
   updateUser(id: $updateUserId, input: $input) {
@@ -89,44 +76,11 @@ mutation Mutation($updateUserId: ID!, $input: UserInput) {
   }
 }
 `;
-
-export const updateUser = (updateUserId, input) => async (dispatch) => {
-  try {
-    const response = await client.mutate({
-      mutation: updateUserReq,
-      variables: {
-        updateUserId,
-        input,
-      },
-    });
-    dispatch({
-      type: 'updateUserReq',
-      payload: response.data.updateUser,
-    });
-  } catch (error) {
-    /* console.error("Erreur lors de la création de l'utilisateur :", error); */
-  }
-};
-
-
 export const deleteUserReq = gql`
 mutation Mutation($deleteUserId: ID!) {
   deleteUser(id: $deleteUserId)
 }
 `;
-export const deleteUser = async (deleteUserId) => {
-  try {
-    await client.mutate({
-      mutation: deleteUserReq,
-      variables: {
-        deleteUserId,
-      },
-    });
-  } catch (error) {
-    console.error('Error deleting user:', error);
-}
-};
-
 export const getUserByCredential = gql`
 mutation Mutation($input: LoginInput) {
   loginUser(input: $input) {
@@ -158,6 +112,96 @@ mutation Mutation($input: LoginInput) {
   }
 }
 `;
+export const fetchUsers = () => async (dispatch) => {
+  try {
+    const { data } = await client.query({ query: getUserReq });
+    dispatch({ type: 'FETCH_USERS', payload: data.getAllUsers });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des utilisateurs :', error);
+  }
+};
+
+export const fetchUserSuit = (userId) => async (dispatch) => {
+  try{
+    const response = await client.query({
+      query: getUserSuit,
+      variables: {
+        getSuitsByUserId: userId,
+      }
+    });
+    dispatch({ type: 'FETCH_USERS_SUIT', payload : response.data.getSuitsByUser })
+  } catch (error) {
+    console.error('Erreur lors de la recuperation du costume')
+  }
+};
+/* export const fetchUserInstrument = (userId) => async (dispatch) => {
+  try{
+    const response = await client.query({
+      query: getUserInstrument,
+      variables: {
+        getInstrumentsByUserId: userId,
+      }
+    });
+    dispatch({ type: 'FETCH_USERS_INSTRUMENT', payload : response.data.getInstrumentsByUser })
+  } catch (error) {
+    console.error('Erreur lors de la recuperation des instruments')
+  }
+}; */
+export const createUser = (input) => async (dispatch) => {
+  try {
+    const response = await client.mutate({
+      mutation: createUserReq,
+      variables: {
+        input,
+      },
+    });
+    dispatch({
+      type: 'CREATE_USER',
+      payload: response.data.createUser,
+    });
+  } catch (error) {
+    console.error("Erreur lors de la modification de l'utilisateur", error);
+  }
+};
+
+
+export const updateUser = (updateUserId, input) => async (dispatch) => {
+  try {
+    const response = await client.mutate({
+      mutation: updateUserReq,
+      variables: {
+        updateUserId,
+        input,
+      },
+    });
+    dispatch({
+      type: 'UPDATE_USER',
+      payload: response.data.updateUser,
+    });
+  } catch (error) {
+    console.error("Erreur lors de la création de l'utilisateur :", error);
+  }
+};
+
+
+export const deleteUser = (deleteUserId) => async (dispatch) => {
+  try {
+    await client.mutate({
+      mutation: deleteUserReq,
+      variables: {
+        deleteUserId,
+      },
+    });
+    dispatch({
+      type: 'DELETE_USER',
+      payload: deleteUserId,
+    })
+  } catch (error) {
+    console.error('Error deleting user:', error);
+}
+};
+
+
 
 export const auth = (email, password) => async (dispatch) => {
   try {

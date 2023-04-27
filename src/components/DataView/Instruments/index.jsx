@@ -3,20 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchInstruments, deleteInstru } from '../../../actions/instrumentActions';
-import InstrumentEdit from '../../Edit/InstrumentEdit';
-import InstrumentCreate from '../../Create/InstrumentCreate';
+
+import InstrumentForm from '../../Create/InstrumentForm';
 
 function Instruments() {
-  const [collapse, setCollapse] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [collapse, setCollapse] = useState(null);
   const [instruData, setInstruData] = useState([]);
-  const instruments = useSelector((state) => state.user.instruments.getAllInstruments);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const instruments = useSelector((state) => state.instrument.instruments);
+  const [selectedInstrument, setSelectedInstrument] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
-  const navigate = useNavigate();
-
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearchChange = (event) => {
@@ -39,7 +38,7 @@ function Instruments() {
 
   useEffect(() => {
     if (instruments) {
-      setInstruData(Object.values(instruments));
+      setInstruData(instruments);
     }
   }, [instruments]);
 
@@ -50,8 +49,8 @@ function Instruments() {
       setCollapse(id);
     }
   };
-  const toggleModal = (user) => {
-    setSelectedUser(user);
+  const toggleModal = (instru) => {
+    setSelectedInstrument(instru);
     setShowModal(!showModal);
   };
   const toggleCreateModal = () => {
@@ -59,10 +58,10 @@ function Instruments() {
   };
   const handleDelete = async (instruId) => {
     try {
-      await deleteInstru(instruId);
+      await dispatch(deleteInstru(instruId));
       setInstruData(instruData.filter((instru) => instru.id !== instruId));
     } catch (error) {
-      console.error('Error deleting user:', error);
+      /* console.error('Error deleting user:', error); */
     }
   };
 
@@ -140,7 +139,7 @@ function Instruments() {
           >
             <div className="modal-box relative w-11/12 max-w-5xl">
               <button type="submit" onClick={() => { toggleModal(); }} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-              <InstrumentEdit data={[selectedUser]} onSubmitFormUser={() => {}} />
+              <InstrumentForm data={[selectedInstrument]} isEditMode closeModal={toggleModal} onSubmitFormUser={() => dispatch(fetchInstruments())} />
             </div>
           </div>
         </>
@@ -153,7 +152,7 @@ function Instruments() {
           >
             <div className="modal-box relative w-11/12 max-w-5xl">
               <button type="submit" onClick={() => { toggleCreateModal(); }} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
-              <InstrumentCreate data={[]} onSubmitFormUser={() => {}} />
+              <InstrumentForm data={[]} mode="create" isEditMode={false}closeModal={toggleCreateModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
         </>

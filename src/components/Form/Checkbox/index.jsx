@@ -1,7 +1,6 @@
-
 import React from "react";
 import PropTypes from "prop-types";
-
+import { v4 as uuidv4 } from 'uuid';
 
 function Checkbox({
   label,
@@ -30,11 +29,13 @@ function Checkbox({
 Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  checked: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.bool.isRequired,
-  id: PropTypes.string,
-
-
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
 };
 Checkbox.defaultProps = {
   id: '',
