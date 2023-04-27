@@ -1,18 +1,14 @@
-import Reactt, { useState } from 'react';
+import React, { useState  } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function NavLinks({ user }) {
   const location = useLocation();
   const currentPath = location.pathname;
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-    };
-
+  const [showSidebar, setShowSidebar] = useState(false);
+  
   return (
-    <div className=''>
+    <div className='overflow-x-auto scroll-smooth border-b border-primary md:my-12 md:border-b-0'>
     <div className='hidden md:block'>
       <ul className="menu menu-compact menu-horizontal md:menu-normal md:menu-vertical">
         <li className={currentPath === '/' ? 'bordered' : ''}>
@@ -36,39 +32,66 @@ function NavLinks({ user }) {
         )}
       </ul>
       </div>
-      <div className='md:hidden'>
-      <button
-        className= " fixed top-5 right-10 cursor-pointer "
-        onClick={toggleMenu} >
-          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Hamburger_icon.svg" alt=""/>
-        </button>
-        {menuOpen && (
-      <ul 
-      className="dropdown w-full absolute top-full left-0 -translate-y-full text-gray-800 border-b border-gray-200 flex flex-col items-center md:static md:w-min md:transform-none md:border-none md:flex-row"
+      <div 
+        className='md:hidden '
+       > { showSidebar ? (
+    <button
+    type='button'
+      className="flex text-4xl text-white items-center cursor-pointer fixed right-10 top-6 z-50"
+      onClick={() => setShowSidebar(!showSidebar)}
+    >
+      x
+    </button>
+  ) : (
+    <svg
+      onClick={() => setShowSidebar(!showSidebar)}
+      className="fixed z-30 flex items-center cursor-pointer right-10 top-6"
+      fill="#0d0d0d"
+      viewBox="0 0 100 80"
+      width="20"
+      height="30"
+    >
+      <rect width="100" height="10"></rect>
+      <rect y="30" width="100" height="10"></rect>
+      <rect y="60" width="100" height="10"></rect>
+    </svg>
+  )}
+
+  <div
+  className={`top-0 right-0 w-[50vw] bg-secondary p-10 pl-20 text-white fixed h-full z-40  ease-in-out duration-300 ${
+    showSidebar ? "translate-x-0 " : "translate-x-full"
+  }`}
+>
+    <ul 
+      className=""
       >
-      <li className="py-2 md:py-0 md:mr-6 ">
-      <Link className="text-sm uppercase font-semibold w-full hover:text-red-600" to="/">Accueil</Link>
+      <li className="mt-20 text-3xl font-semibold text-white">
+      <Link className="text-sm uppercase font-semibold w-full hover:text-red-400" to="/">Accueil</Link>
         </li>
-        <li className="py-2 md:py-0 md:mr-6 ">
-        <Link className="text-sm uppercase font-semibold w-full hover:text-red-600" to="/profil">Profil</Link>
+        <li className="mt-20 text-3xl font-semibold text-white">
+        <Link className="text-sm uppercase font-semibold w-full hover:text-red-400" to="/profil">Profil</Link>
 
         </li>
         {(user.role === 'board' || user.role === 'admin') && (
           <>
-        <li className="py-2 md:py-0 md:mr-6">
-        <Link className="text-sm uppercase font-semibold w-full hover:text-red-600" to="/instruments">Instruments</Link>
+        <li className="mt-20 text-3xl font-semibold text-white">
+        <Link className="text-sm uppercase font-semibold w-full hover:text-red-400" to="/instruments">Instruments</Link>
         </li>
-        <li className="py-2 md:py-0 md:mr-6">
-        <Link className="text-sm uppercase font-semibold w-full hover:text-red-600"  to="/suits">Costumes</Link>
+        <li className="mt-20 text-3xl font-semibold text-white">
+        <Link className="text-sm uppercase font-semibold w-full hover:text-red-400"  to="/suits">Costumes</Link>
         </li>
-        <li className="py-2 md:py-0 md:mr-6">
-          <Link className="text-sm uppercase font-semibold w-full hover:text-red-600" to="/users">Gestion des adhérents</Link>
+        <li className="mt-20 text-3xl font-semibold text-white">
+          <Link className="text-sm uppercase font-semibold w-full hover:text-red-400" to="/users">Adhérents</Link>
         </li>
       </>
       )}
       </ul>
-        )}
-</div>
+  </div>
+          {/* <div>
+      
+        </div>
+        )} */}
+</div> 
     </div>
   );
 }

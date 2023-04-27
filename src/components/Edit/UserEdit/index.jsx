@@ -42,34 +42,38 @@ function UserEdit({ data = 0, closeModal }) {
     subscription: Boolean(data[0].subscription),
     deposit: Boolean(data[0].deposit),
   });
+  const [files, setFiles] = useState(null);
+
   const Ismember = data[0].role === "member";
+
 
   const handleCheckboxChange = (event) => {
     if (Ismember) {
       event.preventDefault();
       return;
     }
-
     setIsChecked({
       ...isChecked,
       [event.target.name]: event.target.checked.toString(),
     });
   };
+    const handleFile = (e) => {
+      setFiles({
+        ...files,
+        [e.target.name]: e.target.checked.toString()
+      });
+      e.preventDefault()
+    };
 
-  const [selected, setSelected] =useState(data[0].gender)
-    
-    const onChangeSelect = (e) => {
-      setSelected(e.target.value)
-     };
-  
+
   const onChange = (e) => {
     setFormData({
       ...formData,
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
-
-  const onSubmitFormUser = async () => {
+  const onSubmitFormUser = async (e) => {
+    e.preventDefault();
     dispatch(updateUser(data[0].id, {
       ...formData,
       subscription: isChecked.subscription === 'true',
@@ -83,10 +87,23 @@ function UserEdit({ data = 0, closeModal }) {
       onSubmit={onSubmitFormUser}
       className="m-2 md:m-0"
     >
+    <div>
       <div className="avatar">
         <div className="m-4 w-12 items-center rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24">
-          <img src={data[0].url_img} alt={data[0].url_img} />
+          <img src={files ? URL.createObjectURL(files) : data[0].url_img}
+  alt="profil"/>
         </div>
+        </div>
+        <div className="">
+        <Input
+          label=""
+          name="picture"
+          type="file"
+          accept=".jpg,.jpeg,.png"
+          onChange={handleFile}
+          className="file-input file-input-bordered file-input-md w-full max-w-xs"
+        />
+</div>
       </div>
       <div className="">
         <Input
@@ -158,7 +175,7 @@ function UserEdit({ data = 0, closeModal }) {
           <Select
             label="Genre"
             name="gender"
-            selected={selected}
+            selected={data[0].gender}
             onChange={onChange}
             options={[
               {

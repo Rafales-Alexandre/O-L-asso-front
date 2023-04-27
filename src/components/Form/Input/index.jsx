@@ -26,7 +26,7 @@ function Input({
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'date', 'number', 'textarea', 'email', 'tel']).isRequired,
+  type: PropTypes.oneOf(['text', 'date', 'number', 'textarea', 'email', 'tel', 'file']).isRequired,
   placeholder: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
