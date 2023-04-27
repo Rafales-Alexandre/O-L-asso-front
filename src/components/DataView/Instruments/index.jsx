@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchInstruments, deleteInstru } from '../../../actions/instrumentActions';
-
+import Button from '../../Form/Button';
 import InstrumentForm from '../../Create/InstrumentForm';
 
 function Instruments() {
@@ -76,7 +76,7 @@ function Instruments() {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <button type="submit" className="btn hover:bg-green-500 " onClick={() => toggleCreateModal()}>Ajouter un instrument</button>
+        <Button onClick={() => toggleCreateModal()}>Ajouter un instrument</Button>
       </div>
       {filteredInstruments.map((u) => (
         <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
@@ -96,12 +96,12 @@ function Instruments() {
             </div>
           </div>
           <div className='flex flex-col items-end'>
-              <button type="submit" onClick={() => toggleModal(u)} className="btn mt-4 absolute top-0 right-4 hover:bg-sky-500">
-                Edition
-              </button>
-              <button type="submit" className="btn mt-4 top-10 right-4 hover:btn-warning" onClick={() => handleDelete(u.id)}>
-                suppression
-              </button>
+                <Button onClick={() => toggleModal(u)} className="mt-4 absolute top-0 right-4 hover:bg-sky-500">
+                  Edition
+                </Button>
+                <Button onClick={() => handleDelete(u.id)} className="mt-4 top-10 right-4 hover:btn-warning">
+                  suppression
+                </Button>
             </div>
           {collapse === u.id && (
           <div className="card-body mt-4">
@@ -138,7 +138,9 @@ function Instruments() {
             className={`modal  ${showModal ? 'modal-open' : ''}`}
           >
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <button type="submit" onClick={() => { toggleModal(); }} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+              <Button onClick={() => {toggleCreateModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+                ✕
+              </Button>
               <InstrumentForm data={[selectedInstrument]} isEditMode closeModal={toggleModal} onSubmitFormUser={() => dispatch(fetchInstruments())} />
             </div>
           </div>
@@ -151,7 +153,9 @@ function Instruments() {
             className={`modal  ${showCreateModal ? 'modal-open' : ''}`}
           >
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <button type="submit" onClick={() => { toggleCreateModal(); }} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+              <Button onClick={() => {toggleCreateModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+                ✕
+              </Button>
               <InstrumentForm data={[]} mode="create" isEditMode={false}closeModal={toggleCreateModal} onSubmitFormUser={() => {}} />
             </div>
           </div>

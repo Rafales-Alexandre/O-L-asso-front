@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchSuits, deleteSuit } from '../../../actions/suitActions';
 import SuitForm from '../../Create/SuitForm';
+import Button from '../../Form/Button';
 
 function Suits() {
   const dispatch = useDispatch();
@@ -79,7 +80,7 @@ function Suits() {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <button type="submit" className="btn hover:bg-green-500 " onClick={() => toggleCreateModal()}>Ajouter un Costume</button>
+        <Button onClick={() => toggleCreateModal()}>Ajouter un Costume</Button>
       </div>
       {filteredSuits.map((u) => (
         <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={u.id}>
@@ -99,12 +100,12 @@ function Suits() {
             </div>
           </div>
           <div className='flex flex-col items-end'>
-              <button type="submit" onClick={() => toggleModal(u)} className="btn mt-4 absolute top-0 right-4 hover:bg-sky-500">
-                Edition
-              </button>
-              <button type="submit" className="btn mt-4 top-10 right-4 hover:btn-warning" onClick={() => handleDelete(u.id)}>
-                suppression
-              </button>
+                <Button onClick={() => toggleModal(u)} className="mt-4 absolute top-0 right-4 hover:bg-sky-500">
+                  Edition
+                </Button>
+                <Button onClick={() => handleDelete(u.id)} className="mt-4 top-10 right-4 hover:btn-warning">
+                  suppression
+                </Button>
             </div>
           {collapse === u.id && (
             <div className="card-body mt-4">
@@ -126,7 +127,9 @@ function Suits() {
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
           <div className={`modal  ${showModal ? 'modal-open' : ''}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <button type="submit" onClick={() => toggleModal()} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+            <Button onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+                ✕
+              </Button>
               <SuitForm data={[selectedUser]} isEditMode closeModal={toggleModal} onSubmitFormSuit={() => {}} />
             </div>
           </div>
@@ -137,7 +140,9 @@ function Suits() {
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
           <div className={`modal  ${showCreateModal ? 'modal-open' : ''}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <button type="submit" onClick={() => toggleCreateModal()} className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+              <Button onClick={() => {toggleCreateModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+                ✕
+              </Button>
               <SuitForm data={[]} closeModal={toggleCreateModal} isEditMode={false} onSubmitFormSuit={() => {}} />
             </div>
           </div>

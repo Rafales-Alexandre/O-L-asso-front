@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchUsers, deleteUser } from '../../../actions/userActions';
 import UserForm from '../../Create/UserForm';
+import Button from '../../Form/Button';
 
 function User() {
   const dispatch = useDispatch();
@@ -76,7 +77,7 @@ function User() {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <button type="submit" className="btn hover:bg-green-500 " onClick={() => toggleCreateModal()}>Ajouter un utilisateur</button>
+        <Button onClick={() => toggleCreateModal()}>Ajouter un utilisateur</Button>
       </div>
       {filteredUsers.map((u) => (
         <div
@@ -104,12 +105,12 @@ function User() {
               </div>
             </div>
             <div className='flex flex-col items-end'>
-              <button type="submit" onClick={() => toggleModal(u)} className="btn mt-4 absolute top-0 right-4 hover:bg-sky-500">
-                Edition
-              </button>
-              <button type="submit" className="btn mt-4 top-10 right-4 hover:btn-warning" onClick={() => handleDelete(u.id)}>
-                suppression
-              </button>
+            <Button onClick={() => toggleModal(u)} className="mt-4 absolute top-0 right-4 hover:bg-sky-500">
+            Edition
+          </Button>
+          <Button onClick={() => handleDelete(u.id)} className="mt-4 top-10 right-4 hover:btn-warning">
+            suppression
+          </Button>
             </div>
           </div>
           {collapse === u.id && (
@@ -189,9 +190,9 @@ function User() {
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
           <div className={`modal  ${showModal ? "modal-open" : ""}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <button type="submit" onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
-              ✕
-              </button>
+              <Button onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+                ✕
+              </Button>
               <UserForm data={[selectedUser]} mode="edit" closeModal={toggleModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
@@ -202,9 +203,9 @@ function User() {
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
           <div className={`modal  ${showCreateModal ? "modal-open" : ""}`}>
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <button type="submit" onClick={() => {toggleCreateModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
-              ✕
-              </button>
+              <Button onClick={() => {toggleCreateModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+                ✕
+              </Button>
               <UserForm data={[]} mode="create" closeModal={toggleCreateModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
