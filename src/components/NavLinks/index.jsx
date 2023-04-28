@@ -58,7 +58,7 @@ function NavLinks({ user }) {
   )}
 
   <div
-  className={`top-0 right-0 w-[50vw] bg-secondary p-10 pl-20 text-white fixed h-full z-40  ease-in-out duration-300 ${
+  className={`top-0 right-0 w-[50vw] bg-secondary p-10 pl-20 text-white fixed h-full z-40  ease-in-out duration-1000 ${
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}
 >
