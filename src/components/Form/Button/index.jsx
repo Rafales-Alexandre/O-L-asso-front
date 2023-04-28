@@ -9,7 +9,7 @@ function Button({ children, onClick, className}) {
         className={className}
         onClick={onClick}
       >
-        { children }
+        {children}
       </button>
     </div>
   );
@@ -22,6 +22,6 @@ Button.propTypes = {
 };
 Button.defaultProps = {
   onClick: () => {},
-  className: "btn btn-primary",
+  className: "btn-primary btn w-full max-w-xs self-center",
 };
 export default Button;

@@ -1,19 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 function Input({
-  label, name, type, placeholder = '', onChange, value, inputSizeClass = '',
+  label,
+  name,
+  type,
+  placeholder = "",
+  onChange,
+  value,
+  inputSizeClass = "",
 }) {
   return (
     <div className={`${inputSizeClass}`}>
-      <label className="label" htmlFor={`input-${name}`}>
-        <span className="label-text pr-4 font-semibold md:text-base">
+      <label
+        className="max-w-screen label flex-col items-start md:flex-row md:items-center"
+        htmlFor={`input-${name}`}
+      >
+        <span className="label-text mb-2 md:mb-0 w-56 font-semibold md:text-base">
           {label}
         </span>
         <input
           type={type}
           name={name}
-          className="input-bordered input w-full max-w-xs"
+          className="input-bordered input w-full"
           id={`input-${name}`}
           placeholder={placeholder}
           onChange={onChange}
@@ -42,7 +51,7 @@ Input.propTypes = {
 };
 Input.defaultProps = {
   placeholder: null,
-  inputSizeClass: '',
+  inputSizeClass: "",
   value: null,
 };
 export default Input;

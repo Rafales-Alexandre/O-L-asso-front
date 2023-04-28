@@ -1,21 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Select({
-  label,
-  name,
-  options,
-  selected,
-  onChange,
-}) {
+function Select({ label, name, options, selected, onChange }) {
   return (
     <div className="">
-      <label className="label" htmlFor={name}>
-        <span className="label-text pr-4 font-semibold md:text-base">
+      <label
+        className="max-w-screen label flex-col items-start md:flex-row md:items-center"
+        htmlFor={name}
+      >
+        <span className="label-text mb-2 md:mb-0 w-56 font-semibold md:text-base">
           {label}
         </span>
         <select
-          className="select-bordered select w-full max-w-xs"
+          className="select-bordered select"
           id={name}
           name={name}
           value={selected}
@@ -39,15 +36,14 @@ Select.propTypes = {
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
   selected: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
 
 Select.defaultProps = {
-  selected: 'defaultValue',
-
+  selected: "defaultValue",
 };
 
 export default Select;

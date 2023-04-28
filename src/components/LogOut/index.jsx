@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import Button from '../Form/Button';
 function Logout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -12,9 +12,9 @@ function Logout() {
   };
 
   return (
-    <button className="btn btn-primary hidden md:block w-48 md:hover:btn-warning" type="button" onClick={handleLogout}>
+    <Button className="btn btn-primary hidden md:visible w-full max-w-xs self-center md:hover:btn-warning" type="button" onClick={handleLogout}>
       Déconnexion
-    </button>
+    </Button>
   );
 }
 
