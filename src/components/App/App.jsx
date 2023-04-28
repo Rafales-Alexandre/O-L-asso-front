@@ -44,10 +44,10 @@ function App() {
   };
   return (
     <div>
-      <div className="App">
+      <div className="App p-2">
         {loggedInUser ? (
-          <div className="flex h-screen w-full flex-col gap-4 md:flex-row">
-            <div className="sticky top-0 h-screen md:w-1/5 md:shadow-xl">
+          <div className="flex w-full flex-col md:gap-4 md:flex-row ">
+            <div className="sticky  md:w-1/5 md:shadow-xl ">
               <UserPanel user={loggedInUser} onLogout={handleLogout} />
             </div>
             <div className="h-screen overflow-y-scroll md:w-4/5">

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Button({ children, onClick, className}) {
   return (
-    <div className="form-control my-6">
+    <div className="">
       <button
         type="submit"
         className={className}

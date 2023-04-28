@@ -8,7 +8,8 @@ function NavLinks({ user }) {
   const [showSidebar, setShowSidebar] = useState(false);
   
   return (
-    <div className="overflow-x-auto scroll-smooth border-b border-primary md:my-12 md:border-b-0 md:w-full md:max-w-xs">
+    <div className=" overflow-x-auto scroll-smooth border-b border-primary md:my-12 md:border-b-0 md:w-full md:max-w-xs">
+      <div className='hidden md:block'>
       <ul className="menu menu-compact menu-horizontal md:menu-normal md:menu-vertical md:w-full">
         <li className={currentPath === '/' ? 'bordered' : ''}>
           <Link to="/">Accueil</Link>
@@ -30,6 +31,7 @@ function NavLinks({ user }) {
           </>
         )}
       </ul>
+      </div>
       <div 
         className='md:hidden '
        > { showSidebar ? (

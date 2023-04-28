@@ -12,7 +12,7 @@ function Logout() {
   };
 
   return (
-    <Button className="btn btn-primary hidden md:visible w-full max-w-xs self-center md:hover:btn-warning" type="button" onClick={handleLogout}>
+    <Button className="btn btn-primary hidden md:block w-full max-w-xs self-center md:hover:btn-warning" type="button" onClick={handleLogout}>
       Déconnexion
     </Button>
   );

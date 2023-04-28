@@ -31,7 +31,6 @@ Checkbox.propTypes = {
   name: PropTypes.string.isRequired,
   checked: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-<<<<<<< HEAD
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -42,13 +41,6 @@ Checkbox.defaultProps = {
   id: '',
   checked: false,
   value: ''
-=======
-  value: PropTypes.bool.isRequired,
-  id: PropTypes.string,
-};
-Checkbox.defaultProps = {
-  id: "",
->>>>>>> Style
 };
 
 export default Checkbox;

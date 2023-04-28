@@ -86,7 +86,7 @@ function Instruments() {
                 src="https://fakeimg.pl/100x100/?text=Instrument"
                 alt="Aperçu"
                 className="rounded-full"
-              />btn 
+              />
             </figure>
             <div className="card-body">
               <h2 className="card-title text-xl font-bold">{u.code}</h2>
