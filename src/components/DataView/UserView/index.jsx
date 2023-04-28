@@ -7,6 +7,7 @@ function UserView(){
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.user.loggedInUser.user.id)
     const userSuits = useSelector((state) => state.user.userSuits)
+
     console.log(userSuits)
     useEffect(() => {
         dispatch(fetchUserSuit(userId))

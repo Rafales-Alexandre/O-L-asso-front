@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Button({ children, onClick }) {
+function Button({ children, onClick, className}) {
   return (
     <div className="form-control my-6">
       <button
         type="submit"
-        className="btn btn-primary"
+        className={className}
         onClick={onClick}
       >
         { children }
@@ -18,8 +18,10 @@ function Button({ children, onClick }) {
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 Button.defaultProps = {
   onClick: () => {},
+  className: "btn btn-primary",
 };
 export default Button;

@@ -100,10 +100,10 @@ function Suits() {
             </div>
           </div>
           <div className='flex flex-col items-end'>
-                <Button onClick={() => toggleModal(u)} className="mt-4 absolute top-0 right-4 hover:bg-sky-500">
+                <Button onClick={() => toggleModal(u)} className="mt-4 btn absolute top-0 right-4 hover:bg-sky-500">
                   Edition
                 </Button>
-                <Button onClick={() => handleDelete(u.id)} className="mt-4 top-10 right-4 hover:btn-warning">
+                <Button onClick={() => handleDelete(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">
                   suppression
                 </Button>
             </div>

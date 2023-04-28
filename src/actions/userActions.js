@@ -215,7 +215,7 @@ export const auth = (email, password) => async (dispatch) => {
       localStorage.setItem('token', user.token);
     }
   } catch (error) {
-    /* console.error(error); */
+    console.error(error);
 
   }
 };
