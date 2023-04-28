@@ -11,6 +11,7 @@ import logo from '../../../assets/react.svg';
 
 function UserForm({ mode = 'create', data = {}, closeModal }) {
   const dispatch = useDispatch();
+  const [files, setFiles] = useState(null);
   const role = data.role || 'admin';
 
   const initialFormData = {
@@ -124,6 +125,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
     <div className="avatar">
     <div className="m-4 w-12 items-center rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24">
     <img src={logo} alt={logo} />
+    {/* <img src={files ? URL.createObjectURL(files) : data[0].url_img} */}
     </div>
     </div>
     <div className="">
