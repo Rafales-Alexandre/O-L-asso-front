@@ -335,10 +335,11 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
   </div>
   <div className="form-actions">
     <Button
-      children={mode === 'create' ? 'Créer' : 'Mettre à jour'}
       type="submit"
       color="primary"
-    />
+    >
+    {mode === 'create' ? 'Créer' : 'Mettre à jour'}    
+    </Button>
   </div>
 </form>
 );
