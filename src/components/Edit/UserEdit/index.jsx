@@ -43,6 +43,7 @@ function UserEdit({ data = 0, closeModal }) {
     deposit: Boolean(data[0].deposit),
   });
   const [files, setFiles] = useState(null);
+  const [selected, setSelected] = useState(data[0].gender, data[0].top_size, data[0].bottom_size);
 
   const Ismember = data[0].role === "member";
 
@@ -71,6 +72,7 @@ function UserEdit({ data = 0, closeModal }) {
       ...formData,
       [e.currentTarget.name]: e.currentTarget.value,
     });
+    setSelected(e.target.value)
   };
   const onSubmitFormUser = async (e) => {
     e.preventDefault();
@@ -175,7 +177,7 @@ function UserEdit({ data = 0, closeModal }) {
           <Select
             label="Genre"
             name="gender"
-            selected={data[0].gender}
+            selected={selected}
             onChange={onChange}
             options={[
               {
@@ -196,7 +198,7 @@ function UserEdit({ data = 0, closeModal }) {
           <Select
             label="Taille Haut"
             name="top_size"
-            selected={data[0].top_size}
+            selected={selected}
             onChange={onChange}
             options={[
               {
@@ -228,7 +230,7 @@ function UserEdit({ data = 0, closeModal }) {
           <Select
             label="Taille Bas"
             name="bottom_size"
-            selected={data[0].bottom_size}
+            selected={selected}
             onChange={onChange}
             options={[
               {
