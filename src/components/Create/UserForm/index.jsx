@@ -237,7 +237,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       <Select
         label="Taille Haut"
         name="top_size"
-        value={selectedTopSize}
+        selected={selectedTopSize}
         onChange={handleTopSizeChange}
         options={[
           {
@@ -269,7 +269,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       <Select
         label="Taille Bas"
         name="bottom_size"
-        value={selectedBottomSize}
+        selected={selectedBottomSize}
         onChange={handleBottomSizeChange}
         options={[
           {
