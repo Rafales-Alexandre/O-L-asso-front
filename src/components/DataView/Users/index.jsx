@@ -19,6 +19,7 @@ function User() {
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const [searchTerm, setSearchTerm] = useState('');
   const [animatedCards, setAnimatedCards] = useState({});
+  const [deletedCards, setDeletedCards] = useState({});
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -76,7 +77,12 @@ function User() {
       /* console.error('Error deleting user:', error); */
     }
   };
-
+  const handleDeleteAnimation = (userId) => {
+    setDeletedCards((prevState) => ({ ...prevState, [userId]: true }));
+    setTimeout(() => {
+      handleDelete(userId);
+    }, 1000);
+  };
   return (
     <div className="">
       <h2 className="text-3xl font-bold">Adherents</h2>
@@ -94,7 +100,7 @@ function User() {
         <div
         className={`card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md transition-transform duration-1000 ease-in ${
           animatedCards[u.id] ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        } ${deletedCards[u.id] ? 'translate-x-full' : ''}`}
           key={u.id}
         >
           <div className="flex-grow">
@@ -121,7 +127,7 @@ function User() {
             <Button onClick={() => {toggleModal(u)}} className="mt-4 btn absolute top-0 right-4 hover:bg-sky-500">
             Edition
           </Button>
-          <Button onClick={() => handleDelete(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">
+          <Button onClick={() => handleDeleteAnimation(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">
             suppression
           </Button>
             </div>
