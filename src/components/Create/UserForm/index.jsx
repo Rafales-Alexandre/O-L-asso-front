@@ -28,16 +28,29 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
     role,
     url_img: data[0]?.url_img || '',
     gender: data[0]?.gender || 'F',
-    top_size: data[0]?.top_size || 'M',
-    bottom_size: data[0]?.bottom_size || 'M',
+    top_size: data[0]?.top_size || 'S',
+    bottom_size: data[0]?.bottom_size || 'S',
     subscription: data[0]?.subscription || false,
     deposit: data[0]?.deposit || false,
   };
   const [formData, setFormData] = useState(initialFormData);
-  const [selectedValue, setSelectedValue] = useState(data.gender || 'F');
+  const [selectedGender, setSelectedGender] = useState(data.gender || 'F');
+  const [selectedTopSize, setSelectedTopSize] = useState(data.top_size || 'M');
+  const [selectedBottomSize, setSelectedBottomSize] = useState(data.bottom_size || 'M');
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+  const handleGenderChange = (event) => {
+    setSelectedGender(event.target.value);
+    setFormData({ ...formData, gender: event.target.value });
+  };
+  
+  const handleTopSizeChange = (event) => {
+    setSelectedTopSize(event.target.value);
+    setFormData({ ...formData, top_size: event.target.value });
+  };
+  
+  const handleBottomSizeChange = (event) => {
+    setSelectedBottomSize(event.target.value);
+    setFormData({ ...formData, bottom_size: event.target.value });
   };
 
   function generateRandomPassword() {
@@ -74,11 +87,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
     } else {
       updateUser(formData);
     }
-    if (Ismember) {
-      event.preventDefault();
-      return;
-    }
-
+  
     setFormData({
       ...formData,
       [event.target.name]: event.target.checked.toString(),
@@ -107,7 +116,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       }
       closeModal();
     },
-    [generatePassword, formData, dispatch, closeModal, mode],
+    [generatePassword, formData, dispatch, closeModal, mode, data],
   );
 
   useEffect(() => {
@@ -145,6 +154,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
            value={formData.lastname}
            onChange={onChange}
            inputSizeClass=""
+           required = {true}
          />
              <Input
       label="Prénom"
@@ -154,6 +164,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       value={formData.firstname}
       onChange={onChange}
       inputSizeClass=""
+      required = {true}
     />
 
     <Input
@@ -174,6 +185,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       placeholder="Email"
       value={formData.email}
       onChange={onChange}
+      required = {true}
     />
     {mode === 'edit' && <ButtonRstPswd>Réinitialiser le mot de passe</ButtonRstPswd>}
   </div>
@@ -186,6 +198,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       value={formData.birthdate}
       onChange={onChange}
       inputSizeClass=""
+      required = {true}
     />
 
     <Input
@@ -196,14 +209,15 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       value={formData.phone}
       onChange={onChange}
       inputSizeClass=""
+      required = {true}
     />
 
     <div className="">
       <Select
         label="Genre"
         name="gender"
-        selected={selectedValue}
-        onChange={onChange}
+        selected={selectedGender}
+        onChange={handleGenderChange}
         options={[
           {
             label: "F",
@@ -223,8 +237,8 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       <Select
         label="Taille Haut"
         name="top_size"
-        value={selectedValue}
-        onChange={handleChange}
+        value={selectedTopSize}
+        onChange={handleTopSizeChange}
         options={[
           {
             label: "S",
@@ -255,8 +269,8 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       <Select
         label="Taille Bas"
         name="bottom_size"
-        value={selectedValue}
-        onChange={handleChange}
+        value={selectedBottomSize}
+        onChange={handleBottomSizeChange}
         options={[
           {
             label: "S",
@@ -295,6 +309,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
                    value={formData.address}
                    onChange={onChange}
                    inputSizeClass=""
+                   required={true}
                  />
                  <Input
       label="Adresse 2"
@@ -314,6 +329,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       value={formData.zip_code}
       onChange={onChange}
       inputSizeClass=""
+      required = {true}
     />
 
     <Input
@@ -324,6 +340,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       value={formData.city}
       onChange={onChange}
       inputSizeClass=""
+      required = {true}
     />
   </div>
   <div className="checkbox-section">

@@ -1,9 +1,10 @@
-import { FETCH_USERS,FETCH_USERS_SUIT, ADD_USER, UPDATE_USER, DELETE_USER } from "../actions/userActions";
+import { FETCH_USERS,FETCH_USERS_SUIT, ADD_USER, UPDATE_USER, DELETE_USER, FETCH_USERS_INSTRUMENT } from "../actions/userActions";
 
 const initialState = {
   loggedInUser: JSON.parse(localStorage.getItem('loggedInUser')) || null,
   users: [],
   userSuits: [],
+  userInstruments: [],
   token: null,
 };
 
@@ -16,6 +17,11 @@ const userReducer = (state = initialState, action = { type: '', payload: null })
           ...state,
           userSuits: action.payload,
           };
+    case FETCH_USERS_INSTRUMENT:
+        return {
+          ...state,
+          userInstruments: action.payload,
+        };
     case ADD_USER:
       return {
         ...state,

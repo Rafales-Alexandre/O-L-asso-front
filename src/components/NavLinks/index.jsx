@@ -45,7 +45,7 @@ function NavLinks({ user }) {
   ) : (
     <svg
       onClick={() => setShowSidebar(!showSidebar)}
-      className="fixed z-30 flex items-center cursor-pointer right-10 top-6"
+      className="fixed z-100 flex items-center cursor-pointer right-10 top-6"
       fill="#0d0d0d"
       viewBox="0 0 100 80"
       width="20"
@@ -58,7 +58,7 @@ function NavLinks({ user }) {
   )}
 
   <div
-  className={`top-0 right-0 w-[50vw] bg-secondary p-10 pl-20 text-white fixed h-full z-40  ease-in-out duration-1000 ${
+  className={`top-0 right-0 w-[50vw] bg-secondary p-10 pl-20 text-white fixed h-full z-100  ease-in-out duration-1000 ${
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}
 >
@@ -87,10 +87,6 @@ function NavLinks({ user }) {
       )}
       </ul>
   </div>
-          {/* <div>
-      
-        </div>
-        )} */}
 </div> 
     </div>
   );

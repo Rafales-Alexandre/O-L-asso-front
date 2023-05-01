@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const 500 = () => {
+export default function ErrorServer() {
   return (
   <div class="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
     <div class="mx-auto max-w-screen-sm text-center">

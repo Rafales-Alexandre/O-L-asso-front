@@ -1,17 +1,17 @@
 import React,{ useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserSuit } from '../../../actions/userActions';
+import { fetchUserSuit, fetchUserInstrument } from '../../../actions/userActions';
 
 
 function UserView(){
     const dispatch = useDispatch();
-    const userId = useSelector((state) => state.user.loggedInUser.user.id)
-    const userSuits = useSelector((state) => state.user.userSuits)
-
-    console.log(userSuits)
+    const userId = useSelector((state) => state.user.loggedInUser.user.id);
+    const userSuits = useSelector((state) => state.user.userSuits);
+    const userInstruments = useSelector((state) => state.user.userInstruments);
     useEffect(() => {
-        dispatch(fetchUserSuit(userId))
-    },[dispatch, userSuits])
+        dispatch(fetchUserSuit(userId));
+        dispatch(fetchUserInstrument(userId));
+    },[dispatch, userSuits, userInstruments, userId])
 
     return (
         <div className="">
@@ -33,8 +33,8 @@ function UserView(){
             </div>
         </div>
       ))}
-      {userSuits.map((userSuit) => (
-        <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={userSuit.id}>
+      {/* {userInstruments.map((userInstrument) => (
+        <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={userInstrument.id}>
             <figure className="">
               <img
                 src="https://fakeimg.pl/300x300/?text=Suit"
@@ -43,13 +43,10 @@ function UserView(){
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{userSuit.label}</h2>
-              <p className="first-letter:capitalize">
-                {userSuit.observation}
-              </p>
+              <h2 className="card-title">{userInstrument.pupitre}</h2>
             </div>
         </div>
-      ))}   
+      ))}   */} 
       </div>
     );
     

@@ -28,7 +28,7 @@ function Suits() {
 
   useEffect(() => {
     if (userRole !== 'board' && userRole !== 'admin') {
-      navigate('/');
+      navigate('/ErrorClient');
     }
   }, [userRole, navigate]);
 
@@ -65,7 +65,6 @@ function Suits() {
       /* console.error('Error deleting user:', error); */
     }
   };
-
   return (
     <div className='h-full'>
       <h2 className="ml-4 text-xl md:text-2xl font-bold">

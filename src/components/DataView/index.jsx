@@ -7,6 +7,7 @@ import Suits from './Suits';
 import Users from './Users';
 import Instruments from './Instruments';
 import UserForm from '../Create/UserForm';
+import ErrorClient from '../../pages/ErrorCLient';
 
 function DataView() {
   const user = useSelector((state) => state.user.loggedInUser.user);
@@ -17,6 +18,8 @@ function DataView() {
       <Route path="/instruments" element={<Instruments />} />
       <Route path="/suits" element={<Suits />} />
       <Route path="/users" element={<Users />} />
+      <Route path="/ErrorClient" element={<ErrorClient />} />
+      <Route path='*' element={<ErrorClient />} />
     </Routes>
   );
 }
@@ -25,24 +28,24 @@ DataView.propTypes = {
   loggedInUser: PropTypes.shape({
     id: PropTypes.number.isRequired,
     url_img: PropTypes.string,
-    lastname: PropTypes.string.isRequired,
-    firstname: PropTypes.string.isRequired,
-    nickname: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
+    lastname: PropTypes.string,
+    firstname: PropTypes.string,
+    nickname: PropTypes.string,
+    email: PropTypes.string,
     password: PropTypes.string,
-    birthdate: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
+    birthdate: PropTypes.string,
+    phone: PropTypes.string,
+    address: PropTypes.string,
     address_2: PropTypes.string,
-    zip_code: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    gender: PropTypes.string.isRequired,
-    top_size: PropTypes.string.isRequired,
-    bottom_size: PropTypes.string.isRequired,
-    subscription: PropTypes.bool.isRequired,
-    deposit: PropTypes.bool.isRequired,
-    role: PropTypes.string.isRequired,
-    created_at: PropTypes.string.isRequired,
+    zip_code: PropTypes.string,
+    city: PropTypes.string,
+    gender: PropTypes.string,
+    top_size: PropTypes.string,
+    bottom_size: PropTypes.string,
+    subscription: PropTypes.bool,
+    deposit: PropTypes.bool,
+    role: PropTypes.string,
+    created_at: PropTypes.string,
     updated_at: PropTypes.string,
 
   }).isRequired,

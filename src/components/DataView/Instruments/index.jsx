@@ -28,7 +28,7 @@ function Instruments() {
 
   useEffect(() => {
     if (userRole !== 'board' && userRole !== 'admin') {
-      navigate('/');
+      navigate('/ErrorClient');
     }
   }, [userRole, navigate]);
 
@@ -138,7 +138,7 @@ function Instruments() {
             className={`modal  ${showModal ? 'modal-open' : ''}`}
           >
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <Button onClick={() => {toggleCreateModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+              <Button onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
                 ✕
               </Button>
               <InstrumentForm data={[selectedInstrument]} isEditMode closeModal={toggleModal} onSubmitFormUser={() => dispatch(fetchInstruments())} />

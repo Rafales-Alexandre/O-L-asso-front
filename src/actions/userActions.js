@@ -36,10 +36,16 @@ query Query {
     updated_at
   }
 }`;
-const getUserSuit =gql`
+export const getUserSuit =gql`
 query Query($getSuitsByUserId: ID!) {
   getSuitsByUser(id: $getSuitsByUserId) {
     label
+  }
+}`;
+export const getUserInstrument = gql `
+query Query($getInstrumentByIdId: ID!) {
+  getInstrumentById(id: $getInstrumentByIdId) {
+    pupitre
   }
 }`;
 export const createUserReq = gql`
@@ -134,19 +140,19 @@ export const fetchUserSuit = (userId) => async (dispatch) => {
     console.error('Erreur lors de la recuperation du costume')
   }
 };
-/* export const fetchUserInstrument = (userId) => async (dispatch) => {
+export const fetchUserInstrument = (userId) => async (dispatch) => {
   try{
     const response = await client.query({
       query: getUserInstrument,
       variables: {
-        getInstrumentsByUserId: userId,
+        getInstrumentByIdId: userId,
       }
     });
-    dispatch({ type: 'FETCH_USERS_INSTRUMENT', payload : response.data.getInstrumentsByUser })
+    dispatch({ type: 'FETCH_USERS_INSTRUMENT', payload : response.data.getInstrumentById })
   } catch (error) {
     console.error('Erreur lors de la recuperation des instruments')
   }
-}; */
+};
 export const createUser = (input) => async (dispatch) => {
   try {
     const response = await client.mutate({

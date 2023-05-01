@@ -9,11 +9,12 @@ function Input({
   onChange,
   value,
   inputSizeClass = "",
+  required
 }) {
   return (
     <div className={`${inputSizeClass}`}>
       <label
-        className="max-w-screen label flex-col items-start md:flex-row md:items-center"
+        className="max-w-screen label flex-col items-start md:flex-row "
         htmlFor={`input-${name}`}
       >
         <span className="label-text mb-2 md:mb-0 w-56 font-semibold md:text-base">
@@ -27,6 +28,7 @@ function Input({
           placeholder={placeholder}
           onChange={onChange}
           value={value}
+          required = {required}
         />
       </label>
     </div>
@@ -48,10 +50,12 @@ Input.propTypes = {
     PropTypes.oneOf([null, undefined]),
   ]),
   inputSizeClass: PropTypes.string,
+  required: PropTypes.bool
 };
 Input.defaultProps = {
   placeholder: null,
   inputSizeClass: "",
   value: null,
+  required: false,
 };
 export default Input;

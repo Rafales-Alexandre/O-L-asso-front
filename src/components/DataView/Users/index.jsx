@@ -18,6 +18,7 @@ function User() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const [searchTerm, setSearchTerm] = useState('');
+  const [animatedCards, setAnimatedCards] = useState({});
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -28,7 +29,7 @@ function User() {
   );
   useEffect(() => {
     if (userRole !== "board" && userRole !== "admin") {
-      navigate("/");
+      navigate("/ErrorClient");
     }
   }, [userRole, navigate]);
 
@@ -41,6 +42,16 @@ function User() {
       setUserData(users);
     }
   }, [users]);
+
+  useEffect(() => {
+    filteredUsers.forEach((u, index) => {
+      const timer = setTimeout(() => {
+        setAnimatedCards((prevState) => ({ ...prevState, [u.id]: true }));
+      }, 100 * (index + 1));
+
+      return () => clearTimeout(timer);
+    });
+  }, [filteredUsers]);
 
   const toggleCollapse = (id) => {
     if (collapse === id) {
@@ -81,7 +92,9 @@ function User() {
       </div>
       {filteredUsers.map((u) => (
         <div
-          className="card card-side relative m-4 mt-10 flex flex-col bg-base-100 p-4 shadow-md"
+        className={`card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md transition-transform duration-1000 ease-in ${
+          animatedCards[u.id] ? 'translate-x-0' : 'translate-x-full'
+        }`}
           key={u.id}
         >
           <div className="flex-grow">
@@ -105,7 +118,7 @@ function User() {
               </div>
             </div>
             <div className='flex flex-col items-end'>
-            <Button onClick={() => toggleModal(u)} className="mt-4 btn absolute top-0 right-4 hover:bg-sky-500">
+            <Button onClick={() => {toggleModal(u)}} className="mt-4 btn absolute top-0 right-4 hover:bg-sky-500">
             Edition
           </Button>
           <Button onClick={() => handleDelete(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">

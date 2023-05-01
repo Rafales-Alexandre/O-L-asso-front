@@ -4,6 +4,7 @@ import { fetchUsers, auth } from "../../actions/userActions";
 import LogIn from "../LogIn";
 import UserPanel from "../UserPanel";
 import DataView from "../DataView";
+import ErrorClient from "../../pages/ErrorCLient";
 
 function App() {
   const dispatch = useDispatch();
