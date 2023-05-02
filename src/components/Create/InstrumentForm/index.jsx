@@ -54,8 +54,8 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
   };
 
   return (
-    <form onSubmit={onSubmitFormInstru}>
-      <div>
+    <form onSubmit={onSubmitFormInstru} className="md:w-2/3 m-auto mt-8">
+      <h1 className="my-8 text-3xl font-semibold">Ajouter un instrument</h1>
         <Input
           label="Code"
           name="code"
@@ -63,7 +63,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
           placeholder={isEditMode ? data[0].code : ''}
           value={instruData.code}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
         <Input
           label="Pupitre"
@@ -72,10 +72,8 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
           placeholder={isEditMode ? data[0].pupitre : ''}
           value={instruData.pupitre}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
-      </div>
-      <div>
         <Input
           label="Observation"
           name="observation"
@@ -83,10 +81,8 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
           placeholder={isEditMode ? data[0].observation : ''}
           value={instruData.observation}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
-      </div>
-      <div>
         <Input
           label="Tirant"
           name="depth"
@@ -94,7 +90,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
           placeholder={isEditMode ? data[0].depth : ''}
           value={instruData.depth ? instruData.depth.toString() : ''}
           onChange={onChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
         />
         <Input
           label="Profondeur"
@@ -103,7 +99,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
           placeholder={isEditMode ? data[0].rods : ''}
           value={instruData.rods ? instruData.rods.toString() : ''}
           onChange={onChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
         />
         <Input
           label="Poids"
@@ -112,11 +108,9 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
           placeholder={isEditMode ? data[0].weight : ''}
           value={instruData.weight ? instruData.weight.toString() : ''}
           onChange={onChange}
-          inputSizeClass="md:w-1/3"
+          inputSizeClass=""
         />
-      </div>
       <fieldset>
-        <legend>Sticker</legend>
         <Radio
             label="Sticker"
             name="sticker"
@@ -133,7 +127,6 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
                 },
             ]}
         />
-
       </fieldset>
     <Button>Valider</Button>
     </form>

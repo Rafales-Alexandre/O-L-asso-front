@@ -10,11 +10,11 @@ function Radio({
   options,
 }) {
   return (
-    <div className="w-full px-3">
+    <div className="form-control">
       <label
-        className="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
+        className="label cursor-pointer"
       >
-        {label}
+        <span className='label-text font-semibold md:text-base'>{label}</span>
       </label>
       {
         options.map((option) => {
@@ -23,13 +23,13 @@ function Radio({
             <div key={id}>
               <input
                 type="radio"
-                className="appearance-none block w-full bg-gray-200 text-black-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                className="radio radio-lg"
                 name={name}
                 value={option.value}
                 onChange={onChange}
                 id={id}
               />
-              <label htmlFor={id}>
+              <label className='label' htmlFor={id}>
                 {option.label}
               </label>
             </div>

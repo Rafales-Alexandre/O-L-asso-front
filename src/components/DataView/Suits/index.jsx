@@ -68,8 +68,7 @@ function Suits() {
 
   return (
     <div className='h-full'>
-      <h2 className="ml-4 text-xl md:text-2xl font-bold">
-        <i className="fa-solid fa-user-tie fa-xs mr-2" />
+      <h2 className="ml-4 text-2xl md:text-3xl font-bold">
         Costumes
       </h2>
       <div className='flex flex-col md:flex-row md:justify-between'>
@@ -87,9 +86,9 @@ function Suits() {
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
             <figure className="">
               <img
-                src="https://fakeimg.pl/300x300/?text=Suit"
+                src="https://fakeimg.pl/100x100/?text=Suit"
                 alt="Aperçu"
-                className=""
+                className="rounded-full"
               />
             </figure>
             <div className="card-body">
