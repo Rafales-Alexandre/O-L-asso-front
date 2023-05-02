@@ -79,7 +79,7 @@ function Instruments() {
         <Button onClick={() => toggleCreateModal()}>Ajouter un instrument</Button>
       </div>
       {filteredInstruments.map((u) => (
-        <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
+        <div className="bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
             <figure className="mr-4">
               <img
