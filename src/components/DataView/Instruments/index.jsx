@@ -6,6 +6,9 @@ import { fetchInstruments, deleteInstru } from '../../../actions/instrumentActio
 import Button from '../../Form/Button';
 import InstrumentForm from '../../Create/InstrumentForm';
 
+import { faTrashCan, faPenToSquare, faDrum, faGuitar, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 function Instruments() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -80,27 +83,24 @@ function Instruments() {
       </div>
       {filteredInstruments.map((u) => (
         <div className="card card-side bg-base-100 shadow-md m-4 p-4 flex flex-col relative" key={u.id}>
-          <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
-            <figure className="mr-4">
-              <img
-                src="https://fakeimg.pl/100x100/?text=Instrument"
-                alt="Aperçu"
-                className="rounded-full"
-              />
+          <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex justify-center">
+            <figure className="md:mr-4">
+            <FontAwesomeIcon icon={faDrum} size="2xl"  />
+            <FontAwesomeIcon icon={faGuitar} size="2xl" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-xl font-bold">{u.code}</h2>
-              <p className="normal-case first-letter:capitalize text-gray-600">
+              <h2 className="card-title text-lg md:text-xl font-bold">{u.code}</h2>
+              <p className="normal-case first-letter:capitalize text-xs md:text-lg text-gray-600">
                 {u.observation}
               </p>
             </div>
           </div>
-          <div className='flex flex-col items-end'>
-                <Button onClick={() => toggleModal(u)} className="mt-4 btn absolute top-0 right-4 hover:bg-sky-500">
-                  Edition
+          <div className='card-actions justify-end'>
+                <Button onClick={() => toggleModal(u)} className=" hover:bg-sky-500">
+                <FontAwesomeIcon icon={faPenToSquare} size="lg" />
                 </Button>
-                <Button onClick={() => handleDelete(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">
-                  suppression
+                <Button onClick={() => handleDelete(u.id)} className="hover:btn-warning">
+                <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} /> 
                 </Button>
             </div>
           {collapse === u.id && (
@@ -111,20 +111,12 @@ function Instruments() {
                 {u.pupitre}
               </p>
               <p>
-                <span className="font-medium">Tirant: </span>
-                {u.rods}
+                <span className="font-medium">Observation: </span>
+                {u.observation}
               </p>
               <p>
-                <span className="font-medium">Profondeur: </span>
-                {u.depth}
-              </p>
-              <p>
-                <span className="font-medium">Poids: </span>
-                {u.weight}
-              </p>
-              <p>
-                <span className="font-medium">Sticker: </span>
-                {u.sticker}
+                <span className="font-medium">Observation: </span>
+                {u.observation}
               </p>
             </div>
           </div>
@@ -138,7 +130,7 @@ function Instruments() {
             className={`modal  ${showModal ? 'modal-open' : ''}`}
           >
             <div className="modal-box relative w-11/12 max-w-5xl">
-              <Button onClick={() => {toggleCreateModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
+              <Button onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
                 ✕
               </Button>
               <InstrumentForm data={[selectedInstrument]} isEditMode closeModal={toggleModal} onSubmitFormUser={() => dispatch(fetchInstruments())} />
