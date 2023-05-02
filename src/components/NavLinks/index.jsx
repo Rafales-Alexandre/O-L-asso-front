@@ -1,6 +1,10 @@
 import React, { useState  } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { faHome, faUser, faDrum, faShirt, faUserGroup, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
 
 function NavLinks({ user }) {
   const location = useLocation();
@@ -33,19 +37,18 @@ function NavLinks({ user }) {
       </ul>
       </div>
       <div 
-        className='md:hidden '
-       > { showSidebar ? (
+        className='md:hidden '>
+         { showSidebar ? (
     <button
     type='button'
       className="flex text-4xl text-white items-center cursor-pointer fixed right-10 top-6 z-50"
-      onClick={() => setShowSidebar(!showSidebar)}
-    >
-      x
+      onClick={() => setShowSidebar(!showSidebar)}>
+      <FontAwesomeIcon icon={faXmark} size="sm" /> 
     </button>
   ) : (
     <svg
       onClick={() => setShowSidebar(!showSidebar)}
-      className="fixed z-100 flex items-center cursor-pointer right-10 top-6"
+      className=" absolute z-30 flex items-center cursor-pointer right-10 top-6"
       fill="#0d0d0d"
       viewBox="0 0 100 80"
       width="20"
@@ -56,37 +59,52 @@ function NavLinks({ user }) {
       <rect y="60" width="100" height="10"></rect>
     </svg>
   )}
-
   <div
-  className={`top-0 right-0 w-[50vw] bg-secondary p-10 pl-20 text-white fixed h-full z-100  ease-in-out duration-1000 ${
+  className={`top-0 right-0 w-[60vw] bg-primary p-5  text-white fixed h-full z-40  ease-in-out duration-600 ${
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}
 >
     <ul 
       className=""
       >
-      <li className="mt-20 text-3xl font-semibold text-white">
-      <Link className="text-sm uppercase font-semibold w-full hover:text-red-400" to="/">Accueil</Link>
+      <li className="mt-20 text-lg font-semibold text-white">
+      <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/">
+      <FontAwesomeIcon icon={faHome} size="xl" className='mr-2'/> 
+        Accueil </Link>
         </li>
-        <li className="mt-20 text-3xl font-semibold text-white">
-        <Link className="text-sm uppercase font-semibold w-full hover:text-red-400" to="/profil">Profil</Link>
+        <li className="mt-10  text-lg font-semibold text-white">
+        <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/profil">
+        <FontAwesomeIcon icon={faUser}  size="xl" className='mr-2' />
+        Profil</Link>
 
         </li>
         {(user.role === 'board' || user.role === 'admin') && (
           <>
-        <li className="mt-20 text-3xl font-semibold text-white">
-        <Link className="text-sm uppercase font-semibold w-full hover:text-red-400" to="/instruments">Instruments</Link>
+        <li className="mt-10 text-lg font-semibold text-white">
+        <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/instruments">
+        <FontAwesomeIcon icon={faDrum}  size="xl" className='mr-2' />
+        Instruments</Link>
         </li>
-        <li className="mt-20 text-3xl font-semibold text-white">
-        <Link className="text-sm uppercase font-semibold w-full hover:text-red-400"  to="/suits">Costumes</Link>
+        <li className="mt-10 text-lg font-semibold text-white">
+        <Link className="text-xs uppercase font-semibold w-full hover:text-red-400"  to="/suits">
+        <FontAwesomeIcon icon={faShirt}  size="xl" className='mr-2' />
+        Costumes</Link>
         </li>
-        <li className="mt-20 text-3xl font-semibold text-white">
-          <Link className="text-sm uppercase font-semibold w-full hover:text-red-400" to="/users">Adhérents</Link>
+        <li className="mt-10 text-lg font-semibold text-white">
+          <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/users">
+          <FontAwesomeIcon icon={faUserGroup}  size="xl" className='mr-2'/>
+          Adhérents</Link>
         </li>
       </>
       )}
       </ul>
   </div>
+  <div
+    className={`fixed top-22 left-0 w-screen h-screen ${
+      showSidebar ?  'bg-gray-500 bg-opacity-50' : 'bg-transparent'
+    } transition-opacity duration-500 ease-in-out`}
+
+  />
 </div> 
     </div>
   );
