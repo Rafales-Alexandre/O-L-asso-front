@@ -55,7 +55,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
 
   return (
     <form onSubmit={onSubmitFormInstru} className="md:w-2/3 m-auto mt-8">
-      <h1 className="my-8 text-3xl font-semibold">Ajouter un instrument</h1>
+      <h1 className="my-8 text-3xl font-semibold">{isEditMode ? 'Editer' : 'Ajouter'} un instrument</h1>
         <Input
           label="Code"
           name="code"
