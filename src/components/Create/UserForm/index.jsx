@@ -119,7 +119,7 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
         <img src={files ? URL.createObjectURL(files) : selectedUser .url_img}
         </div>
     </div> */}
-    <h1 className="text-3xl font-semibold my-8">Modifiez votre profil</h1>
+    <h1 className="text-3xl font-semibold my-8">{mode === 'edit' ? 'Editer le' : 'Ajouter un'} profil</h1>
 
 <div className="flex">
 <label className="label">

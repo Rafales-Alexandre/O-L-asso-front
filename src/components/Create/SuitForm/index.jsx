@@ -57,7 +57,7 @@ function SuitForm({ data = [], isEditMode = false, closeModal }) {
 
   return (
     <form onSubmit={onSubmitFormSuit} className="md:w-2/3 m-auto mt-8">
-      <h1 className="my-8 text-3xl font-semibold">Ajouter un costume</h1>
+      <h1 className="my-8 text-3xl font-semibold">{isEditMode ? 'Editer' : 'Ajouter'} un costume</h1>
       <div>
         <Input
           label="Label"
