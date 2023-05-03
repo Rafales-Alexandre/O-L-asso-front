@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { faTrashCan, faPenToSquare, faDrum, faGuitar, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { fetchInstruments, deleteInstru } from '../../../actions/instrumentActions';
 import Button from '../../Form/Button';
 import InstrumentForm from '../../Create/InstrumentForm';
-
-import { faTrashCan, faPenToSquare, faDrum, faGuitar, faUserGroup } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Instruments() {
   const dispatch = useDispatch();
@@ -20,6 +20,10 @@ function Instruments() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const [searchTerm, setSearchTerm] = useState('');
+  const [animatedCards, setAnimatedCards] = useState({});
+  const [deletedCards, setDeletedCards] = useState({});
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [InstruIdToDelete, setInstruIdToDelete] = useState(null)
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -45,6 +49,15 @@ function Instruments() {
     }
   }, [instruments]);
 
+  useEffect(() => {
+    filteredInstruments.forEach((u, index) => {
+      const timer = setTimeout(() => {
+        setAnimatedCards((prevState) => ({ ...prevState, [u.id]: true }));
+      }, 50 * (index + 1));
+
+      return () => clearTimeout(timer);
+    });
+  }, [filteredInstruments]);
   const toggleCollapse = (id) => {
     if (collapse === id) {
       setCollapse(null);
@@ -67,9 +80,22 @@ function Instruments() {
       /* console.error('Error deleting user:', error); */
     }
   };
-
+  const HandleShowConfirmModal = (instrmentId) => {
+    setInstruIdToDelete(instrmentId);
+    setShowConfirmModal(true);
+  }
+  const handleDeleteAnimation = (instrumentId) => {
+    setDeletedCards((prevState) => ({ ...prevState, [instrumentId]: true }));
+    setTimeout(() => {
+      handleDelete(instrumentId);
+    }, 10);
+  };
+  const handleConfirmDelete = () => {
+    handleDeleteAnimation(InstruIdToDelete);
+    setShowConfirmModal(false);
+  }
   return (
-    <div className="bg-base-300 h-full">
+    <div className="h-full">
       <h2 className="text-3xl font-bold">Instruments</h2>
       <div className='flex flex-col md:flex-row md:justify-between'>
         <input
@@ -82,7 +108,9 @@ function Instruments() {
         <Button onClick={() => toggleCreateModal()}>Ajouter un instrument</Button>
       </div>
       {filteredInstruments.map((u) => (
-        <div className="md:card md:card-side bg-base-100 shadow-md m-4 p-4 flex flex-col md:relative" key={u.id}>
+        <div className={`card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md transition-transform duration-500 ease-in ${
+          animatedCards[u.id] ? 'translate-x-0' : 'translate-x-full'
+        } ${deletedCards[u.id] ? 'translate-x-full' : ''}`} key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex justify-center">
             <figure className="md:mr-4">
             <FontAwesomeIcon icon={faDrum} size="2xl"  />
@@ -99,7 +127,7 @@ function Instruments() {
                 <Button onClick={() => toggleModal(u)} className=" hover:bg-sky-500">
                 <FontAwesomeIcon icon={faPenToSquare} size="lg" />
                 </Button>
-                <Button onClick={() => handleDelete(u.id)} className="hover:btn-warning">
+                <Button onClick={() => HandleShowConfirmModal(u.id)} className="hover:btn-warning">
                 <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} /> 
                 </Button>
             </div>
@@ -152,6 +180,17 @@ function Instruments() {
             </div>
           </div>
         </>
+      )}
+      {showConfirmModal && (
+        <div className={`modal ${showConfirmModal ? 'modal-open' : ''}`}>
+          <div className='modal-box flex flex-col gap-10 items-center'>
+            <h3 className=''> Voulez vous vraiment supprimer cette instrument?</h3>
+            <div className='modal-actions flex justify-center gap-10'>
+                <Button onClick={handleConfirmDelete} className="btn btn-warning">Oui</Button>
+                <Button onClick={()=> setShowConfirmModal(false)} className="btn btn-secondary">Non</Button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

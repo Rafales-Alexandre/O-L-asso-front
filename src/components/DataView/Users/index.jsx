@@ -18,15 +18,14 @@ function User() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const [searchTerm, setSearchTerm] = useState('');
-  const [animatedCards, setAnimatedCards] = useState({});
   const [deletedCards, setDeletedCards] = useState({});
-
+ 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const filteredUsers = userData.filter((user) =>
-    `${user.firstname} ${user.lastname} ${user.nickname}`.toLowerCase().includes(searchTerm.toLowerCase())
+    `${user.firstname} ${user.lastname} ${user.nickname} ${user.role}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
   useEffect(() => {
     if (userRole !== "board" && userRole !== "admin") {
@@ -44,15 +43,6 @@ function User() {
     }
   }, [users]);
 
-  useEffect(() => {
-    filteredUsers.forEach((u, index) => {
-      const timer = setTimeout(() => {
-        setAnimatedCards((prevState) => ({ ...prevState, [u.id]: true }));
-      }, 100 * (index + 1));
-
-      return () => clearTimeout(timer);
-    });
-  }, [filteredUsers]);
 
   const toggleCollapse = (id) => {
     if (collapse === id) {
@@ -98,9 +88,7 @@ function User() {
       </div>
       {filteredUsers.map((u) => (
         <div
-        className={`card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md transition-transform duration-1000 ease-in ${
-          animatedCards[u.id] ? 'translate-x-0' : 'translate-x-full'
-        } ${deletedCards[u.id] ? 'translate-x-full' : ''}`}
+        className={`card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md transition-transform duration-1000 ease-in ${deletedCards[u.id] ? 'translate-x-full' : ''}`}
           key={u.id}
         >
           <div className="flex-grow">
@@ -212,7 +200,7 @@ function User() {
               <Button onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
                 ✕
               </Button>
-              <UserForm data={[selectedUser]} mode="edit" closeModal={toggleModal} onSubmitFormUser={() => {}} />
+              <UserForm mode="edit" selectedUser={selectedUser} closeModal={toggleModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
         </>

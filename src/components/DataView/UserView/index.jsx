@@ -2,7 +2,6 @@ import React,{ useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserSuit, fetchUserInstrument } from '../../../actions/userActions';
 
-
 function UserView(){
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.user.loggedInUser.user.id);
@@ -37,7 +36,7 @@ function UserView(){
         <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={userInstrument.id}>
             <figure className="">
               <img
-                src="https://fakeimg.pl/300x300/?text=Suit"
+                src="https://fakeimg.pl/300x300/?text=Instrument"
                 alt="Aperçu"
                 className=""
               />
@@ -46,11 +45,10 @@ function UserView(){
               <h2 className="card-title">{userInstrument.pupitre}</h2>
             </div>
         </div>
-      ))}   */} 
+      ))} */}
       </div>
     );
     
 }
-
 
 export default UserView;

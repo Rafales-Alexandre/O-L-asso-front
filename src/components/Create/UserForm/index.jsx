@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { createUser, updateUser } from '../../../actions/userActions';
@@ -9,34 +9,36 @@ import Input from '../../Form/Input';
 import Checkbox from '../../Form/Checkbox';
 import logo from '../../../assets/react.svg';
 
-function UserForm({ mode = 'create', data = {}, closeModal }) {
+function UserForm({ mode, selectedUser = {}, closeModal }) {
   const dispatch = useDispatch();
-  const [files, setFiles] = useState(null);
-  const role = data.role || 'admin';
+  
+  
+  const role = selectedUser ? selectedUser.role || 'admin' : 'admin';
 
   const initialFormData = {
-    lastname: data[0]?.lastname || '',
-    firstname: data[0]?.firstname || '',
-    nickname: data[0]?.nickname || '',
-    email: data[0]?.email || '',
-    birthdate: data[0]?.birthdate || '',
-    phone: data[0]?.phone || '',
-    address: data[0]?.address || '',
-    address_2: data[0]?.address_2 || '',
-    zip_code: data[0]?.zip_code || '',
-    city: data[0]?.city || '',
+    lastname: selectedUser ? selectedUser.lastname : '',
+    firstname: selectedUser ? selectedUser.firstname : '',
+    nickname: selectedUser ? selectedUser.nickname : '',
+    email: selectedUser ? selectedUser.email : '',
+    birthdate: selectedUser ? selectedUser.birthdate : '',
+    phone: selectedUser ? selectedUser.phone : '',
+    address: selectedUser ? selectedUser.address : '',
+    address_2: selectedUser ? selectedUser.address_2 : '',
+    zip_code: selectedUser ? selectedUser.zip_code : '',
+    city: selectedUser ? selectedUser.city : '',
     role,
-    url_img: data[0]?.url_img || '',
-    gender: data[0]?.gender || 'F',
-    top_size: data[0]?.top_size || 'S',
-    bottom_size: data[0]?.bottom_size || 'S',
-    subscription: data[0]?.subscription || false,
-    deposit: data[0]?.deposit || false,
+    password: "chuckpass",
+    url_img: selectedUser ? selectedUser.url_img : '',
+    gender: selectedUser ? selectedUser.gender : 'F',
+    top_size: selectedUser ? selectedUser.top_size : 'S',
+    bottom_size: selectedUser ? selectedUser.bottom_size : 'S',
+    subscription: selectedUser ? selectedUser.subscription : false,
+    deposit: selectedUser ? selectedUser.deposit : false,
   };
   const [formData, setFormData] = useState(initialFormData);
-  const [selectedGender, setSelectedGender] = useState(data.gender || 'F');
-  const [selectedTopSize, setSelectedTopSize] = useState(data.top_size || 'M');
-  const [selectedBottomSize, setSelectedBottomSize] = useState(data.bottom_size || 'M');
+  const [selectedGender, setSelectedGender] = useState(selectedUser.gender || 'F');
+  const [selectedTopSize, setSelectedTopSize] = useState(selectedUser.top_size || 'M');
+  const [selectedBottomSize, setSelectedBottomSize] = useState(selectedUser.bottom_size || 'M');
 
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value);
@@ -53,7 +55,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
     setFormData({ ...formData, bottom_size: event.target.value });
   };
 
-  function generateRandomPassword() {
+ /*  function generateRandomPassword() {
     const length = 12;
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+<>/?';
     const charsetLength = charset.length;
@@ -66,20 +68,10 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
     }
 
     return result;
-  }
+  } */
 
-  const generatePassword = useCallback(() => {
-    const newPassword = generateRandomPassword();
-    return newPassword;
-  }, []);
 
-  useEffect(() => {
-    if (mode === 'edit') {
-      generatePassword();
-    }
-  }, [generatePassword, mode]);
-
-  const Ismember = data[0] && role === 'member';
+  const Ismember = selectedUser  && role === 'member';
 
   const handleCheckboxChange = (event) => {
     if (mode === 'create') {
@@ -100,41 +92,31 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
-
-  const onSubmitFormUser = useCallback(
-    async (e, newPassword = null) => {
-        if (e) {
-            e.preventDefault();
-        }
-      const passwordToUse = mode === 'create' ? (newPassword || generatePassword()) : undefined;
-      const formWithPassword = passwordToUse ? { ...formData, password: passwordToUse } : formData;
-      if (mode === 'create') {
-        dispatch(createUser(formWithPassword));
-      } else {
-        dispatch(updateUser(data[0].id, {...formData, subscription: Boolean(formData.subscription), deposit: Boolean(formData.deposit)}));
-
-      }
-      closeModal();
-    },
-    [generatePassword, formData, dispatch, closeModal, mode, data],
-  );
-
-  useEffect(() => {
-    if (data && mode === 'edit') {
-      const newPassword = generatePassword();
-      onSubmitFormUser(newPassword);
+  const handleSubmitFormUser = async (e) => {
+    e.preventDefault();
+  
+    const finalFormData = {
+      ...formData,
+      subscription: Boolean(formData.subscription),
+      deposit: Boolean(formData.deposit),
+    };
+  
+    if (mode === 'create') {
+      dispatch(createUser(finalFormData));
+    } else {
+      dispatch(updateUser(selectedUser.id, finalFormData));
     }
-    }, [data, onSubmitFormUser, generatePassword, mode]);
+    closeModal();
+  };
+
+    
     
     return (
-    <form
-       onSubmit={onSubmitFormUser}
-       className="m-2 md:m-0"
-     >
+      <form onSubmit={handleSubmitFormUser} className="m-2 md:m-0">
     {/* <div className="avatar">
         <div className="m-4 w-12 items-center rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24">
         <img src={logo} alt={logo} />
-        <img src={files ? URL.createObjectURL(files) : data[0].url_img}
+        <img src={files ? URL.createObjectURL(files) : selectedUser .url_img}
         </div>
     </div> */}
     <h1 className="text-3xl font-semibold my-8">Modifiez votre profil</h1>
@@ -374,7 +356,7 @@ function UserForm({ mode = 'create', data = {}, closeModal }) {
 
 UserForm.propTypes = {
 mode: PropTypes.oneOf(['create', 'edit']),
-data: PropTypes.array,
+selectedUser: PropTypes.array,
 closeModal: PropTypes.func.isRequired,
 };
 
