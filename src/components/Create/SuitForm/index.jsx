@@ -56,8 +56,9 @@ function SuitForm({ data = [], isEditMode = false, closeModal }) {
   };
 
   return (
-    <form onSubmit={onSubmitFormSuit} className="w-full max-w-lg">
-      <div className="flex flex-wrap -mx-3 mb-6">
+    <form onSubmit={onSubmitFormSuit} className="md:w-2/3 m-auto mt-8">
+      <h1 className="my-8 text-3xl font-semibold">Ajouter un costume</h1>
+      <div>
         <Input
           label="Label"
           name="label"
@@ -65,7 +66,7 @@ function SuitForm({ data = [], isEditMode = false, closeModal }) {
           placeholder=""
           value={suitData.label}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
         <Input
           label="Genre"
@@ -74,10 +75,8 @@ function SuitForm({ data = [], isEditMode = false, closeModal }) {
           placeholder=""
           value={suitData.gender}
           onChange={onChange}
-          inputSizeClass="md:w-1/2"
+          inputSizeClass=""
         />
-      </div>
-      <div className="w-full px-3">
         <Input
           label="Observation"
           name="observation"
@@ -85,22 +84,21 @@ function SuitForm({ data = [], isEditMode = false, closeModal }) {
           placeholder=""
           value={suitData.observation}
           onChange={onChange}
-          inputSizeClass="md:w-1/1"
+          inputSizeClass=""
         />
       </div>
-      <div className="relative overflow-x-auto">
-        <table className="table-zebra border-collapse border border-slate-400">
+        <table className="table w-full my-8">
           <thead>
             <tr>
-              <td>Taille</td>
-              <td>Quantité</td>
+              <th>Taille</th>
+              <th>Quantité</th>
             </tr>
           </thead>
           <tbody>
             {['s', 'm', 'l', 'xl', 'xxl', 'xxxl'].map((size) => (
               <tr key={size}>
-                <td className="border border-slate-300">{size.toUpperCase()}</td>
-                <td className="border border-slate-300">
+                <th className="border border-base-300">{size.toUpperCase()}</th>
+                <td className="border border-base-300">
                   <input
                     type="number"
                     name={`quantity_${size}`}
@@ -113,7 +111,6 @@ function SuitForm({ data = [], isEditMode = false, closeModal }) {
             ))}
           </tbody>
         </table>
-      </div>
       <Button>Valider</Button>
     </form>
   );

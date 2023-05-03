@@ -84,8 +84,8 @@ function User() {
     }, 1000);
   };
   return (
-    <div className="">
-      <h2 className="text-3xl font-bold">Adherents</h2>
+    <div className="h-full">
+      <h2 className="ml-4 text-2xl md:text-3xl font-bold">Adherents</h2>
       <div className='flex flex-col md:flex-row md:justify-between'>
         <input
           type="text"
