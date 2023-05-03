@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan, faPenToSquare, faDrum, faGuitar } from '@fortawesome/free-solid-svg-icons';
 import { fetchInstruments, deleteInstru } from '../../../actions/instrumentActions';
 import Button from '../../Form/Button';
 import InstrumentForm from '../../Create/InstrumentForm';
 
-import { faTrashCan, faPenToSquare, faDrum, faGuitar, faUserGroup } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Instruments() {
   const dispatch = useDispatch();
@@ -70,7 +70,9 @@ function Instruments() {
 
   return (
     <div className="bg-base-300 h-full">
-      <h2 className="text-3xl font-bold">Instruments</h2>
+      <h2 className="ml-4 text-xl md:text-2xl font-bold">
+      <FontAwesomeIcon icon={faGuitar} size="sm"/>
+      Instruments</h2>
       <div className='flex flex-col md:flex-row md:justify-between'>
         <input
           type="text"
@@ -84,23 +86,23 @@ function Instruments() {
       {filteredInstruments.map((u) => (
         <div className="md:card md:card-side bg-base-100 shadow-md m-4 p-4 flex flex-col md:relative" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex justify-center">
-            <figure className="md:mr-4">
-            <FontAwesomeIcon icon={faDrum} size="2xl"  />
-            <FontAwesomeIcon icon={faGuitar} size="2xl" />
+            <figure className="md:mr-4 md:w-30">
+            <FontAwesomeIcon icon={faDrum} size="2xl" className='md:h-15'  />
+            <FontAwesomeIcon icon={faGuitar} size="2xl" className='md:h-15' />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-lg md:text-xl font-bold">{u.code}</h2>
+              <h2 className="card-title text-lg md:text-2xl font-bold">{u.code}</h2>
               <p className="normal-case first-letter:capitalize text-xs md:text-lg text-gray-600">
                 {u.observation}
               </p>
             </div>
           </div>
-          <div className='card-actions justify-end'>
+          <div className='card-actions justify-end md:absolute md:right-20 md:flex-col'>
                 <Button onClick={() => toggleModal(u)} className=" hover:bg-sky-500">
-                <FontAwesomeIcon icon={faPenToSquare} size="lg" />
+                <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
                 </Button>
                 <Button onClick={() => handleDelete(u.id)} className="hover:btn-warning">
-                <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} /> 
+                <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 md:mb-10' /> 
                 </Button>
             </div>
           {collapse === u.id && (
@@ -111,12 +113,16 @@ function Instruments() {
                 {u.pupitre}
               </p>
               <p>
-                <span className="font-medium">Observation: </span>
-                {u.observation}
+                <span className="font-medium">Tirant: </span>
+                {u.rods}
               </p>
               <p>
-                <span className="font-medium">Observation: </span>
-                {u.observation}
+                <span className="font-medium">Profondeur: </span>
+                {u.depth}
+              </p>
+              <p>
+                <span className="font-medium">Poids: </span>
+                {u.weight}
               </p>
             </div>
           </div>

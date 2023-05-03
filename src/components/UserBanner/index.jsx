@@ -9,7 +9,7 @@ function UserBanner({ user }) {
         </div>
       </div>
       <div className="font-bold md:text-center">
-        <p className="text-lg first-letter:uppercase">{user.nickname}</p>
+        <p className="text-black text-lg first-letter:uppercase">{user.nickname}</p>
         <p className="bade-primary badge-outline badge badge-xs p-2 font-semibold uppercase md:badge-md">
           {user.role}
         </p>
