@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Button from '../Form/Button';
+
 function Logout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();

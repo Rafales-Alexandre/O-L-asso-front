@@ -3,9 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan, faPenToSquare, faUserGroup,  } from '@fortawesome/free-solid-svg-icons';
 import { fetchUsers, deleteUser } from '../../../actions/userActions';
 import UserForm from '../../Create/UserForm';
 import Button from '../../Form/Button';
+
 
 function User() {
   const dispatch = useDispatch();
@@ -74,8 +77,10 @@ function User() {
     }, 1000);
   };
   return (
-    <div className="h-full">
-      <h2 className="ml-4 text-2xl md:text-3xl font-bold">Adherents</h2>
+    <div className="bg-base-300 h-full">
+      <h2 className="ml-4 text-xl md:text-2xl font-bold">
+      <FontAwesomeIcon icon={faUserGroup} size="sm"/>
+      Adherents</h2>
       <div className='flex flex-col md:flex-row md:justify-between'>
         <input
           type="text"
@@ -91,102 +96,82 @@ function User() {
         className={`card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md transition-transform duration-1000 ease-in ${deletedCards[u.id] ? 'translate-x-full' : ''}`}
           key={u.id}
         >
-          <div className="flex-grow">
+        
+          <div className="flex-grow p-2">
             <div
               onClick={() => toggleCollapse(u.id)}
               onKeyDown={() => {}}
-              className="flex items-center"
+              className="flex justify-center"
             >
-              <figure className="mr-4">
+              <figure className="md:mr-4 pr-2">
                 <img
                   src={u.url_img}
                   alt="User"
-                  className="h-20 w-20 rounded-full"
+                  className=" rounded-full "
                 />
               </figure>
-              <div className="card-body">
-                <h2 className="card-title text-xl">
+              <div className="md:card-body">
+                <h2 className="card-title md:text-2xl text-sm font-bold">
                   {u.firstname}
                   {u.lastname}({u.nickname})
                 </h2>
+                <h3 className="normal-case first-letter:capitalize text-xs md:text-lg text-gray-600">
+                {u.role}
+                </h3>
               </div>
             </div>
-            <div className='flex flex-col items-end'>
-            <Button onClick={() => {toggleModal(u)}} className="mt-4 btn absolute top-0 right-4 hover:bg-sky-500">
-            Edition
+            <div className='card-actions justify-end md:fixed md:right-20 md:top-10 md:flex-col'>
+            <Button onClick={() => {toggleModal(u)}} className="hover:bg-sky-500">
+            <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
           </Button>
-          <Button onClick={() => handleDeleteAnimation(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">
-            suppression
+          <Button onClick={() => handleDeleteAnimation(u.id)} className="hover:btn-warning">
+          <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
           </Button>
             </div>
           </div>
           {collapse === u.id && (
-            <div className="card-body mt-4">
+            <div className="card-body mt-4 md:text-sl text-sm">
               <div>
                 <p>
-                  Nickname:
-                  {u.nickname}
-                </p>
-                <p>
-                  Email:
+                  Email: 
                   {u.email}
                 </p>
                 <p>
-                  Phone:
+                  Téléphone: 
                   {u.phone}
                 </p>
                 <p>
-                  Address:
+                  Adresse: 
                   {u.address}
                 </p>
                 <p>
-                  Address 2:
+                  Adresse complémentaire: 
                   {u.address_2}
                 </p>
                 <p>
-                  Zip Code:
+                  Code postal: 
                   {u.zip_code}
                 </p>
                 <p>
-                  City:
+                  Ville: 
                   {u.city}
                 </p>
                 <p>
-                  Gender:
-                  {u.gender}
-                </p>
-                <p>
-                  Top Size:
+                  Taille haut: 
                   {u.top_size}
                 </p>
                 <p>
-                  Bottom Size:
+                  Taille bas: 
                   {u.bottom_size}
                 </p>
                 <p>
-                  Subscription:
+                  Côtisation: 
                   {u.subscription}
                 </p>
                 <p>
-                  Deposit:
+                  Caution: 
                   {u.deposit}
-                </p>
-                <p>
-                  Role:
-                  {u.role}
-                </p>
-                <p>
-                  Birthdate:
-                  {u.birthdate}
-                </p>
-                <p>
-                  Created At:
-                  {u.created_at}
-                </p>
-                <p>
-                  Updated At:
-                  {u.updated_at}
-                </p>
+                </p>        
               </div>
             </div>
           )}

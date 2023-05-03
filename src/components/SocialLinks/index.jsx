@@ -1,19 +1,21 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook, faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 function SocialLinks() {
   return (
-    <div className="flex justify-evenly hidden md:block w-48 mt-16 text-primary">
+    <div className="self-center hidden md:block w-48 mt-16 text-primary">
       <a href="https://www.facebook.com/BatalaLaRochelle" target="_blank" rel="noreferrer">
-        <i className="fa-brands fa-square-facebook fa-2xl hover:text-accent" />
+      <FontAwesomeIcon icon={faFacebook} size="2xl" className='mr-2' />
       </a>
       <a href="https://twitter.com/batala_lr" target="_blank" rel="noreferrer">
-        <i className="fa-brands fa-square-twitter fa-2xl hover:text-accent" />
+      <FontAwesomeIcon icon={faTwitter} size="2xl" className='mr-2' />
       </a>
       <a href="https://www.youtube.com/channel/UC2nkR0cyMLRxYs1yk1ktHgQ" target="_blank" rel="noreferrer">
-        <i className="fa-brands fa-square-youtube fa-2xl hover:text-accent" />
+      <FontAwesomeIcon icon={faYoutube} size="2xl" className='mr-2'/>
       </a>
       <a href="https://www.instagram.com/batala.larochelle/" target="_blank" rel="noreferrer">
-        <i className="fa-brands fa-square-instagram fa-2xl hover:text-accent" />
+        <FontAwesomeIcon icon={faInstagram} size="2xl" className='mr-2' />
       </a>
     </div>
   );

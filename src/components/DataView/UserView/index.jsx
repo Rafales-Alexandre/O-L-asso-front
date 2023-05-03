@@ -1,7 +1,8 @@
 import React,{ useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { faDrum, faGuitar } from '@fortawesome/free-solid-svg-icons';
+import { faMask, faShirt, faDrum, faGuitar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { fetchUserSuit, fetchUserInstrument } from '../../../actions/userActions';
 
 function UserView(){
@@ -18,16 +19,13 @@ function UserView(){
         <div className="">
         <h2 className="text-3xl font-bold">Vos objets</h2>
         {userSuits.map((userSuit) => (
-        <div className="card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md" key={userSuit.id}>
+        <div className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md 4 md:w-50" key={userSuit.id}>
             <figure className="">
-              <img
-                src="https://fakeimg.pl/300x300/?text=Suit"
-                alt="Aperçu"
-                className=""
-              />
+            <FontAwesomeIcon icon={faMask} size="2xl" className='md:h-15'  />
+            <FontAwesomeIcon icon={faShirt} size="2xl" className='md:h-15'  />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{userSuit.label}</h2>
+              <h2 className="card-title  md:2xl">{userSuit.label}</h2>
               <p className="first-letter:capitalize">
                 {userSuit.observation}
               </p>

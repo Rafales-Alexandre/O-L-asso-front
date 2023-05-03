@@ -54,26 +54,39 @@ function NavLinks({ user }) {
       width="20"
       height="30"
     >
-      <rect width="100" height="10" />
-      <rect y="30" width="100" height="10" />
-      <rect y="60" width="100" height="10" />
+      <rect width="100" height="10"/>
+      <rect y="30" width="100" height="10"/>
+      <rect y="60" width="100" height="10"/>
     </svg>
   )}
   <div
-  className={`top-0 overflow-hidden right-0 w-[100vw] bg-primary p-5  text-white fixed h-full z-40  ease-in-out duration-600 ${
+  className={` top-0 right-0 w-[100vw] bg-primary p-5  text-white fixed h-full z-40  ease-in-out duration-1000 ${
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}
 >
+<div>
+<div className="flex flex-col " key={user.id}>
+      <img className="m-2 w-12 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24" src={user.url_img} alt="Avatar"  />
+      <p className="ml-5 text-sm first-letter:uppercase">{user.nickname}</p>
+        <p className="bade-primary badge-outline badge badge-xs p-2 font-semibold uppercase md:badge-md">
+          {user.role}
+        </p>
+
+
+</div>
     <ul 
       className=""
       >
+      
       <li className="mt-20 text-lg font-semibold text-white">
-      <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/">
+      <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/"
+      onClick={() => setShowSidebar(false)}>
       <FontAwesomeIcon icon={faHome} size="xl" className='mr-2'/> 
         Accueil </Link>
         </li>
         <li className="mt-10  text-lg font-semibold text-white">
-        <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/profil">
+        <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/profil"
+          onClick={() => setShowSidebar(false)}>
         <FontAwesomeIcon icon={faUser}  size="xl" className='mr-2' />
         Profil</Link>
 
@@ -81,30 +94,34 @@ function NavLinks({ user }) {
         {(user.role === 'board' || user.role === 'admin') && (
           <>
         <li className="mt-10 text-lg font-semibold text-white">
-        <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/instruments">
+        <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/instruments"
+          onClick={() => setShowSidebar(false)}>
         <FontAwesomeIcon icon={faDrum}  size="xl" className='mr-2' />
         Instruments</Link>
         </li>
         <li className="mt-10 text-lg font-semibold text-white">
-        <Link className="text-xs uppercase font-semibold w-full hover:text-red-400"  to="/suits">
+        <Link className="text-xs uppercase font-semibold w-full hover:text-red-400"  to="/suits"
+          onClick={() => setShowSidebar(false)}>
         <FontAwesomeIcon icon={faShirt}  size="xl" className='mr-2' />
         Costumes</Link>
         </li>
         <li className="mt-10 text-lg font-semibold text-white">
-          <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/users">
+          <Link className="text-xs uppercase font-semibold w-full hover:text-red-400" to="/users"
+            onClick={() => setShowSidebar(false)}>
           <FontAwesomeIcon icon={faUserGroup}  size="xl" className='mr-2'/>
           Adhérents</Link>
         </li>
       </>
       )}
       </ul>
+</div>
   </div>
-  <div
-    className={`fixed top-22 left-0 w-screen h-screen ${
-      showSidebar ?  'bg-gray-500 bg-opacity-50' : 'bg-transparent'
-    } transition-opacity duration-500 ease-in-out`}
+  {/* <div
+    className={`  ${
+      showSidebar ?  'fixed top-22 left-0 w-screen h-screen bg-gray-500 bg-opacity-50' : ''
+    } transition-opacity duration-1000 ease-in-out`}
 
-  />
+  /> */}
 </div> 
     </div>
   );

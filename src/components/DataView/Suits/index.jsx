@@ -2,9 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { faTrashCan, faPenToSquare, faMask, faShirt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fetchSuits, deleteSuit } from '../../../actions/suitActions';
 import SuitForm from '../../Create/SuitForm';
 import Button from '../../Form/Button';
+
+
 
 function Suits() {
   const dispatch = useDispatch();
@@ -66,8 +70,9 @@ function Suits() {
     }
   };
   return (
-    <div className='h-full'>
-      <h2 className="ml-4 text-2xl md:text-3xl font-bold">
+    <div className='bg-base-300 h-full'>
+      <h2 className="ml-4 text-xl md:text-2xl font-bold ">
+      <FontAwesomeIcon icon={faMask} size="sm"/>
         Costumes
       </h2>
       <div className='flex flex-col md:flex-row md:justify-between'>
@@ -81,29 +86,27 @@ function Suits() {
         <Button onClick={() => toggleCreateModal()}>Ajouter un Costume</Button>
       </div>
       {filteredSuits.map((u) => (
-        <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={u.id}>
-          <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex items-center">
-            <figure className="">
-              <img
-                src="https://fakeimg.pl/100x100/?text=Suit"
-                alt="Aperçu"
-                className="rounded-full"
-              />
+        <div className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md flex flex-col md:relative" key={u.id}>
+          <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} 
+          className="flex justify-center">
+            <figure className="md:mr-4 md:w-30">
+            <FontAwesomeIcon icon={faMask} size="2xl" className='md:h-15'  />
+            <FontAwesomeIcon icon={faShirt} size="2xl" className='md:h-15'  />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{u.label}</h2>
-              <p className="first-letter:capitalize">
+              <h2 className="card-title text-lg md:text-2xl font-bold">{u.label}</h2>
+              <p className="normal-case first-letter:capitalize text-xs md:text-lg text-gray-600">
                 {u.observation}
               </p>
             </div>
           </div>
-          <div className='flex flex-col items-end'>
-                <Button onClick={() => toggleModal(u)} className="mt-4 btn absolute top-0 right-4 hover:bg-sky-500">
-                  Edition
+          <div className='card-actions justify-end md:absolute md:right-20 md:flex-col'>
+                <Button onClick={() => toggleModal(u)} className="hover:bg-sky-500">
+                <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
                 </Button>
-                <Button onClick={() => handleDelete(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">
-                  suppression
-                </Button>
+                <Button onClick={() => handleDelete(u.id)} className="hover:btn-warning">
+                <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
+                 </Button>
             </div>
           {collapse === u.id && (
             <div className="card-body mt-4">

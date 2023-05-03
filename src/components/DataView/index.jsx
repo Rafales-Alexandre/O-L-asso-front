@@ -9,7 +9,7 @@ import Instruments from './Instruments';
 import UserForm from '../Create/UserForm';
 import ErrorClient from '../../pages/ErrorCLient';
 
-function DataView() {
+  function DataView() {
   const user = useSelector((state) => state.user.loggedInUser.user);
   return (
     <Routes>
