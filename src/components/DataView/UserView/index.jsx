@@ -2,7 +2,7 @@ import React,{ useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { faMask, faShirt, faDrum, faGuitar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { v4 as uuidv4 } from 'uuid';
 import { fetchUserSuit, fetchUserInstrument } from '../../../actions/userActions';
 
 function UserView(){
@@ -19,7 +19,7 @@ function UserView(){
         <div className="">
         <h2 className="text-3xl font-bold">Vos objets</h2>
         {userSuits.map((userSuit) => (
-        <div className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md 4 md:w-50" key={userSuit.id}>
+        <div className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md 4 md:w-50" key={uuidv4()}>
             <figure className="">
             <FontAwesomeIcon icon={faMask} size="2xl" className='md:h-15'  />
             <FontAwesomeIcon icon={faShirt} size="2xl" className='md:h-15'  />
@@ -33,7 +33,7 @@ function UserView(){
         </div>
       ))}
       {userInstruments.map((userInstrument) => (
-        <div className="card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md" key={userInstrument.id}>
+        <div className="card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md" key={uuidv4()}>
             <figure className="md:mr-4">
             <FontAwesomeIcon icon={faDrum} size="2xl"  />
             <FontAwesomeIcon icon={faGuitar} size="2xl" />

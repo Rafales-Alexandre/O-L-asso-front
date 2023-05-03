@@ -128,7 +128,7 @@ function Instruments() {
                 <Button onClick={() => toggleModal(u)} className=" hover:bg-sky-500">
                 <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
                 </Button>
-                <Button onClick={() => handleDelete(u.id)} className="hover:btn-warning">
+                <Button onClick={() => HandleShowConfirmModal(u.id)} className="hover:btn-warning">
                 <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 md:mb-10' /> 
                 </Button>
             </div>
