@@ -1,7 +1,8 @@
 import React,{ useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { faDrum, faGuitar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fetchUserSuit, fetchUserInstrument } from '../../../actions/userActions';
-
 
 function UserView(){
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ function UserView(){
         <div className="">
         <h2 className="text-3xl font-bold">Vos objets</h2>
         {userSuits.map((userSuit) => (
-        <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={userSuit.id}>
+        <div className="card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md" key={userSuit.id}>
             <figure className="">
               <img
                 src="https://fakeimg.pl/300x300/?text=Suit"
@@ -33,24 +34,23 @@ function UserView(){
             </div>
         </div>
       ))}
-      {/* {userInstruments.map((userInstrument) => (
-        <div className="card md:card-side m-4 p-4 bg-base-100 shadow-md" key={userInstrument.id}>
-            <figure className="">
-              <img
-                src="https://fakeimg.pl/300x300/?text=Suit"
-                alt="Aperçu"
-                className=""
-              />
+      {userInstruments.map((userInstrument) => (
+        <div className="card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md" key={userInstrument.id}>
+            <figure className="md:mr-4">
+            <FontAwesomeIcon icon={faDrum} size="2xl"  />
+            <FontAwesomeIcon icon={faGuitar} size="2xl" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{userInstrument.pupitre}</h2>
+              <h2 className="card-title text-lg md:text-xl font-bold">{userInstrument.code}</h2>
+              <p className="normal-case first-letter:capitalize text-xs md:text-lg text-gray-600">
+                {userInstrument.observation}
+              </p>
             </div>
         </div>
-      ))}   */} 
+      ))}
       </div>
     );
     
 }
-
 
 export default UserView;

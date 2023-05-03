@@ -1,8 +1,10 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import fetch from 'cross-fetch';
 
 const httpLink = createHttpLink({
   uri: 'https://projet-01-o-lasso-back-production.up.railway.app/graphql',
+  fetch: fetch,
 });
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists

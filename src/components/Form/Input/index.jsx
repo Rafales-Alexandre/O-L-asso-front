@@ -27,13 +27,14 @@ function Input({
           id={`input-${name}`}
           placeholder={placeholder}
           onChange={onChange}
-          value={value}
-          required = {required}
+          value={value === null ? '' : value} // Replace null value with an empty string
+          required={required}
         />
       </label>
     </div>
   );
 }
+
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -52,10 +53,12 @@ Input.propTypes = {
   inputSizeClass: PropTypes.string,
   required: PropTypes.bool
 };
+
 Input.defaultProps = {
   placeholder: null,
   inputSizeClass: "",
   value: null,
   required: false,
 };
+
 export default Input;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { createInstrument, updateInstrument } from '../../../actions/instrumentActions';
@@ -19,11 +19,23 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
     sticker: false,
   });
 
+  const prevDataRef = useRef();
   useEffect(() => {
-    if (isEditMode && data.length > 0 && data[0]){
-        setInstruData(data[0]);
+    prevDataRef.current = data;
+  });
+  const prevData = prevDataRef.current;
+
+  useEffect(() => {
+    if (
+      isEditMode &&
+      data.length > 0 &&
+      data[0] &&
+      (!prevData || JSON.stringify(prevData) !== JSON.stringify(data))
+    ) {
+      setInstruData(data[0]);
     }
-  }, [isEditMode, data]);
+  }, [isEditMode, data, prevData]);
+
 
   const onChange = (e) => {
     const value = e.currentTarget.name === 'sticker' ? e.currentTarget.value === 'true' : e.currentTarget.value;

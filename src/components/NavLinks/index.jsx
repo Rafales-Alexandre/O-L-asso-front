@@ -54,13 +54,13 @@ function NavLinks({ user }) {
       width="20"
       height="30"
     >
-      <rect width="100" height="10"></rect>
-      <rect y="30" width="100" height="10"></rect>
-      <rect y="60" width="100" height="10"></rect>
+      <rect width="100" height="10" />
+      <rect y="30" width="100" height="10" />
+      <rect y="60" width="100" height="10" />
     </svg>
   )}
   <div
-  className={`top-0 right-0 w-[60vw] bg-primary p-5  text-white fixed h-full z-40  ease-in-out duration-600 ${
+  className={`top-0 overflow-hidden right-0 w-[100vw] bg-primary p-5  text-white fixed h-full z-40  ease-in-out duration-600 ${
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}
 >

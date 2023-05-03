@@ -43,9 +43,16 @@ query Query($getSuitsByUserId: ID!) {
   }
 }`;
 export const getUserInstrument = gql `
-query Query($getInstrumentByIdId: ID!) {
-  getInstrumentById(id: $getInstrumentByIdId) {
+query Query($getInstrumentsByUserId: ID!) {
+  getInstrumentsByUser(id: $getInstrumentsByUserId) {
+    id
+    code
     pupitre
+    observation
+    depth
+    rods
+    weight
+    sticker
   }
 }`;
 export const createUserReq = gql`
@@ -123,7 +130,7 @@ export const fetchUsers = () => async (dispatch) => {
     const { data } = await client.query({ query: getUserReq });
     dispatch({ type: 'FETCH_USERS', payload: data.getAllUsers });
   } catch (error) {
-    console.error('Erreur lors de la récupération des utilisateurs :', error);
+    /* console.error('Erreur lors de la récupération des utilisateurs :', error); */
   }
 };
 
@@ -137,7 +144,7 @@ export const fetchUserSuit = (userId) => async (dispatch) => {
     });
     dispatch({ type: 'FETCH_USERS_SUIT', payload : response.data.getSuitsByUser })
   } catch (error) {
-    console.error('Erreur lors de la recuperation du costume')
+    /* console.error('Erreur lors de la recuperation du costume') */
   }
 };
 export const fetchUserInstrument = (userId) => async (dispatch) => {
@@ -145,10 +152,10 @@ export const fetchUserInstrument = (userId) => async (dispatch) => {
     const response = await client.query({
       query: getUserInstrument,
       variables: {
-        getInstrumentByIdId: userId,
+        getInstrumentsByUserId: userId,
       }
     });
-    dispatch({ type: 'FETCH_USERS_INSTRUMENT', payload : response.data.getInstrumentById })
+    dispatch({ type: 'FETCH_USERS_INSTRUMENT', payload : response.data.getInstrumentsByUser })
   } catch (error) {
     console.error('Erreur lors de la recuperation des instruments')
   }
@@ -203,7 +210,7 @@ export const deleteUser = (deleteUserId) => async (dispatch) => {
       payload: deleteUserId,
     })
   } catch (error) {
-    console.error('Error deleting user:', error);
+    /* console.error('Error deleting user:', error); */
 }
 };
 

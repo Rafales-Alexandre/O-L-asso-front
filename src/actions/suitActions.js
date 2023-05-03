@@ -85,7 +85,7 @@ export const updateSuit = (updateSuitId, input) => async (dispatch) => {
       payload: response.data.updateSuit,
     });
   } catch (error) {
-    console.error('Erreur lors de la modification du costume :', error);
+    /* console.error('Erreur lors de la modification du costume :', error); */
   }
 };
 
@@ -103,7 +103,7 @@ export const createSuit = (input) => async (dispatch) => {
       payload: response.data.addSuit,
     });
   } catch (error) {
-    console.error('Erreur lors de la création du costume :', error);
+    /* console.error('Erreur lors de la création du costume :', error); */
   }
 };
 
@@ -121,6 +121,6 @@ export const deleteSuit = (SuitId) => async (dispatch) => {
       payload: SuitId,
     })
   } catch (error) {
-    console.error('Error deleting user:', error);
+    /* console.error('Error deleting user:', error); */
 }
 };
