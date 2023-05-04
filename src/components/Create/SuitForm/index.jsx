@@ -7,7 +7,7 @@ import Button from '../../Form/Button';
 
 function SuitForm({ data = [], isEditMode = false, closeModal }) {
   const dispatch = useDispatch();
-
+  
   const [suitData, setSuitData] = useState({
     label: '',
     gender: 'F',
@@ -19,13 +19,15 @@ function SuitForm({ data = [], isEditMode = false, closeModal }) {
     quantity_xxl: 0,
     quantity_xxxl: 0,
   });
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
+  
   useEffect(() => {
     if (isEditMode && data.length > 0 && data[0]) {
       setSuitData(data[0]);
     }
   }, [isEditMode, data]);
-
+  
   const onChange = (e) => {
     const { name, value } = e.currentTarget;
     setSuitData({
@@ -33,29 +35,31 @@ function SuitForm({ data = [], isEditMode = false, closeModal }) {
       [name]: name.startsWith('quantity_') ? parseInt(value, 10) || 0 : value,
     });
   };
-
   const onSubmitFormSuit = async (e) => {
     e.preventDefault();
     const suitDataToSend = {
-        label: suitData.label,
-        gender: suitData.gender,
-        observation: suitData.observation,
-        quantity_s: suitData.quantity_s,
-        quantity_m: suitData.quantity_m,
-        quantity_l: suitData.quantity_l,
-        quantity_xl: suitData.quantity_xl,
-        quantity_xxl: suitData.quantity_xxl,
-        quantity_xxxl: suitData.quantity_xxxl,
-      };
+      label: suitData.label,
+      gender: suitData.gender,
+      observation: suitData.observation,
+      quantity_s: suitData.quantity_s,
+      quantity_m: suitData.quantity_m,
+      quantity_l: suitData.quantity_l,
+      quantity_xl: suitData.quantity_xl,
+      quantity_xxl: suitData.quantity_xxl,
+      quantity_xxxl: suitData.quantity_xxxl,
+    };
     if (isEditMode) {
       dispatch(updateSuit(data[0].id, suitDataToSend));
     } else {
       dispatch(createSuit({ ...suitData }));
     }
-    closeModal();
-  };
-
-  return (
+    setShowConfirmModal(true);
+    setTimeout(()=>{
+      closeModal()},2000)
+      ;
+    };
+    
+    return (
     <form onSubmit={onSubmitFormSuit} className="md:w-2/3 m-auto mt-8">
       <h1 className="my-8 text-3xl font-semibold">Ajouter un costume</h1>
       <div>
@@ -111,7 +115,14 @@ function SuitForm({ data = [], isEditMode = false, closeModal }) {
             ))}
           </tbody>
         </table>
-      <Button>Valider</Button>
+        <Button >Valider</Button>
+    {showConfirmModal && (
+        <div className={`modal modal-bottom sm:modal-middle ${showConfirmModal ? 'modal-open' : ''}`}>
+          <div className='modal-box  '>
+            <h3 className='font-bold text-lg'> {`${isEditMode ? 'Costume modifié' : 'Génial, un nouveau costume'}`}</h3>
+          </div>
+        </div>
+      )}
     </form>
   );
 }

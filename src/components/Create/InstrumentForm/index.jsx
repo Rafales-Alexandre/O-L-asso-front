@@ -18,6 +18,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
     weight: 0,
     sticker: false,
   });
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const prevDataRef = useRef();
   useEffect(() => {
@@ -63,6 +64,10 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
       dispatch(createInstrument({...instruDataToSend}));
     }
     closeModal();
+    setShowConfirmModal(true);
+    setTimeout(()=>{
+      closeModal()},2000)
+      ;
   };
 
   return (
@@ -100,7 +105,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
           name="depth"
           type="text"
           placeholder={isEditMode ? data[0].depth : ''}
-          value={instruData.depth ? instruData.depth.toString() : ''}
+          value={instruData.depth ? instruData.depth : ''}
           onChange={onChange}
           inputSizeClass=""
         />
@@ -109,7 +114,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
           name="rods"
           type="text"
           placeholder={isEditMode ? data[0].rods : ''}
-          value={instruData.rods ? instruData.rods.toString() : ''}
+          value={instruData.rods ? instruData.rods : ''}
           onChange={onChange}
           inputSizeClass=""
         />
@@ -118,7 +123,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
           name="weight"
           type="text"
           placeholder={isEditMode ? data[0].weight : ''}
-          value={instruData.weight ? instruData.weight.toString() : ''}
+          value={instruData.weight ? instruData.weight : ''}
           onChange={onChange}
           inputSizeClass=""
         />
@@ -140,7 +145,14 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
             ]}
         />
       </fieldset>
-    <Button>Valider</Button>
+    <Button >Valider</Button>
+    {showConfirmModal && (
+        <div className={`modal modal-bottom sm:modal-middle ${showConfirmModal ? 'modal-open' : ''}`}>
+          <div className='modal-box  '>
+            <h3 className='font-bold text-lg'> {`${isEditMode ? 'Instrument modifié' : 'Génial, un nouvel instrument'}`}</h3>
+          </div>
+        </div>
+      )}
     </form>
     );
 }

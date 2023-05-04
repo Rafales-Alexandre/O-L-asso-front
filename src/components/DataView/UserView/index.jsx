@@ -26,21 +26,21 @@ function UserView(){
             </figure>
             <div className="card-body">
               <h2 className="card-title  md:2xl">{userSuit.label}</h2>
-              <p className="first-letter:capitalize">
+              <p className="normal-case first-letter:capitalize text-xs md:text-xl text-gray-600">
                 {userSuit.observation}
               </p>
             </div>
         </div>
       ))}
       {userInstruments.map((userInstrument) => (
-        <div className="card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md" key={uuidv4()}>
-            <figure className="md:mr-4">
-            <FontAwesomeIcon icon={faDrum} size="2xl"  />
-            <FontAwesomeIcon icon={faGuitar} size="2xl" />
+        <div className="md:card md:card-side md:relative m-4 mt-10 flex flex-col p-4 shadow-md md:w-50" key={uuidv4()}>
+            <figure className="">
+            <FontAwesomeIcon icon={faDrum} size="2xl" className='md:h-15'  />
+            <FontAwesomeIcon icon={faGuitar} size="2xl" className='md:h-15'  />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-lg md:text-xl font-bold">{userInstrument.code}</h2>
-              <p className="normal-case first-letter:capitalize text-xs md:text-lg text-gray-600">
+              <h2 className="card-title  md:2xl">{userInstrument.code}</h2>
+              <p className="normal-case first-letter:capitalize text-xs md:text-xl text-gray-600">
                 {userInstrument.observation}
               </p>
             </div>

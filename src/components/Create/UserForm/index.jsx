@@ -7,7 +7,6 @@ import ButtonRstPswd from "../../Form/ButtonRstPswd";
 import Select from '../../Form/Select';
 import Input from '../../Form/Input';
 import Checkbox from '../../Form/Checkbox';
-import logo from '../../../assets/react.svg';
 
 function UserForm({ mode, selectedUser = {}, closeModal }) {
   const dispatch = useDispatch();
@@ -39,6 +38,7 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
   const [selectedGender, setSelectedGender] = useState(selectedUser.gender || 'F');
   const [selectedTopSize, setSelectedTopSize] = useState(selectedUser.top_size || 'M');
   const [selectedBottomSize, setSelectedBottomSize] = useState(selectedUser.bottom_size || 'M');
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value);
@@ -54,6 +54,8 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
     setSelectedBottomSize(event.target.value);
     setFormData({ ...formData, bottom_size: event.target.value });
   };
+
+
 
  /*  function generateRandomPassword() {
     const length = 12;
@@ -94,23 +96,23 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
   };
   const handleSubmitFormUser = async (e) => {
     e.preventDefault();
-  
     const finalFormData = {
       ...formData,
       subscription: Boolean(formData.subscription),
       deposit: Boolean(formData.deposit),
     };
-  
+    
     if (mode === 'create') {
       dispatch(createUser(finalFormData));
     } else {
       dispatch(updateUser(selectedUser.id, finalFormData));
     }
-    closeModal();
+    setShowConfirmModal(true);
+    setTimeout(()=>{
+      closeModal()},2000)
+      ;
   };
 
-    
-    
     return (
       <form onSubmit={handleSubmitFormUser} className="m-2 md:m-0">
     {/* <div className="avatar">
@@ -350,6 +352,13 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
     {mode === 'create' ? 'Créer' : 'Mettre à jour'}    
     </Button>
   </div>
+  {showConfirmModal && (
+        <div className={`modal modal-bottom sm:modal-middle ${showConfirmModal ? 'modal-open' : ''}`}>
+          <div className='modal-box  '>
+            <h3 className='font-bold text-lg'> {`${mode === 'edit' ? 'Utilisateur modifié' : 'Génial, un nouveau copain'}`}</h3>
+          </div>
+        </div>
+      )}
 </form>
 );
 };
