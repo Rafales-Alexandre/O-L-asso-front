@@ -120,10 +120,10 @@ function User() {
               </div>
             </div>
             <div className='card-actions justify-end md:absolute md:right-20 md:top-10 md:flex-col'>
-            <Button onClick={() => {toggleModal(u)}} className="hover:bg-sky-500">
+            <Button onClick={() => {toggleModal(u)}} className="">
             <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
           </Button>
-          <Button onClick={() => handleDeleteAnimation(u.id)} className="hover:btn-warning">
+          <Button onClick={() => handleDeleteAnimation(u.id)} className="">
           <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
           </Button>
             </div>
