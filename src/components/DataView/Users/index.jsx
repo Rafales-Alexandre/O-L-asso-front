@@ -42,7 +42,6 @@ function User() {
   useEffect(() => {
     if (users) {
       setUserData(users);
-      console.log('hi')
     }
   }, [users]);
 
