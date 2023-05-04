@@ -39,10 +39,12 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
 
 
   const onChange = (e) => {
-    const value = e.currentTarget.name === 'sticker' ? e.currentTarget.value === 'true' : e.currentTarget.value;
+    const currentValue = instruData.sticker === "true";
+    const newValue = !currentValue;
+  
     setInstruData({
       ...instruData,
-      [e.currentTarget.name]: value,
+      [e.currentTarget.name]: newValue ? "true" : "false",
     });
   };
 
@@ -62,7 +64,6 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
     } else {
       dispatch(createInstrument({...instruDataToSend}));
     }
-    closeModal();
     setShowConfirmModal(true);
     setTimeout(()=>{
       closeModal()},2000)
@@ -102,7 +103,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
         <Input
           label="Tirant"
           name="depth"
-          type="text"
+          type="number"
           placeholder={isEditMode ? data[0].depth : ''}
           value={instruData.depth ? instruData.depth : ''}
           onChange={onChange}
@@ -111,7 +112,7 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
         <Input
           label="Profondeur"
           name="rods"
-          type="text"
+          type="number"
           placeholder={isEditMode ? data[0].rods : ''}
           value={instruData.rods ? instruData.rods : ''}
           onChange={onChange}
@@ -120,7 +121,8 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
         <Input
           label="Poids"
           name="weight"
-          type="text"
+          type="number"
+          step="0.01"
           placeholder={isEditMode ? data[0].weight : ''}
           value={instruData.weight ? instruData.weight : ''}
           onChange={onChange}

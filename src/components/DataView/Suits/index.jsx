@@ -113,6 +113,7 @@ function Suits() {
               <div>
                 <p>
                   <span className="font-medium">Genre: </span>
+                  {u.gender}
                 </p>
                 <p>
                   <span className="font-medium">Taille: </span>

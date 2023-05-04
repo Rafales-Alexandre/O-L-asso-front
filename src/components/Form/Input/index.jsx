@@ -47,6 +47,7 @@ Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.number,
     PropTypes.instanceOf(Date),
     PropTypes.oneOf([null, undefined]),
   ]),
