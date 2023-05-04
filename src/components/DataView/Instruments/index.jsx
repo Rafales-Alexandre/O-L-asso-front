@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faPenToSquare, faDrum, faGuitar } from '@fortawesome/free-solid-svg-icons';
-import { fetchInstruments, deleteInstru } from '../../../actions/instrumentActions';
+import { fetchInstruments, deleteInstru, } from '../../../actions/instrumentActions';
 import Button from '../../Form/Button';
 import InstrumentForm from '../../Create/InstrumentForm';
 
@@ -23,6 +23,7 @@ function Instruments() {
   const [deletedCards, setDeletedCards] = useState({});
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [InstruIdToDelete, setInstruIdToDelete] = useState(null)
+
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -80,6 +81,7 @@ function Instruments() {
       /* console.error('Error deleting user:', error); */
     }
   };
+  
   const HandleShowConfirmModal = (instrmentId) => {
     setInstruIdToDelete(instrmentId);
     setShowConfirmModal(true);
@@ -92,6 +94,7 @@ function Instruments() {
     handleDeleteAnimation(InstruIdToDelete);
     setShowConfirmModal(false);
   }
+ 
   return (
     <div className="">
       <h2 className="ml-4 text-xl md:text-2xl font-bold">
@@ -122,10 +125,10 @@ function Instruments() {
             </div>
           </div>
           <div className='card-actions justify-end md:absolute md:right-20 md:flex-col'>
-                <Button onClick={() => toggleModal(u)} className=" hover:bg-sky-500">
+                <Button onClick={() => toggleModal(u)} className="">
                 <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
                 </Button>
-                <Button onClick={() => HandleShowConfirmModal(u.id)} className="hover:btn-warning">
+                <Button onClick={() => HandleShowConfirmModal(u.id)} className="">
                 <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 md:mb-10' /> 
                 </Button>
             </div>

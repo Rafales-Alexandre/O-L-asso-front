@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { fetchUsers, deleteUser } from '../../../actions/userActions';
 import UserForm from '../../Create/UserForm';
 import Button from '../../Form/Button';
@@ -107,8 +109,8 @@ function User() {
             <Button onClick={() => {toggleModal(u)}} className="hover:bg-sky-500">
             <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
           </Button>
-          <Button onClick={() => handleDelete(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">
-            suppression
+          <Button onClick={() => handleDeleteAnimation(u.id)} className="hover:btn-warning">
+          <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
           </Button>
             </div>
           </div>
