@@ -3,12 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan, faPenToSquare, faUserGroup,  } from '@fortawesome/free-solid-svg-icons';
 import { fetchUsers, deleteUser } from '../../../actions/userActions';
 import UserForm from '../../Create/UserForm';
 import Button from '../../Form/Button';
-
 
 function User() {
   const dispatch = useDispatch();
@@ -21,18 +18,17 @@ function User() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const [searchTerm, setSearchTerm] = useState('');
-  const [deletedCards, setDeletedCards] = useState({});
- 
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const filteredUsers = userData.filter((user) =>
-    `${user.firstname} ${user.lastname} ${user.nickname} ${user.role}`.toLowerCase().includes(searchTerm.toLowerCase())
+    `${user.firstname} ${user.lastname} ${user.nickname}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
   useEffect(() => {
     if (userRole !== "board" && userRole !== "admin") {
-      navigate("/ErrorClient");
+      navigate("/");
     }
   }, [userRole, navigate]);
 
@@ -45,7 +41,6 @@ function User() {
       setUserData(users);
     }
   }, [users]);
-
 
   const toggleCollapse = (id) => {
     if (collapse === id) {
@@ -70,17 +65,10 @@ function User() {
       /* console.error('Error deleting user:', error); */
     }
   };
-  const handleDeleteAnimation = (userId) => {
-    setDeletedCards((prevState) => ({ ...prevState, [userId]: true }));
-    setTimeout(() => {
-      handleDelete(userId);
-    }, 1000);
-  };
+
   return (
-    <div className="bg-base-300 h-full">
-      <h2 className="ml-4 text-xl md:text-2xl font-bold">
-      <FontAwesomeIcon icon={faUserGroup} size="sm"/>
-      Adherents</h2>
+    <div className="">
+      <h2 className="text-3xl font-bold">Adherents</h2>
       <div className='flex flex-col md:flex-row md:justify-between'>
         <input
           type="text"
@@ -89,89 +77,109 @@ function User() {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <Button onClick={() => toggleCreateModal()} >Ajouter un utilisateur</Button>
+        <Button onClick={() => toggleCreateModal()} >Ajouter un utizlisateur</Button>
       </div>
       {filteredUsers.map((u) => (
         <div
-        className={`card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md transition-transform duration-1000 ease-in ${deletedCards[u.id] ? 'translate-x-full' : ''}`}
+          className="card card-side relative m-4 mt-10 flex flex-col bg-base-100 p-4 shadow-md"
           key={u.id}
         >
-        
-          <div className="flex-grow p-2">
+          <div className="flex-grow">
             <div
               onClick={() => toggleCollapse(u.id)}
               onKeyDown={() => {}}
-              className="flex justify-center"
+              className="flex items-center"
             >
-              <figure className="md:mr-4 pr-2">
+              <figure className="mr-4">
                 <img
                   src={u.url_img}
                   alt="User"
-                  className=" rounded-full "
+                  className="h-20 w-20 rounded-full"
                 />
               </figure>
-              <div className="md:card-body">
-                <h2 className="card-title md:text-2xl text-sm font-bold">
+              <div className="card-body">
+                <h2 className="card-title text-xl">
                   {u.firstname}
                   {u.lastname}({u.nickname})
                 </h2>
-                <h3 className="normal-case first-letter:capitalize text-xs md:text-lg text-gray-600">
-                {u.role}
-                </h3>
               </div>
             </div>
-            <div className='card-actions justify-end md:fixed md:right-20 md:top-10 md:flex-col'>
-            <Button onClick={() => {toggleModal(u)}} className="hover:bg-sky-500">
-            <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
+            <div className='flex flex-col items-end'>
+            <Button onClick={() => toggleModal(u)} className="mt-4 btn absolute top-0 right-4 hover:bg-sky-500">
+            Edition
           </Button>
-          <Button onClick={() => handleDeleteAnimation(u.id)} className="hover:btn-warning">
-          <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
+          <Button onClick={() => handleDelete(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">
+            suppression
           </Button>
             </div>
           </div>
           {collapse === u.id && (
-            <div className="card-body mt-4 md:text-sl text-sm">
+            <div className="card-body mt-4">
               <div>
                 <p>
-                  Email: 
+                  Nickname:
+                  {u.nickname}
+                </p>
+                <p>
+                  Email:
                   {u.email}
                 </p>
                 <p>
-                  Téléphone: 
+                  Phone:
                   {u.phone}
                 </p>
                 <p>
-                  Adresse: 
+                  Address:
                   {u.address}
                 </p>
                 <p>
-                  Adresse complémentaire: 
+                  Address 2:
                   {u.address_2}
                 </p>
                 <p>
-                  Code postal: 
+                  Zip Code:
                   {u.zip_code}
                 </p>
                 <p>
-                  Ville: 
+                  City:
                   {u.city}
                 </p>
                 <p>
-                  Taille haut: 
+                  Gender:
+                  {u.gender}
+                </p>
+                <p>
+                  Top Size:
                   {u.top_size}
                 </p>
                 <p>
-                  Taille bas: 
+                  Bottom Size:
                   {u.bottom_size}
                 </p>
                 <p>
-                  Côtisation: 
+                  Subscription:
                   {u.subscription}
                 </p>
                 <p>
-                  Caution: 
+                  Deposit:
                   {u.deposit}
-                </p>        
+                </p>
+                <p>
+                  Role:
+                  {u.role}
+                </p>
+                <p>
+                  Birthdate:
+                  {u.birthdate}
+                </p>
+                <p>
+                  Created At:
+                  {u.created_at}
+                </p>
+                <p>
+                  Updated At:
+                  {u.updated_at}
+                </p>
               </div>
             </div>
           )}
@@ -185,7 +193,7 @@ function User() {
               <Button onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
                 ✕
               </Button>
-              <UserForm mode="edit" selectedUser={selectedUser} closeModal={toggleModal} onSubmitFormUser={() => {}} />
+              <UserForm data={[selectedUser]} mode="edit" closeModal={toggleModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
         </>
