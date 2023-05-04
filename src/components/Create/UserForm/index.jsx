@@ -8,6 +8,7 @@ import Select from '../../Form/Select';
 import Input from '../../Form/Input';
 import Checkbox from '../../Form/Checkbox';
 import logo from '../../../assets/react.svg';
+import FileBase64 from 'react-file-base64';
 
 function UserForm({ mode, selectedUser = {}, closeModal }) {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
     setFormData({ ...formData, bottom_size: event.target.value });
   };
 
- /*  function generateRandomPassword() {
+  /* function generateRandomPassword() {
     const length = 12;
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+<>/?';
     const charsetLength = charset.length;
@@ -109,7 +110,13 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
     closeModal();
   };
 
-    
+  const handleFileChange = (file) => {
+    setFormData({
+      ...formData,
+      url_img: file.base64,
+    });
+  };
+  console.log(formData)
     
     return (
       <form onSubmit={handleSubmitFormUser} className="m-2 md:m-0">
@@ -124,7 +131,7 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
 <div className="flex">
 <label className="label">
   <span className="label-text font-semibold md:text-base">Avatar</span>
-  <input type="file" className="file-input w-full max-w-xs" />
+  <FileBase64 multiple={false} onDone={handleFileChange} />
 </label>
 </div>
     <div className="">
@@ -211,8 +218,8 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
           },
 
           {
-            label: "mixte",
-            value: "mixte",
+            label: "Mixte",
+            value: "Mixte",
           },
         ]}
       />
@@ -355,9 +362,13 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
 };
 
 UserForm.propTypes = {
-mode: PropTypes.oneOf(['create', 'edit']),
-selectedUser: PropTypes.array,
+mode: PropTypes.oneOf(['create', 'edit']).isRequired,
+selectedUser: PropTypes.object,
 closeModal: PropTypes.func.isRequired,
 };
+
+UserForm.defaultProps = {
+  selectedUser: {},
+}
 
 export default UserForm;

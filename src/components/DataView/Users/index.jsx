@@ -22,7 +22,6 @@ function User() {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
   const filteredUsers = userData.filter((user) =>
     `${user.firstname} ${user.lastname} ${user.nickname}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -81,20 +80,20 @@ function User() {
       </div>
       {filteredUsers.map((u) => (
         <div
-          className="card card-side relative m-4 mt-10 flex flex-col bg-base-100 p-4 shadow-md"
+        className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md flex flex-col md:relative"
           key={u.id}
         >
           <div className="flex-grow">
             <div
               onClick={() => toggleCollapse(u.id)}
               onKeyDown={() => {}}
-              className="flex items-center"
+              className="flex md:justify-center"
             >
-              <figure className="mr-4">
+              <figure className=" md:mr-4 pr-2 ">
                 <img
                   src={u.url_img}
                   alt="User"
-                  className="h-20 w-20 rounded-full"
+                  className="w-24 h-24 md:w-36 md:h-36 rounded-full"
                 />
               </figure>
               <div className="card-body">
@@ -104,9 +103,9 @@ function User() {
                 </h2>
               </div>
             </div>
-            <div className='flex flex-col items-end'>
-            <Button onClick={() => toggleModal(u)} className="mt-4 btn absolute top-0 right-4 hover:bg-sky-500">
-            Edition
+            <div className='card-actions justify-end md:absolute md:right-20 md:top-10 md:flex-col'>
+            <Button onClick={() => {toggleModal(u)}} className="hover:bg-sky-500">
+            <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
           </Button>
           <Button onClick={() => handleDelete(u.id)} className="mt-4 btn top-10 right-4 hover:btn-warning">
             suppression

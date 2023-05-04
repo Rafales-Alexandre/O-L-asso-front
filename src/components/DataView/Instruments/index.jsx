@@ -57,6 +57,7 @@ function Instruments() {
       return () => clearTimeout(timer);
     });
   }, [filteredInstruments]);
+  
   const toggleCollapse = (id) => {
     if (collapse === id) {
       setCollapse(null);
@@ -85,16 +86,14 @@ function Instruments() {
   }
   const handleDeleteAnimation = (instrumentId) => {
     setDeletedCards((prevState) => ({ ...prevState, [instrumentId]: true }));
-    setTimeout(() => {
-      handleDelete(instrumentId);
-    }, 10);
+    handleDelete(instrumentId);
   };
   const handleConfirmDelete = () => {
     handleDeleteAnimation(InstruIdToDelete);
     setShowConfirmModal(false);
   }
   return (
-    <div className="bg-base-300 h-full">
+    <div className="">
       <h2 className="ml-4 text-xl md:text-2xl font-bold">
       <FontAwesomeIcon icon={faGuitar} size="sm"/>
       Instruments</h2>
@@ -109,9 +108,7 @@ function Instruments() {
         <Button onClick={() => toggleCreateModal()}>Ajouter un instrument</Button>
       </div>
       {filteredInstruments.map((u) => (
-        <div className={`card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md transition-transform duration-500 ease-in ${
-          animatedCards[u.id] ? 'translate-x-0' : 'translate-x-full'
-        } ${deletedCards[u.id] ? 'translate-x-full' : ''}`} key={u.id}>
+        <div className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md flex flex-col md:relative" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} className="flex justify-center">
             <figure className="md:mr-4 md:w-30">
             <FontAwesomeIcon icon={faDrum} size="2xl" className='md:h-15'  />

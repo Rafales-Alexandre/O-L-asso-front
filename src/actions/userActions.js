@@ -125,6 +125,27 @@ mutation Mutation($input: LoginInput) {
   }
 }
 `;
+export const resetPasswordReq = gql`
+mutation Mutation($token: String!, $newPassword: String!) {
+  resetPassword(token: $token, newPassword: $newPassword) {
+    success
+  }
+}
+`;
+export const resetPassword = async(token, newPassword) => {
+  try {
+    const {data} = await client.mutate({
+      mutation: resetPasswordReq,
+      variables:{
+        token,
+        newPassword,
+      },
+      });
+
+  } catch (error) {
+    console.error('Erreur lors de la reinitialisation du mot de passe')
+  }
+};
 export const fetchUsers = () => async (dispatch) => {
   try {
     const { data } = await client.query({ query: getUserReq });
@@ -173,7 +194,7 @@ export const createUser = (input) => async (dispatch) => {
       payload: response.data.createUser,
     });
   } catch (error) {
-    console.error("Erreur lors de la modification de l'utilisateur", error);
+    console.error("Erreur lors de la creatation de l'utilisateur", error);
   }
 };
 
@@ -192,7 +213,7 @@ export const updateUser = (updateUserId, input) => async (dispatch) => {
       payload: response.data.updateUser,
     });
   } catch (error) {
-    console.error("Erreur lors de la création de l'utilisateur :", error);
+    console.error("Erreur lors de la modification de l'utilisateur :", error);
   }
 };
 
