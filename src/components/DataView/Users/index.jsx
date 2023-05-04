@@ -22,6 +22,8 @@ function User() {
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const [searchTerm, setSearchTerm] = useState('');
   const [deletedCards, setDeletedCards] = useState({});
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [UserIdToDelete, setUserIdToDelete] = useState(null);
  
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -69,12 +71,18 @@ function User() {
       /* console.error('Error deleting user:', error); */
     }
   };
-  const handleDeleteAnimation = (userId) => {
-    setDeletedCards((prevState) => ({ ...prevState, [userId]: true }));
-    setTimeout(() => {
-      handleDelete(userId);
-    }, 1000);
+  const HandleShowConfirmModal = (userId) => {
+    setUserIdToDelete(userId);
+    setShowConfirmModal(true);
+  }
+  const handleDeleteAnimation = (iuserId) => {
+    setDeletedCards((prevState) => ({ ...prevState, [iuserId]: true }));
+    handleDelete(iuserId);
   };
+  const handleConfirmDelete = () => {
+    handleDeleteAnimation(UserIdToDelete);
+    setShowConfirmModal(false);
+  }
   return (
     <div className="bg-base-300 h-full">
       <h2 className="ml-4 text-xl md:text-2xl font-bold">
@@ -123,7 +131,7 @@ function User() {
             <Button onClick={() => {toggleModal(u)}} className="hover:bg-sky-500">
             <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
           </Button>
-          <Button onClick={() => handleDeleteAnimation(u.id)} className="hover:btn-warning">
+          <Button onClick={() => HandleShowConfirmModal(u.id)} className="hover:btn-warning">
           <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
           </Button>
             </div>
@@ -201,6 +209,17 @@ function User() {
             </div>
           </div>
         </>
+      )}
+      {showConfirmModal && (
+        <div className={`modal ${showConfirmModal ? 'modal-open' : ''}`}>
+          <div className='modal-box flex flex-col gap-10 items-center'>
+            <h3 className=''> Voulez vous vraiment supprimer ce Membre?</h3>
+            <div className='modal-actions flex justify-center gap-10'>
+                <Button onClick={handleConfirmDelete} className="btn btn-warning">Oui</Button>
+                <Button onClick={()=> setShowConfirmModal(false)} className="btn btn-secondary">Non</Button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

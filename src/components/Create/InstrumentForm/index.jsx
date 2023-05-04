@@ -62,11 +62,10 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
     } else {
       dispatch(createInstrument({...instruDataToSend}));
     }
-    closeModal();
     setShowConfirmModal(true);
     setTimeout(()=>{
-      closeModal()},2000)
-      ;
+      setShowConfirmModal(false);
+      closeModal()},2000);
   };
 
   return (
@@ -173,7 +172,7 @@ closeModal: PropTypes.func.isRequired,
 };
 
 InstrumentForm.defaultProps = {
-data: [{ depth: 0 }],
+data: [],
 };
 
 export default InstrumentForm;

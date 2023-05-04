@@ -194,7 +194,7 @@ export const createUser = (input) => async (dispatch) => {
       payload: response.data.createUser,
     });
   } catch (error) {
-    console.error("Erreur lors de la creatation de l'utilisateur", error);
+    console.error("Erreur lors de la creation de l'utilisateur", error);
   }
 };
 

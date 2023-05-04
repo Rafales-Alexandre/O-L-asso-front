@@ -27,14 +27,17 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
     zip_code: selectedUser ? selectedUser.zip_code : '',
     city: selectedUser ? selectedUser.city : '',
     role,
-    password: "chuckpass",
     url_img: selectedUser ? selectedUser.url_img : '',
     gender: selectedUser ? selectedUser.gender : 'F',
     top_size: selectedUser ? selectedUser.top_size : 'S',
     bottom_size: selectedUser ? selectedUser.bottom_size : 'S',
     subscription: selectedUser ? selectedUser.subscription : false,
     deposit: selectedUser ? selectedUser.deposit : false,
+
+    ...(mode === 'create' ? { password: "chuckpass" }: {}), 
   };
+
+  
   const [formData, setFormData] = useState(initialFormData);
   const [selectedGender, setSelectedGender] = useState(selectedUser.gender || 'F');
   const [selectedTopSize, setSelectedTopSize] = useState(selectedUser.top_size || 'M');

@@ -21,6 +21,9 @@ function Suits() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const [searchTerm, setSearchTerm] = useState('');
+  const [deletedCards, setDeletedCards] = useState({});
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [SuitIdToDelete, setSuitToDelete] = useState(null);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -60,7 +63,6 @@ function Suits() {
   const toggleCreateModal = () => {
     setShowCreateModal(!showCreateModal);
   };
-
   const handleDelete = async (suitId) => {
     try {
       await dispatch(deleteSuit(suitId));
@@ -69,6 +71,18 @@ function Suits() {
       /* console.error('Error deleting user:', error); */
     }
   };
+  const HandleShowConfirmModal = (suitId) => {
+    setSuitToDelete(suitId);
+    setShowConfirmModal(true);
+  }
+  const handleDeleteAnimation = (suitId) => {
+    setDeletedCards((prevState) => ({ ...prevState, [suitId]: true }));
+    handleDelete(suitId);
+  };
+  const handleConfirmDelete = () => {
+    handleDeleteAnimation(SuitIdToDelete);
+    setShowConfirmModal(false);
+  }
   return (
     <div className='bg-base-300 h-full'>
       <h2 className="ml-4 text-xl md:text-2xl font-bold ">
@@ -104,7 +118,7 @@ function Suits() {
                 <Button onClick={() => toggleModal(u)} className="hover:bg-sky-500">
                 <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
                 </Button>
-                <Button onClick={() => handleDelete(u.id)} className="hover:btn-warning">
+                <Button onClick={() => HandleShowConfirmModal(u.id)} className="hover:btn-warning">
                 <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
                  </Button>
             </div>
@@ -148,6 +162,17 @@ function Suits() {
             </div>
           </div>
         </>
+      )}
+      {showConfirmModal && (
+        <div className={`modal ${showConfirmModal ? 'modal-open' : ''}`}>
+          <div className='modal-box flex flex-col gap-10 items-center'>
+            <h3 className=''> Voulez vous vraiment supprimer ce costume?</h3>
+            <div className='modal-actions flex justify-center gap-10'>
+                <Button onClick={handleConfirmDelete} className="btn btn-warning">Oui</Button>
+                <Button onClick={()=> setShowConfirmModal(false)} className="btn btn-secondary">Non</Button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
