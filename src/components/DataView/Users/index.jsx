@@ -26,7 +26,6 @@ function User() {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
   const filteredUsers = userData.filter((user) =>
     `${user.firstname} ${user.lastname} ${user.nickname} ${user.role}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -93,7 +92,7 @@ function User() {
       </div>
       {filteredUsers.map((u) => (
         <div
-        className={`card card-side relative m-4 mt-10 flex flex-col p-4 shadow-md transition-transform duration-1000 ease-in ${deletedCards[u.id] ? 'translate-x-full' : ''}`}
+        className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md flex flex-col md:relative"
           key={u.id}
         >
         
@@ -120,7 +119,7 @@ function User() {
                 </h3>
               </div>
             </div>
-            <div className='card-actions justify-end md:fixed md:right-20 md:top-10 md:flex-col'>
+            <div className='card-actions justify-end md:absolute md:right-20 md:top-10 md:flex-col'>
             <Button onClick={() => {toggleModal(u)}} className="hover:bg-sky-500">
             <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
           </Button>

@@ -51,7 +51,7 @@ function App() {
             <div className="sticky   md:w-1/5 md:shadow-xl ">
               <UserPanel user={loggedInUser} onLogout={handleLogout} />
             </div>
-            <div className="h-screen overflow-y-scroll md:w-4/5">
+            <div className="h-screen overflow-y-scroll md:w-4/5 bg-base-300">
               <DataView loggedInUser={loggedInUser} />
             </div>
           </div>

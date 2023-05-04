@@ -173,7 +173,7 @@ export const createUser = (input) => async (dispatch) => {
       payload: response.data.createUser,
     });
   } catch (error) {
-    console.error("Erreur lors de la modification de l'utilisateur", error);
+    console.error("Erreur lors de la creatation de l'utilisateur", error);
   }
 };
 
@@ -192,7 +192,7 @@ export const updateUser = (updateUserId, input) => async (dispatch) => {
       payload: response.data.updateUser,
     });
   } catch (error) {
-    console.error("Erreur lors de la création de l'utilisateur :", error);
+    console.error("Erreur lors de la modification de l'utilisateur :", error);
   }
 };
 

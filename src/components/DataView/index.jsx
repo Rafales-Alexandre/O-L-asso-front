@@ -14,7 +14,7 @@ import ErrorClient from '../../pages/ErrorCLient';
   return (
     <Routes>
       <Route path="/" element={<UserView user={user} />} />
-      <Route path="/profil" element={<UserForm mode="edit" data={[user]} closeModal={() => {}} />} />
+      <Route path="/profil" element={<UserForm mode="edit" selectedUser={user} closeModal={() => {}} />} />
       <Route path="/instruments" element={<Instruments />} />
       <Route path="/suits" element={<Suits />} />
       <Route path="/users" element={<Users />} />
