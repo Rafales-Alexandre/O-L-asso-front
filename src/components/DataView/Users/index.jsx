@@ -42,6 +42,7 @@ function User() {
   useEffect(() => {
     if (users) {
       setUserData(users);
+      console.log('hi')
     }
   }, [users]);
 
@@ -100,13 +101,13 @@ function User() {
             <div
               onClick={() => toggleCollapse(u.id)}
               onKeyDown={() => {}}
-              className="flex justify-center"
+              className="flex md:justify-center"
             >
-              <figure className="md:mr-4 pr-2">
+              <figure className=" md:mr-4 pr-2 ">
                 <img
                   src={u.url_img}
                   alt="User"
-                  className=" rounded-full "
+                  className="w-24 h-24 md:w-36 md:h-36 rounded-full"
                 />
               </figure>
               <div className="md:card-body">

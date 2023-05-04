@@ -51,12 +51,11 @@ function InstrumentForm({ data = [], isEditMode = false, closeModal}) {
       code: instruData.code,
       pupitre: instruData.pupitre,
       observation: instruData.observation,
-      depth: instruData.depth,
-      rods: instruData.rods,
-      weight: instruData.weight,
+      depth: +instruData.depth,
+      rods: +instruData.rods,
+      weight: +instruData.weight,
       sticker: instruData.sticker,
     };
-  
     if (isEditMode) {
       dispatch(updateInstrument(data[0].id, instruDataToSend));
     } else {
