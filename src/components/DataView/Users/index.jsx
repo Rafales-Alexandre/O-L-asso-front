@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faPenToSquare, faUserGroup,  } from '@fortawesome/free-solid-svg-icons';
 import { fetchUsers, deleteUser } from '../../../actions/userActions';
 import UserForm from '../../Create/UserForm';
 import Button from '../../Form/Button';
+
 
 function User() {
   const dispatch = useDispatch();
@@ -20,16 +21,17 @@ function User() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const userRole = useSelector((state) => state.user.loggedInUser.user.role);
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [deletedCards, setDeletedCards] = useState({});
+ 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
   const filteredUsers = userData.filter((user) =>
-    `${user.firstname} ${user.lastname} ${user.nickname}`.toLowerCase().includes(searchTerm.toLowerCase())
+    `${user.firstname} ${user.lastname} ${user.nickname} ${user.role}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
   useEffect(() => {
     if (userRole !== "board" && userRole !== "admin") {
-      navigate("/");
+      navigate("/ErrorClient");
     }
   }, [userRole, navigate]);
 
@@ -42,6 +44,7 @@ function User() {
       setUserData(users);
     }
   }, [users]);
+
 
   const toggleCollapse = (id) => {
     if (collapse === id) {
@@ -66,10 +69,17 @@ function User() {
       /* console.error('Error deleting user:', error); */
     }
   };
-
+  const handleDeleteAnimation = (userId) => {
+    setDeletedCards((prevState) => ({ ...prevState, [userId]: true }));
+    setTimeout(() => {
+      handleDelete(userId);
+    }, 1000);
+  };
   return (
-    <div className="">
-      <h2 className="text-3xl font-bold">Adherents</h2>
+    <div className="bg-base-300 h-full">
+      <h2 className="ml-4 text-xl md:text-2xl font-bold">
+      <FontAwesomeIcon icon={faUserGroup} size="sm"/>
+      Adherents</h2>
       <div className='flex flex-col md:flex-row md:justify-between'>
         <input
           type="text"
@@ -78,14 +88,15 @@ function User() {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <Button onClick={() => toggleCreateModal()} >Ajouter un utizlisateur</Button>
+        <Button onClick={() => toggleCreateModal()} >Ajouter un utilisateur</Button>
       </div>
       {filteredUsers.map((u) => (
         <div
         className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md flex flex-col md:relative"
           key={u.id}
         >
-          <div className="flex-grow">
+        
+          <div className="flex-grow p-2">
             <div
               onClick={() => toggleCollapse(u.id)}
               onKeyDown={() => {}}
@@ -98,89 +109,68 @@ function User() {
                   className="w-24 h-24 md:w-36 md:h-36 rounded-full"
                 />
               </figure>
-              <div className="card-body">
-                <h2 className="card-title text-xl">
+              <div className="md:card-body">
+                <h2 className="card-title md:text-2xl text-sm font-bold">
                   {u.firstname}
                   {u.lastname}({u.nickname})
                 </h2>
+                <h3 className="normal-case first-letter:capitalize text-xs md:text-lg text-gray-600">
+                {u.role}
+                </h3>
               </div>
             </div>
             <div className='card-actions justify-end md:absolute md:right-20 md:top-10 md:flex-col'>
             <Button onClick={() => {toggleModal(u)}} className="hover:bg-sky-500">
             <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
           </Button>
-          <Button onClick={() => handleDelete(u.id)} className="hover:btn-warning">
+          <Button onClick={() => handleDeleteAnimation(u.id)} className="hover:btn-warning">
           <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
           </Button>
             </div>
           </div>
           {collapse === u.id && (
-            <div className="card-body mt-4">
+            <div className="card-body mt-4 md:text-sl text-sm">
               <div>
                 <p>
-                  Nickname:
-                  {u.nickname}
-                </p>
-                <p>
-                  Email:
+                  Email: 
                   {u.email}
                 </p>
                 <p>
-                  Phone:
+                  Téléphone: 
                   {u.phone}
                 </p>
                 <p>
-                  Address:
+                  Adresse: 
                   {u.address}
                 </p>
                 <p>
-                  Address 2:
+                  Adresse complémentaire: 
                   {u.address_2}
                 </p>
                 <p>
-                  Zip Code:
+                  Code postal: 
                   {u.zip_code}
                 </p>
                 <p>
-                  City:
+                  Ville: 
                   {u.city}
                 </p>
                 <p>
-                  Gender:
-                  {u.gender}
-                </p>
-                <p>
-                  Top Size:
+                  Taille haut: 
                   {u.top_size}
                 </p>
                 <p>
-                  Bottom Size:
+                  Taille bas: 
                   {u.bottom_size}
                 </p>
                 <p>
-                  Subscription:
+                  Côtisation: 
                   {u.subscription}
                 </p>
                 <p>
-                  Deposit:
+                  Caution: 
                   {u.deposit}
-                </p>
-                <p>
-                  Role:
-                  {u.role}
-                </p>
-                <p>
-                  Birthdate:
-                  {u.birthdate}
-                </p>
-                <p>
-                  Created At:
-                  {u.created_at}
-                </p>
-                <p>
-                  Updated At:
-                  {u.updated_at}
-                </p>
+                </p>        
               </div>
             </div>
           )}
@@ -194,7 +184,7 @@ function User() {
               <Button onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
                 ✕
               </Button>
-              <UserForm data={[selectedUser]} mode="edit" closeModal={toggleModal} onSubmitFormUser={() => {}} />
+              <UserForm mode="edit" selectedUser={selectedUser} closeModal={toggleModal} onSubmitFormUser={() => {}} />
             </div>
           </div>
         </>
