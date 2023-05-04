@@ -80,15 +80,16 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
   const Ismember = selectedUser  && role === 'member';
 
   const handleCheckboxChange = (event) => {
+    const checked = !formData[event.target.name];
     if (mode === 'create') {
-      createUser(formData);
+      createUser({ ...formData, [event.target.name]: checked.toString() });
     } else {
-      updateUser(formData);
+      updateUser({ ...formData, [event.target.name]: checked.toString() });
     }
   
     setFormData({
       ...formData,
-      [event.target.name]: event.target.checked.toString(),
+      [event.target.name]:checked,
     });
   };
 
@@ -113,6 +114,7 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
     }
     setShowConfirmModal(true);
     setTimeout(()=>{
+      setShowConfirmModal(false);
       closeModal()},2000)
       ;
   };
@@ -338,6 +340,7 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
       required = {true}
     />
   </div>
+  <fieldset disabled={Ismember}>
   <div className="checkbox-section">
     <Checkbox
       label="Adhésion"
@@ -355,6 +358,7 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
       onChange={handleCheckboxChange}
     />
   </div>
+  </fieldset>
   <div className="form-actions">
     <Button
       type="submit"

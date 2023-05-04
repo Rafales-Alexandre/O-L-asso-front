@@ -66,7 +66,7 @@ function NavLinks({ user }) {
 >
 <div>
 <div className="flex flex-col " key={user.id}>
-      <img className="m-2 w-12 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24" src={user.url_img} alt="Avatar"  />
+      <img className="m-2 w-16 h-16 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24" src={user.url_img} alt="Avatar"  />
       <p className="ml-5 text-sm first-letter:uppercase">{user.nickname}</p>
         <p className="bade-primary badge-outline badge badge-xs p-2 font-semibold uppercase md:badge-md">
           {user.role}

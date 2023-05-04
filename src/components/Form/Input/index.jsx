@@ -48,6 +48,7 @@ Input.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
+    PropTypes.number,
     PropTypes.instanceOf(Date),
     PropTypes.oneOf([null, undefined]),
   ]),
