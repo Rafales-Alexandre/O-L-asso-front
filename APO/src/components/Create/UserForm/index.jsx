@@ -368,9 +368,9 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
     </Button>
   </div>
   {showConfirmModal && (
-        <div className={`modal modal-bottom sm:modal-middle ${showConfirmModal ? 'modal-open' : ''}`}>
+        <div className={`modal modal-bottom sm:modal-middle h-screen ${showConfirmModal ? 'modal-open' : ''}`}>
           <div className='modal-box  '>
-            <h3 className='font-bold text-lg'> {`${mode === 'edit' ? 'Utilisateur modifié' : 'Génial, un nouveau copain'}`}</h3>
+            <h3 className='font-bold text-lg'> {`${mode === 'edit' ? 'Utilisateur modifié' : 'Membre ajouté'}`}</h3>
           </div>
         </div>
       )}
