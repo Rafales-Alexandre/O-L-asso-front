@@ -7,6 +7,7 @@ import LogIn from "../LogIn";
 import ResetPassword from "../ResetPassword";
 import UserPanel from "../UserPanel";
 import DataView from "../DataView";
+import videoBackground from "../../assets/Olasso.mp4"
 
 // Déclaration du composant fonctionnel App
 function App() {
@@ -45,7 +46,14 @@ function App() {
   // Rendu du composant App
   return (
       <div>
-        <div className="App ">
+        <div className="App relative">
+        <video
+        className="w-full h-full object-cover fixed top-0 left-0 z-0"
+        autoPlay
+        muted
+      >
+        <source src={videoBackground} type="video/mp4" />
+      </video>
           {loggedInUser ? (
             <div className="flex w-full flex-col md:gap-4 md:flex-row ">
               <div className="sticky   md:w-1/5 md:shadow-xl ">

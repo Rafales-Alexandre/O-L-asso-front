@@ -1,12 +1,20 @@
 // Importation de React et useState
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 
 // Déclaration du composant fonctionnel ResetPassword
 function ResetPassword({ onReset}) {
   // Déclaration des états pour le mot de passe et la confirmation du mot de passe
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const token = searchParams.get('token');
+    const email = searchParams.get('email');
+  }, [location]);
 
   // Déclaration de la fonction handleSubmit
   const handleSubmit = (e) => {

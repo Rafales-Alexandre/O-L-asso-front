@@ -28,7 +28,7 @@ function UserPanel({ onLogout }) {
   // Rendu du composant UserPanel
   return (
     <div
-      className={`md:flex md:flex-col md:h-full md:justify-center md:items-center transition-transform duration-1000 ease-in ${
+      className={`bg-base-200 md:flex md:flex-col md:h-full md:justify-center md:items-center transition-transform duration-1000 ease-in ${
         animatedPanel ? 'md:translate-y-0' : 'md:-translate-y-full'
       }`}
     >
