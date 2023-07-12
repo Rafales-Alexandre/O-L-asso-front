@@ -3,7 +3,7 @@ import { setContext } from "@apollo/client/link/context";
 import fetch from 'cross-fetch';
 
 const httpLink = createHttpLink({
-  uri: 'https://projet-01-o-lasso-back-production.up.railway.app/graphql',
+  uri: 'http://localhost:3000/graphql',
   fetch: fetch,
 });
 const authLink = setContext((_, { headers }) => {

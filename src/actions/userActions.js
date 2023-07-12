@@ -9,6 +9,7 @@ export const ADD_USER = 'ADD_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
+export const RESET_PASSWORD = 'RESET_PASSWORD';
 
 const getUserReq = gql`
 query Query {
@@ -134,7 +135,7 @@ mutation Mutation($token: String!, $newPassword: String!) {
 `;
 export const resetPassword = async(token, newPassword) => {
   try {
-    const {data} = await client.mutate({
+    const { data } = await client.mutate({
       mutation: resetPasswordReq,
       variables:{
         token,

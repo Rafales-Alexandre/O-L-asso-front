@@ -128,176 +128,168 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
     
     return (
       <form onSubmit={handleSubmitFormUser} className="m-2 md:m-0">
-    {/* <div className="avatar">
-        <div className="m-4 w-12 items-center rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-24">
-        <img src={logo} alt={logo} />
-        <img src={files ? URL.createObjectURL(files) : selectedUser .url_img}
-        </div>
-    </div> */}
-    <h1 className="text-3xl font-semibold my-8">{mode === 'edit' ? 'Editer le' : 'Ajouter un'} profil</h1>
-
-<div className="flex">
-<label className="label">
-  <span className="label-text font-semibold md:text-base">Avatar</span>
-  <FileBase64 multiple={false} onDone={handleFileChange} />
-</label>
-</div>
-    <div className="">
-    <Input
-           label="Nom"
-           name="lastname"
-           type="text"
-           placeholder='Nom'
-           value={formData.lastname}
-           onChange={onChange}
-           inputSizeClass=""
-           required = {true}
-         />
-             <Input
-      label="Prénom"
-      name="firstname"
-      type="text"
-      placeholder="Prénom"
-      value={formData.firstname}
-      onChange={onChange}
-      inputSizeClass=""
-      required = {true}
-    />
-
-    <Input
-      label="Pseudo"
-      name="nickname"
-      type="text"
-      placeholder="Pseudo"
-      value={formData.nickname}
-      onChange={onChange}
-      inputSizeClass=""
-    />
-  </div>
-  <div className="">
-    <Input
-      label="Email"
-      name="email"
-      type="email"
-      placeholder="Email"
-      value={formData.email}
-      onChange={onChange}
-      required = {true}
-    />
-    {mode === 'edit' && <ButtonRstPswd>Réinitialiser le mot de passe</ButtonRstPswd>}
-  </div>
-  <div className="">
-    <Input
-      label="Date de naissance"
-      name="birthdate"
-      type="date"
-      placeholder="Date de naissance"
-      value={formData.birthdate}
-      onChange={onChange}
-      inputSizeClass=""
-      required = {true}
-    />
-
-    <Input
-      label="Téléphone"
-      name="phone"
-      type="tel"
-      placeholder="Téléphone"
-      value={formData.phone}
-      onChange={onChange}
-      inputSizeClass=""
-      required = {true}
-    />
-
-    <div className="">
-      <Select
-        label="Genre"
-        name="gender"
-        selected={selectedGender}
-        onChange={handleGenderChange}
-        options={[
-          {
-            label: "F",
-            value: "F",
-          },
-          {
-            label: "M",
-            value: "M",
-          },
-
-          {
-            label: "Mixte",
-            value: "Mixte",
-          },
-        ]}
-      />
-      <Select
-        label="Taille Haut"
-        name="top_size"
-        selected={selectedTopSize}
-        onChange={handleTopSizeChange}
-        options={[
-          {
-            label: "S",
-            value: "S",
-          },
-          {
-            label: "M",
-            value: "M",
-          },
-          {
-            label: "L",
-            value: "L",
-          },
-          {
-            label: "XL",
-            value: "XL",
-          },
-          {
-            label: "XXL",
-            value: "XXL",
-          },
-          {
-            label: "XXXL",
-            value: "XXXL",
-          },
-        ]}
-      />
-      <Select
-        label="Taille Bas"
-        name="bottom_size"
-        selected={selectedBottomSize}
-        onChange={handleBottomSizeChange}
-        options={[
-          {
-            label: "S",
-            value: "S",
-          },
-          {
-            label: "M",
-            value: "M",
-          },
-          {
-            label: "L",
-            value: "L",
-          },
-          {
-            label: "XL",
-            value: "XL",
-          },
-          {
-            label: "XXL",
-            value: "XXL",
-          },
-          {
-            label: "XXXL",
-            value: "XXXL",
-            },
-            ]}
+        <h1 className="text-3xl font-semibold my-8">{mode === 'edit' ? 'Editer le' : 'Ajouter un'} profil</h1>
+          <div className="flex">
+            <label className="label">
+            <span className="label-text font-semibold md:text-base">Avatar</span>
+            <FileBase64 multiple={false} onDone={handleFileChange} />
+            </label>
+          </div>
+          <div className="">
+            <Input
+                    label="Nom"
+                    name="lastname"
+                    type="text"
+                    placeholder='Nom'
+                    value={formData.lastname}
+                    onChange={onChange}
+                    inputSizeClass=""
+                    required = {true}
             />
-            </div>
-            </div>
-            <div className="">
+            <Input
+              label="Prénom"
+              name="firstname"
+              type="text"
+              placeholder="Prénom"
+              value={formData.firstname}
+              onChange={onChange}
+              inputSizeClass=""
+              required = {true}
+            />
+
+            <Input
+              label="Pseudo"
+              name="nickname"
+              type="text"
+              placeholder="Pseudo"
+              value={formData.nickname}
+              onChange={onChange}
+              inputSizeClass=""
+            />
+        </div>
+        <div className="">
+          <Input
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={onChange}
+            required = {true}
+          />
+          {mode === 'edit' && <ButtonRstPswd>Réinitialiser le mot de passe</ButtonRstPswd>}
+        </div>
+        <div className="">
+          <Input
+            label="Date de naissance"
+            name="birthdate"
+            type="date"
+            placeholder="Date de naissance"
+            value={formData.birthdate}
+            onChange={onChange}
+            inputSizeClass=""
+            required = {true}
+          />
+
+          <Input
+            label="Téléphone"
+            name="phone"
+            type="tel"
+            placeholder="Téléphone"
+            value={formData.phone}
+            onChange={onChange}
+            inputSizeClass=""
+            required = {true}
+          />
+        </div>
+        <div className="">
+          <Select
+            label="Genre"
+            name="gender"
+            selected={selectedGender}
+            onChange={handleGenderChange}
+            options={[
+              {
+                label: "F",
+                value: "F",
+              },
+              {
+                label: "M",
+                value: "M",
+              },
+
+              {
+                label: "Mixte",
+                value: "Mixte",
+              },
+            ]}
+          />
+          <Select
+            label="Taille Haut"
+            name="top_size"
+            selected={selectedTopSize}
+            onChange={handleTopSizeChange}
+            options={[
+              {
+                label: "S",
+                value: "S",
+              },
+              {
+                label: "M",
+                value: "M",
+              },
+              {
+                label: "L",
+                value: "L",
+              },
+              {
+                label: "XL",
+                value: "XL",
+              },
+              {
+                label: "XXL",
+                value: "XXL",
+              },
+              {
+                label: "XXXL",
+                value: "XXXL",
+              },
+            ]}
+          />
+          <Select
+            label="Taille Bas"
+            name="bottom_size"
+            selected={selectedBottomSize}
+            onChange={handleBottomSizeChange}
+            options={[
+              {
+                label: "S",
+                value: "S",
+              },
+              {
+                label: "M",
+                value: "M",
+              },
+              {
+                label: "L",
+                value: "L",
+              },
+              {
+                label: "XL",
+                value: "XL",
+              },
+              {
+                label: "XXL",
+                value: "XXL",
+              },
+              {
+                label: "XXXL",
+                value: "XXXL",
+                },
+                ]}
+                />
+              </div>
+          <div className="">
             <Input
                    label="Adresse"
                    name="address"
@@ -307,39 +299,39 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
                    onChange={onChange}
                    inputSizeClass=""
                    required={true}
-                 />
-                 <Input
-      label="Adresse 2"
-      name="address_2"
-      type="text"
-      placeholder="Adresse 2"
-      value={formData.address_2}
-      onChange={onChange}
-      inputSizeClass=""
-    />
+            />
+            <Input
+              label="Adresse 2"
+              name="address_2"
+              type="text"
+              placeholder="Adresse 2"
+              value={formData.address_2}
+              onChange={onChange}
+              inputSizeClass=""
+            />
 
-    <Input
-      label="Code postal"
-      name="zip_code"
-      type="text"
-      placeholder="Code postal"
-      value={formData.zip_code}
-      onChange={onChange}
-      inputSizeClass=""
-      required = {true}
-    />
+            <Input
+              label="Code postal"
+              name="zip_code"
+              type="text"
+              placeholder="Code postal"
+              value={formData.zip_code}
+              onChange={onChange}
+              inputSizeClass=""
+              required = {true}
+            />
 
-    <Input
-      label="Ville"
-      name="city"
-      type="text"
-      placeholder="Ville"
-      value={formData.city}
-      onChange={onChange}
-      inputSizeClass=""
-      required = {true}
-    />
-  </div>
+            <Input
+              label="Ville"
+              name="city"
+              type="text"
+              placeholder="Ville"
+              value={formData.city}
+              onChange={onChange}
+              inputSizeClass=""
+              required = {true}
+            />
+          </div>
   <fieldset disabled={Ismember}>
   <div className="checkbox-section">
     <Checkbox
@@ -370,7 +362,7 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
   {showConfirmModal && (
         <div className={`modal modal-bottom sm:modal-middle ${showConfirmModal ? 'modal-open' : ''}`}>
           <div className='modal-box  '>
-            <h3 className='font-bold text-lg'> {`${mode === 'edit' ? 'Utilisateur modifié' : 'Génial, un nouveau copain'}`}</h3>
+            <h3 className='font-bold text-lg'> {`${mode === 'edit' ? 'Utilisateur modifié' : 'Membre ajouté'}`}</h3>
           </div>
         </div>
       )}

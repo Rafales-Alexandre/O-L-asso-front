@@ -8,6 +8,7 @@ import { faTrashCan, faPenToSquare, faUserGroup,  } from '@fortawesome/free-soli
 import { fetchUsers, deleteUser } from '../../../actions/userActions';
 import UserForm from '../../Create/UserForm';
 import Button from '../../Form/Button';
+import SearchBar from '../../SearchBar';
 
 
 function User() {
@@ -27,7 +28,7 @@ function User() {
  
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
-  };
+  };  
   const filteredUsers = userData.filter((user) =>
     `${user.firstname} ${user.lastname} ${user.nickname} ${user.role}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -83,24 +84,19 @@ function User() {
     handleDeleteAnimation(UserIdToDelete);
     setShowConfirmModal(false);
   }
+  
   return (
-    <div className="bg-base-300 h-full">
+    <div className="border-2 border-double bg-gradient-to-r from-orange-500 to-transparent rounded-md z-0 md:absolute md:right-20 md:w-3/5 w-full">
       <h2 className="ml-4 text-xl md:text-2xl font-bold">
       <FontAwesomeIcon icon={faUserGroup} size="sm"/>
       Adherents</h2>
+      <SearchBar handleSearchChange={handleSearchChange} placeholder="Recherche..." />
       <div className='flex flex-col md:flex-row md:justify-between'>
-        <input
-          type="text"
-          placeholder="Recherche..."
-          className="input input-bordered mb-4"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
         <Button onClick={() => toggleCreateModal()} >Ajouter un utilisateur</Button>
       </div>
       {filteredUsers.map((u) => (
         <div
-        className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md flex flex-col md:relative"
+        className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md rounded-md flex flex-col md:relative"
           key={u.id}
         >
         
@@ -114,7 +110,7 @@ function User() {
                 <img
                   src={u.url_img}
                   alt="User"
-                  className="w-24 h-24 md:w-36 md:h-36 rounded-full"
+                  className="w-24 h-24 md:w-36 md:h-36 rounded-full border-2"
                 />
               </figure>
               <div className="md:card-body">
@@ -131,7 +127,7 @@ function User() {
             <Button onClick={() => {toggleModal(u)}} className="">
             <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
           </Button>
-          <Button onClick={() => handleDeleteAnimation(u.id)} className="">
+          <Button onClick={() => HandleShowConfirmModal(u.id)} className="">
           <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
           </Button>
             </div>

@@ -1,16 +1,22 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+// Importation de React et useState
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+// Déclaration du composant fonctionnel LogIn
 function LogIn({ onLogin, refused }) {
+  // Déclaration des états pour email et mot de passe
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // Déclaration de la fonction handleSubmit
   const handleSubmit = (e) => {
+    // Empêche le comportement par défaut du formulaire (rechargement de la page)
     e.preventDefault();
+    // Appelle la fonction onLogin passée en tant que prop avec email et mot de passe
     onLogin(email, password);
   };
 
+  // Rendu du composant
   return (
     <div className="hero min-h-screen w-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -66,9 +72,12 @@ function LogIn({ onLogin, refused }) {
     </div>
   );
 }
+
+// Définition des propTypes
 LogIn.propTypes = {
   onLogin: PropTypes.func.isRequired,
   refused: PropTypes.bool.isRequired,
 };
 
+// Exportation du composant
 export default LogIn;

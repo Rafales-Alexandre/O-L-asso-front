@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { v4 as uuidv4 } from 'uuid';
 import { fetchUserSuit, fetchUserInstrument } from '../../../actions/userActions';
 
+
 function UserView(){
     const dispatch = useDispatch();
     const [collapse, setCollapse] = useState(null);

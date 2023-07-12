@@ -1,3 +1,4 @@
+// Importation de React, useState, Link, useLocation et PropTypes
 import React, { useState  } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -5,14 +6,17 @@ import { faHome, faUser, faDrum, faShirt, faUserGroup, faXmark } from '@fortawes
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-
+// Déclaration du composant fonctionnel NavLinks
 function NavLinks({ user }) {
+  // Utilisation de l'hook useLocation pour obtenir le chemin actuel
   const location = useLocation();
   const currentPath = location.pathname;
+  // Utilisation de l'hook useState pour gérer l'état d'affichage de la barre latérale
   const [showSidebar, setShowSidebar] = useState(false);
   
   return (
     <div className=" overflow-x-auto scroll-smooth border-b border-primary md:my-12 md:border-b-0 md:w-full md:max-w-xs">
+      {/* Menu pour les écrans de taille moyenne et supérieure */}
       <div className='hidden md:block'>
       <ul className="menu menu-compact menu-horizontal md:menu-normal md:menu-vertical md:w-full">
         <li className={currentPath === '/' ? 'bordered' : ''}>
@@ -36,8 +40,10 @@ function NavLinks({ user }) {
         )}
       </ul>
       </div>
+      {/* Menu pour les écrans de petite taille (mobile) */}
       <div 
         className='md:hidden '>
+          {/* Bouton pour afficher ou masquer la barre latérale */}
          { showSidebar ? (
     <button
     type='button'
@@ -59,6 +65,7 @@ function NavLinks({ user }) {
       <rect y="60" width="100" height="10"/>
     </svg>
   )}
+  {/* Barre latérale avec liens de navigation */}
   <div
   className={` top-0 right-0 w-[100vw] bg-primary p-5  text-white fixed h-full z-40  ease-in-out duration-1000 ${
     showSidebar ? "translate-x-0 " : "translate-x-full"
@@ -74,6 +81,7 @@ function NavLinks({ user }) {
 
 
 </div>
+{/* Liste des liens de navigation */}
     <ul 
       className=""
       >
