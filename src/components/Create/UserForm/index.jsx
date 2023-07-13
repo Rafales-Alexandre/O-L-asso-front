@@ -128,13 +128,13 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
     
     return (
       <form onSubmit={handleSubmitFormUser} className="m-2 md:m-0 ">
-        <h1 className="text-3xl font-semibold my-8">{mode === 'edit' ? 'Editer le' : 'Ajouter un'} profil</h1>
-          <div className="flex">
-            <label className="label">
-            <span className="label-text font-semibold md:text-base">Avatar</span>
-            <FileBase64 multiple={false} onDone={handleFileChange} />
-            </label>
-          </div>
+        <h1 className="text-3xl font-semibold my-8 text-white font-outline-2">{mode === 'edit' ? 'Editer le' : 'Ajouter un'} profil</h1>
+        <div className="flex justify-center items-center">
+  <label className="label">
+    <span className="label-text font-semibold md:text-base text-white font-outline-1">Avatar</span>
+    <FileBase64 multiple={false} onDone={handleFileChange} />
+  </label>
+</div>
           <div className="">
             <Input
                     label="Nom"

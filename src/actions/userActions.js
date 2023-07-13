@@ -47,6 +47,7 @@ export const getUserInstrument = gql `
 query Query($getInstrumentsByUserId: ID!) {
   getInstrumentsByUser(id: $getInstrumentsByUserId) {
     id
+    url_img
     code
     pupitre
     observation

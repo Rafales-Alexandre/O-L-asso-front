@@ -85,9 +85,9 @@ function Suits() {
   }
   return (
     <div className="border-2 border-double bg-gradient-to-r from-orange-500 to-transparent rounded-md z-0 md:absolute md:right-20 md:w-3/5 w-full">
-      <h2 className="ml-4 text-xl md:text-2xl font-bold ">
+      <h2 className="ml-2 text-xl font-bold md:text-2xl text-white font-outline-1">
       <FontAwesomeIcon icon={faMask} size="sm"/>
-        Costumes
+        {" "}Costumes
       </h2>
       <div className='flex flex-col md:flex-row md:justify-between'>
         <input
@@ -100,7 +100,8 @@ function Suits() {
         <Button onClick={() => toggleCreateModal()}>Ajouter un Costume</Button>
       </div>
       {filteredSuits.map((u) => (
-        <div className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md flex flex-col md:relative" key={u.id}>
+        <div className="m-4 flex flex-col rounded-2xl  shadow-md md:relative bg-white-to-orange">
+        <div className="md:card md:card-side m-2 p-4 bg-base-100 shadow-md flex flex-col md:relative" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} 
           className="flex justify-center">
             <figure className="md:mr-4 md:w-30">
@@ -116,7 +117,7 @@ function Suits() {
           </div>
           <div className='card-actions justify-end md:absolute md:right-20 md:flex-col'>
                 <Button onClick={() => toggleModal(u)} className="">
-                <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10' />
+                <FontAwesomeIcon icon={faPenToSquare} size="lg" className='md:h-6 md:mb-10 text-gray-600' />
                 </Button>
                 <Button onClick={() => handleDelete(u.id)} className="">
                 <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#e26569",}} className='md:h-6 ' /> 
@@ -136,6 +137,7 @@ function Suits() {
             </div>
           )}
           
+        </div>
         </div>
       ))}
       {showModal && (

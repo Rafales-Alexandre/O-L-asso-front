@@ -10,6 +10,7 @@ const getInstrumentReq = gql`
 query Query {
   getAllInstruments {
     id
+    url_img
     code
     pupitre
     observation
