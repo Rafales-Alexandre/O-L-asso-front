@@ -33,7 +33,7 @@ function UserPanel({ onLogout }) {
       }`}
     >
       <UserBanner user={user} />
-      <NavLinks user={user} />
+      <NavLinks user={user} onLogout={onLogout} />
       <LogOut onLogout={onLogout} />
       <SocialLinks />
     </div>

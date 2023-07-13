@@ -4,10 +4,11 @@ import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { faHome, faUser, faDrum, faShirt, faUserGroup, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import LogOut from '../LogOut';
 
 
 // Déclaration du composant fonctionnel NavLinks
-function NavLinks({ user }) {
+function NavLinks({ user, onLogout }) {
   // Utilisation de l'hook useLocation pour obtenir le chemin actuel
   const location = useLocation();
   const currentPath = location.pathname;
@@ -120,8 +121,12 @@ function NavLinks({ user }) {
           Adhérents</Link>
         </li>
       </>
+    
       )}
       </ul>
+      <div>
+      <LogOut onLogout={onLogout} />
+      </div>
 </div>
   </div>
   {/* <div

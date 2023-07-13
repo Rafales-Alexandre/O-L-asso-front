@@ -22,7 +22,7 @@ function Logout() {
 
   return (
     // Bouton de déconnexion qui appelle la fonction handleLogout lorsqu'il est cliqué
-    <Button className="btn btn-primary hidden md:block w-full max-w-xs self-center md:hover:btn-warning" type="button" onClick={handleLogout}>
+    <Button className="btn btn-primary md:block w-full max-w-xs self-center md:hover:btn-warning" type="button" onClick={handleLogout}>
       Déconnexion
     </Button>
   );
