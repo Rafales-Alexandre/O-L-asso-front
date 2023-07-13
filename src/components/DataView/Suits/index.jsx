@@ -84,7 +84,7 @@ function Suits() {
     setShowConfirmModal(false);
   }
   return (
-    <div className='bg-base-300 h-full'>
+    <div className="border-2 border-double bg-gradient-to-r from-orange-500 to-transparent rounded-md z-0 md:absolute md:right-20 md:w-3/5 w-full">
       <h2 className="ml-4 text-xl md:text-2xl font-bold ">
       <FontAwesomeIcon icon={faMask} size="sm"/>
         Costumes

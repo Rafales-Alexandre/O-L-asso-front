@@ -21,7 +21,7 @@ function UserView(){
       setCollapse(collapse === id ? null : id);
     };
     return (
-        <div className="">
+      <div className="border-2 border-double bg-gradient-to-r from-orange-500 to-transparent rounded-md z-0 md:absolute md:right-20 md:w-3/5 w-full">
         <h2 className="text-3xl font-bold">Vos objets</h2>
         {userSuits.map((userSuit) => (
         <div className="md:card md:card-side m-4 p-4 bg-base-100 shadow-md flex flex-col md:relative" key={uuidv4()}>

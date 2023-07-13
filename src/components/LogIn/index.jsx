@@ -21,8 +21,8 @@ function LogIn({ onLogin, refused }) {
     <div className="hero min-h-screen w-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Connexion</h1>
-          <p className="py-6">Saisissez vos identifiants pour vous connecter.</p>
+          <h1 className="text-5xl text-white font-bold font-outline-2">Connexion</h1>
+          <p className="py-6 text-white font-bold font-outline-1">Saisissez vos identifiants pour vous connecter.</p>
         </div>
         <div className="card w-full max-w-sm flex-shrink-0 bg-base-100 shadow-2xl">
           <form onSubmit={handleSubmit} className="card-body">

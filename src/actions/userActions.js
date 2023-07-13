@@ -251,6 +251,7 @@ export const auth = (email, password) => async (dispatch) => {
     }
   } catch (error) {
     console.error(error);
+    throw error;
 
   }
 };
