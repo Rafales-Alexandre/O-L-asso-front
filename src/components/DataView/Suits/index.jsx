@@ -104,10 +104,7 @@ function Suits() {
         <div className="md:card md:card-side m-2 p-4 bg-base-100 shadow-md flex flex-col md:relative" key={u.id}>
           <div onClick={() => toggleCollapse(u.id)} onKeyDown={() => {}} 
           className="flex justify-center">
-            <figure className="md:mr-4 md:w-30">
-            <FontAwesomeIcon icon={faMask} size="2xl" className='md:h-15'  />
-            <FontAwesomeIcon icon={faShirt} size="2xl" className='md:h-15'  />
-            </figure>
+            <img src={u.url_img} alt={u.name} className="w-1/5 h-30 " />
             <div className="card-body">
               <h2 className="card-title text-lg md:text-2xl font-bold">{u.label}</h2>
               <p className="normal-case first-letter:capitalize text-xs md:text-lg text-gray-600">

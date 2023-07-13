@@ -10,6 +10,7 @@ const getSuitsReq = gql`
 query Query {
   getAllSuits {
     id
+    url_img
     label
     gender
     observation
