@@ -127,7 +127,7 @@ function UserForm({ mode, selectedUser = {}, closeModal }) {
   };
     
     return (
-      <form onSubmit={handleSubmitFormUser} className="m-2 md:m-0">
+      <form onSubmit={handleSubmitFormUser} className="m-2 md:m-0 ">
         <h1 className="text-3xl font-semibold my-8">{mode === 'edit' ? 'Editer le' : 'Ajouter un'} profil</h1>
           <div className="flex">
             <label className="label">

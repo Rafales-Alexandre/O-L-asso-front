@@ -55,7 +55,7 @@ function NavLinks({ user, onLogout }) {
   ) : (
     <svg
       onClick={() => setShowSidebar(!showSidebar)}
-      className=" absolute z-30 flex items-center cursor-pointer right-10 top-6"
+      className=" absolute flex items-center cursor-pointer right-10 top-6"
       fill="#0d0d0d"
       viewBox="0 0 100 80"
       width="20"

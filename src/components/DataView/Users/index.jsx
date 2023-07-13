@@ -184,7 +184,7 @@ function User() {
         <>
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
           <div className={`modal  ${showModal ? "modal-open" : ""}`}>
-            <div className="modal-box relative w-11/12 max-w-5xl">
+            <div className="modal-box relative w-11/12 max-w-5xl z-10">
               <Button onClick={() => {toggleModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
                 ✕
               </Button>
@@ -197,7 +197,7 @@ function User() {
         <>
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
           <div className={`modal  ${showCreateModal ? "modal-open" : ""}`}>
-            <div className="modal-box relative w-11/12 max-w-5xl">
+            <div className="modal-box relative w-11/12 max-w-5xl z-10">
               <Button onClick={() => {toggleCreateModal();}} className="btn-sm btn-circle btn absolute right-2 top-2">
                 ✕
               </Button>
