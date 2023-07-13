@@ -67,7 +67,7 @@ function NavLinks({ user }) {
   )}
   {/* Barre latérale avec liens de navigation */}
   <div
-  className={` top-0 right-0 w-[100vw] bg-primary p-5  text-white fixed h-full z-40  ease-in-out duration-1000 ${
+  className={` top-0 right-0 w-[100vw] bg-primary p-5 abo text-white fixed h-full z-40  ease-in-out duration-1000 ${
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}
 >
