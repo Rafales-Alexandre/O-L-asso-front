@@ -27,11 +27,6 @@ function UserView() {
       <h2 className="text-3xl font-bold text-white font-outline-1">Vos objets</h2>
       {userSuits.map((userSuit) => (
         <div className="m-4 flex flex-col rounded-2xl  shadow-md md:relative bg-white-to-orange">
-          <div
-          className="m-2 flex flex-col rounded-2xl bg-base-100 p-4 shadow-md md:card md:card-side md:relative"
-          key={uuidv4()}
-          style={{ backgroundImage: `url(${userSuit.url_img})` }}
-        >
           <div onClick={() => toggleCollapse(userSuit.id)} onKeyDown={() => {}} className="flex justify-center ">
             <figure className="md:mr-4 md:w-30">
               <FontAwesomeIcon icon={faMask} size="2xl" className='md:h-15 '  />
