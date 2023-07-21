@@ -64,7 +64,7 @@ function UserView() {
           <div
           className="m-2 flex flex-col rounded-2xl bg-base-100 p-4 shadow-md md:card md:card-side md:relative"
           key={uuidv4()}
-          style={{ backgroundImage: `url(${userInstrument.url_img})` }}
+          
         >
           <div onClick={() => toggleCollapse(userInstrument.id)} onKeyDown={() => {}} className="flex justify-center">
             <figure className="md:mr-4 md:w-30">
